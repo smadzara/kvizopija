@@ -7,13 +7,10 @@
  * @package kvizopija
  */
 
-
-
 $questions_taxonomy = 'questions_categories';
 $questions_terms = get_terms($questions_taxonomy); // Get all terms of a questions taxonomy
 
 ?>
-
 
 <!-- Kvizopija Template -->
 
@@ -22,6 +19,8 @@ $questions_terms = get_terms($questions_taxonomy); // Get all terms of a questio
     <!-- <img src="img/Logo-70px.png" alt="Pub kviz pitanja by kvizopija.com - Logo"> -->
 
     <div class="content-container">
+
+
 
         <div class="page-title">
             <h1>
@@ -44,7 +43,8 @@ $questions_terms = get_terms($questions_taxonomy); // Get all terms of a questio
                         Broj pitanja: <span class="accent"><?= $questions_term->count; ?></span>
                     </p>
                     <p class="refresh-date">
-                        Zadnje osvježavanje: <span class="accent">16.12.2021.</span>
+                        Zadnje osvježavanje: <span
+                            class="accent"><?php echo (get_the_date( 'j. n. Y.', $questions_term->ID, $questions_taxonomy )) ?></span>
                     </p>
                 </div>
             </a>
