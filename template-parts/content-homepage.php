@@ -10,6 +10,19 @@
 $questions_taxonomy = 'questions_categories';
 $questions_terms = get_terms($questions_taxonomy); // Get all terms of a questions taxonomy
 
+$args = [
+    'post_type' => 'questions',
+    'orderby' => 'date',
+    'order' => 'DESC',
+    'posts_per_page' => '20',
+    'post__not_in'   => [get_the_ID()],
+
+];
+
+$query = new WP_Query($args);
+//print_r($query->posts);
+$posts=$query->posts;
+
 ?>
 
 <!-- Kvizopija Template -->
@@ -51,137 +64,22 @@ $questions_terms = get_terms($questions_taxonomy); // Get all terms of a questio
             <?php endforeach; ?>
         </div>
 
+
         <div class="container-questions">
             <h2>Zadnje objavljena pitanja</h2>
+            <?php foreach($posts as $key => $item): //print_r($item)?>
             <div class="questions-homepage">
-                <p class="question-category"><a href="#">Naziv kategorije</a></p>
-                <p class="question-date">Objavljeno: <span class="question-accent">23.12.2022.</span></p>
+                <p class="question-category"><a href="#">Naziv
+                        kategorije: <?=get_the_category( $item->term_id);?></a></p>
+                <p class="question-date">Objavljeno: <span
+                        class="question-accent"><?=get_the_date( 'j. n. Y.', $item->ID ) ?></span></p>
                 <p class="question-author">Autor: <a href="https://kvizopija.com" target="_blank">kvizopija.com</a></p>
-                <p>Ovdje ide neko pitanje, pa sad pišem tekst koji će glumiti neko pitanje iz kviza, a kao i u gornjem
-                    slučaju, trebat će mi gomila teksta da to testiram jer nikad ne znaš kakva će mudra pitanja smisliti
-                    naš drugar Sale Glijaković, koji je inače, najbolji smišljavač pitanja kako u RH tako i u vaseloj
-                    vaseljeni.</p>
-                <p class="answer">Odgovor na pitanje</p>
+                <p><?=get_the_title($item->ID) ?></p>
+                <div class="answer"><?= apply_filters('the_content', get_the_content(null,false,$item)); ?></div>
             </div>
-            <div class="questions-homepage">
-                <p class="question-category"><a href="#">Naziv kategorije</a></p>
-                <p class="question-date">Objavljeno: <span class="question-accent">23.12.2022.</span></p>
-                <p class="question-author">Autor: <a href="https://kvizopija.com" target="_blank">kvizopija.com</a></p>
-                <p>Ovdje ide neko pitanje, pa sad pišem tekst koji će glumiti neko pitanje iz kviza, a kao i u gornjem
-                    slučaju, trebat će mi gomila teksta da to testiram jer nikad ne znaš kakva će mudra pitanja smisliti
-                    naš drugar Sale Glijaković, koji je inače, najbolji smišljavač pitanja kako u RH tako i u vaseloj
-                    vaseljeni.</p>
-                <p class="answer">Odgovor na pitanje</p>
-            </div>
-            <div class="questions-homepage">
-                <p class="question-category"><a href="#">Naziv kategorije</a></p>
-                <p class="question-date">Objavljeno: <span class="question-accent">23.12.2022.</span></p>
-                <p class="question-author">Autor: <a href="https://kvizopija.com" target="_blank">kvizopija.com</a></p>
-                <p>Ovdje ide neko pitanje, pa sad pišem tekst koji će glumiti neko pitanje iz kviza, a kao i u gornjem
-                    slučaju, trebat će mi gomila teksta da to testiram jer nikad ne znaš kakva će mudra pitanja smisliti
-                    naš drugar Sale Glijaković, koji je inače, najbolji smišljavač pitanja kako u RH tako i u vaseloj
-                    vaseljeni.</p>
-                <p class="answer">Odgovor na pitanje</p>
-            </div>
-            <div class="questions-homepage">
-                <p class="question-category">Naziv kategorije</p>
-                <p class="question-date">Objavljeno: <span class="question-accent">23.12.2022.</span></p>
-                <p class="question-author">Autor: kvizopija.com</p>
-                <p>Ovdje ide neko pitanje, pa sad pišem tekst koji će glumiti neko pitanje iz kviza, a kao i u gornjem
-                    slučaju, trebat će mi gomila teksta da to testiram jer nikad ne znaš kakva će mudra pitanja smisliti
-                    naš drugar Sale Glijaković, koji je inače, najbolji smišljavač pitanja kako u RH tako i u vaseloj
-                    vaseljeni.</p>
-                <p class="answer">Odgovor na pitanje</p>
-            </div>
-            <div class="questions-homepage">
-                <p class="question-category">Naziv kategorije</p>
-                <p class="question-date">Objavljeno: <span class="question-accent">23.12.2022.</span>.</p>
-                <p class="question-author">Autor: kvizopija.com</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id odio convallis, tempus arcu
-                    vel, laoreet mi. Sed dignissim auctor est eu tristique. Duis cursus velit vel arcu commodo iaculis.
-                    Morbi ac malesuada magna. Vivamus sed eros vel risus malesuada posuere nec vel neque. Duis
-                    pellentesque a quam et fringilla. Vivamus tempor eros ullamcorper ex hendrerit imperdiet. Nam ac
-                    varius quam. In dignissim viverra ligula, sed sagittis massa egestas id. In eget fermentum risus.
-                    Phasellus finibus molestie diam eget rhoncus. Fusce tempus mattis sapien ut.</p>
-                <p class="answer">Odgovor na pitanje</p>
-            </div>
-            <div class="questions-homepage">
-                <p class="question-category">Naziv kategorije</p>
-                <p class="question-date">Objavljeno: <span class="question-accent">23.12.2022.</span></p>
-                <p class="question-author">Autor: kvizopija.com</p>
-                <p>Ovdje ide neko pitanje, pa sad pišem tekst koji će glumiti neko pitanje iz kviza, a kao i u gornjem
-                    slučaju, trebat će mi gomila teksta da to testiram jer nikad ne znaš kakva će mudra pitanja smisliti
-                    naš drugar Sale Glijaković, koji je inače, najbolji smišljavač pitanja kako u RH tako i u vaseloj
-                    vaseljeni.</p>
-                <p class="answer">Odgovor na pitanje</p>
-            </div>
-            <div class="questions-homepage">
-                <p class="question-category">Naziv kategorije</p>
-                <p class="question-date">Objavljeno: 23.12.2022.</p>
-                <p class="question-author">Autor: kvizopija.com</p>
-                <p>Ovdje ide neko pitanje, pa sad pišem tekst koji će glumiti neko pitanje iz kviza, a kao i u gornjem
-                    slučaju, trebat će mi gomila teksta da to testiram jer nikad ne znaš kakva će mudra pitanja smisliti
-                    naš drugar Sale Glijaković, koji je inače, najbolji smišljavač pitanja kako u RH tako i u vaseloj
-                    vaseljeni.</p>
-                <p class="answer">Odgovor na pitanje</p>
-            </div>
-            <div class="questions-homepage">
-                <p class="question-category">Naziv kategorije</p>
-                <p class="question-date">Objavljeno: 23.12.2022.</p>
-                <p class="question-author">Autor: kvizopija.com</p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc blandit placerat laoreet. Nam ornare
-                    velit eget metus facilisis vestibulum. Ut ac ipsum nec ligula laoreet consectetur mattis ut ipsum.
-                    Sed purus nulla, tincidunt vel tincidunt sed, volutpat vel augue.
-                    Nulla vulputate rhoncus ipsum sit amet mattis. Nulla facilisi. Phasellus ut tincidunt elit. Cras
-                    vitae nisi eu augue egestas lobortis a egestas orci. Fusce dolor justo, facilisis vitae augue sed,
-                    viverra porttitor libero. Sed sodales eros in faucibus bibendum.
-                    Ut suscipit arcu scelerisque justo rhoncus, maximus rutrum est varius. Nullam scelerisque eros nec
-                    tellus varius, vel consectetur magna gravida. Aliquam eu ligula mi.
-                    Suspendisse congue felis at dapibus egestas. Phasellus fringilla eu elit non maximus. Morbi laoreet
-                    egestas tortor porttitor lobortis. Integer quis rhoncus nunc. Integer.</p>
-                <p class="answer">Odgovor na pitanje</p>
-            </div>
-            <div class="questions-homepage">
-                <p class="question-category">Naziv kategorije</p>
-                <p class="question-date">Objavljeno: 23.12.2022.</p>
-                <p class="question-author">Autor: kvizopija.com</p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc blandit placerat laoreet. Nam ornare
-                    velit eget metus facilisis vestibulum. Ut ac ipsum nec ligula laoreet consectetur mattis ut ipsum.
-                    Sed purus nulla, tincidunt vel tincidunt sed, volutpat vel augue.
-                    Nulla vulputate rhoncus ipsum sit amet mattis. Nulla facilisi. Phasellus ut tincidunt elit. Cras
-                    vitae nisi eu augue egestas lobortis a egestas orci. Fusce dolor justo, facilisis vitae augue sed,
-                    viverra porttitor libero. Sed sodales eros in faucibus bibendum.
-                    Ut suscipit arcu scelerisque justo rhoncus, maximus rutrum est varius. Nullam scelerisque eros nec
-                    tellus varius, vel consectetur magna gravida. Aliquam eu ligula mi.
-                    Suspendisse congue felis at dapibus egestas. Phasellus fringilla eu elit non maximus. Morbi laoreet
-                    egestas tortor porttitor lobortis. Integer quis rhoncus nunc. Integer.</p>
-                <p class="answer">Odgovor na pitanje</p>
-            </div>
-            <div class="questions-homepage">
-                <p class="question-category">Naziv kategorije</p>
-                <p class="question-date">Objavljeno: 23.12.2022.</p>
-                <p class="question-author">Autor: kvizopija.com</p>
-                <p>Ovdje ide neko pitanje, pa sad pišem tekst koji će glumiti neko pitanje iz kviza, a kao i u gornjem
-                    slučaju, trebat će mi gomila teksta da to testiram jer nikad ne znaš kakva će mudra pitanja smisliti
-                    naš drugar Sale Glijaković, koji je inače, najbolji smišljavač pitanja kako u RH tako i u vaseloj
-                    vaseljeni.</p>
-                <p class="answer">Odgovor na pitanje</p>
-            </div>
-            <div class="questions-homepage">
-                <p class="question-category">Naziv kategorije</p>
-                <p class="question-date">Objavljeno: 23.12.2022.</p>
-                <p class="question-author">Autor: kvizopija.com</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id odio convallis, tempus arcu
-                    vel, laoreet mi. Sed dignissim auctor est eu tristique. Duis cursus velit vel arcu commodo iaculis.
-                    Morbi ac malesuada magna. Vivamus sed eros vel risus malesuada posuere nec vel neque. Duis
-                    pellentesque a quam et fringilla. Vivamus tempor eros ullamcorper ex hendrerit imperdiet. Nam ac
-                    varius quam. In dignissim viverra ligula, sed sagittis massa egestas id. In eget fermentum risus.
-                    Phasellus finibus molestie diam eget rhoncus. Fusce tempus mattis sapien ut.</p>
-                <p class="answer">Odgovor na pitanje</p>
-            </div>
+            <?php endforeach; ?>
         </div>
+
 
     </div>
 
