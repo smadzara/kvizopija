@@ -20,8 +20,9 @@ $args = [
 ];
 
 $query = new WP_Query($args);
-//print_r($query->posts);
 $posts=$query->posts;
+
+//print_r($query->posts);
 
 ?>
 
