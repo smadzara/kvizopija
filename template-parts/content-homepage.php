@@ -71,7 +71,7 @@ $posts=$query->posts;
             <?php foreach($posts as $key => $item): //print_r($item)?>
             <div class="questions-homepage">
                 <p class="question-category"><a href="#">Naziv
-                        kategorije: <?=get_the_category( $item->term_id);?></a></p>
+                        kategorije: <?=get_the_category( $item->ID);?></a></p>
                 <p class="question-date">Objavljeno: <span
                         class="question-accent"><?=get_the_date( 'j. n. Y.', $item->ID ) ?></span></p>
                 <p class="question-author">Autor: <a href="https://kvizopija.com" target="_blank">kvizopija.com</a></p>
