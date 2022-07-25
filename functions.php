@@ -1,15 +1,15 @@
 <?php
 /**
- * _s functions and definitions
+ * kvizopija functions and definitions
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package _s
+ * @package kvizopija
  */
 
-if ( ! defined( '_S_VERSION' ) ) {
+if ( ! defined( 'KVIZOPIJA_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.0' );
+	define( 'KVIZOPIJA_VERSION', '1.0.0' );
 }
 
 /**
@@ -19,14 +19,14 @@ if ( ! defined( '_S_VERSION' ) ) {
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  */
-function _s_setup() {
+function kvizopija_setup() {
 	/*
 		* Make theme available for translation.
 		* Translations can be filed in the /languages/ directory.
-		* If you're building a theme based on _s, use a find and replace
-		* to change '_s' to the name of your theme in all the template files.
+		* If you're building a theme based on kvizopija, use a find and replace
+		* to change 'kvizopija' to the name of your theme in all the template files.
 		*/
-	load_theme_textdomain( '_s', get_template_directory() . '/languages' );
+	load_theme_textdomain( 'kvizopija', get_template_directory() . '/languages' );
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
@@ -49,7 +49,7 @@ function _s_setup() {
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(
-			'menu-1' => esc_html__( 'Primary', '_s' ),
+			'menu-1' => esc_html__( 'Primary', 'kvizopija' ),
 		)
 	);
 
@@ -74,7 +74,7 @@ function _s_setup() {
 	add_theme_support(
 		'custom-background',
 		apply_filters(
-			'_s_custom_background_args',
+			'kvizopija_custom_background_args',
 			array(
 				'default-color' => 'ffffff',
 				'default-image' => '',
@@ -100,7 +100,7 @@ function _s_setup() {
 		)
 	);
 }
-add_action( 'after_setup_theme', '_s_setup' );
+add_action( 'after_setup_theme', 'kvizopija_setup' );
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -109,22 +109,22 @@ add_action( 'after_setup_theme', '_s_setup' );
  *
  * @global int $content_width
  */
-function _s_content_width() {
-	$GLOBALS['content_width'] = apply_filters( '_s_content_width', 640 );
+function kvizopija_content_width() {
+	$GLOBALS['content_width'] = apply_filters( 'kvizopija_content_width', 640 );
 }
-add_action( 'after_setup_theme', '_s_content_width', 0 );
+add_action( 'after_setup_theme', 'kvizopija_content_width', 0 );
 
 /**
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
-function _s_widgets_init() {
+function kvizopija_widgets_init() {
 	register_sidebar(
 		array(
-			'name'          => esc_html__( 'Sidebar', '_s' ),
+			'name'          => esc_html__( 'Sidebar', 'kvizopija' ),
 			'id'            => 'sidebar-1',
-			'description'   => esc_html__( 'Add widgets here.', '_s' ),
+			'description'   => esc_html__( 'Add widgets here.', 'kvizopija' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',
@@ -132,22 +132,24 @@ function _s_widgets_init() {
 		)
 	);
 }
-add_action( 'widgets_init', '_s_widgets_init' );
+add_action( 'widgets_init', 'kvizopija_widgets_init' );
 
 /**
  * Enqueue scripts and styles.
  */
-function _s_scripts() {
-	wp_enqueue_style( '_s-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_style_add_data( '_s-style', 'rtl', 'replace' );
+function kvizopija_scripts() {
+	wp_enqueue_style( 'kvizopija-style', get_stylesheet_uri(), array(), KVIZOPIJA_VERSION );
+	wp_style_add_data( 'kvizopija-style', 'rtl', 'replace' );
 
-	wp_enqueue_script( '_s-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'kvizopija-navigation', get_template_directory_uri() . '/js/navigation.js', array(), KVIZOPIJA_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
+    // Bootstrap import
+    //wp_enqueue_style("bootstrap", "//cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css");
 }
-add_action( 'wp_enqueue_scripts', '_s_scripts' );
+add_action( 'wp_enqueue_scripts', 'kvizopija_scripts' );
 
 /**
  * Implement the Custom Header feature.
@@ -182,3 +184,65 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 if ( class_exists( 'WooCommerce' ) ) {
 	require get_template_directory() . '/inc/woocommerce.php';
 }
+
+/**
+ * Custom post type - Questions
+ */
+
+function questions_register() {
+    $labels = array(
+        'name' => _x('Questions', 'post type general name'),
+        'singular_name' => _x('Question', 'post type singular name'),
+        'add_new' => _x('Add New', 'Question'),
+        'add_new_item' => __('Add New Question'),
+        'edit_item' => __('Edit Question'),
+        'new_item' => __('New Question'),
+        'view_item' => __('View Question'),
+        'search_items' => __('Search Questions'),
+        'not_found' =>  __('Nothing found'),
+        'not_found_in_trash' => __('Nothing found in Trash'),
+        'parent_item_colon' => ''
+    );
+    $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'query_var' => true,
+        'rewrite' => true,
+        'capability_type' => 'post',
+        'hierarchical' => false,
+        'menu_position' => 8,
+        'supports' => array('title','editor','thumbnail')
+    ); 
+    register_post_type( 'questions' , $args );
+}
+add_action('init', 'questions_register');
+
+function create_questions_taxonomies() {
+    $labels = array(
+        'name'              => _x( 'Categories', 'taxonomy general name' ),
+        'singular_name'     => _x( 'Category', 'taxonomy singular name' ),
+        'search_items'      => __( 'Search Categories' ),
+        'all_items'         => __( 'All Categories' ),
+        'parent_item'       => __( 'Parent Category' ),
+        'parent_item_colon' => __( 'Parent Category:' ),
+        'edit_item'         => __( 'Edit Category' ),
+        'update_item'       => __( 'Update Category' ),
+        'add_new_item'      => __( 'Add New Category' ),
+        'new_item_name'     => __( 'New Category Name' ),
+        'menu_name'         => __( 'Categories' ),
+    );
+
+    $args = array(
+        'hierarchical'      => true, // Set this to 'false' for non-hierarchical taxonomy (like tags)
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => 'categories' ),
+    );
+
+    register_taxonomy( 'questions_categories', array( 'questions' ), $args );
+}
+add_action( 'init', 'create_questions_taxonomies', 0 );
