@@ -7,21 +7,11 @@
  * @package kvizopija
  */
 
-$questions_taxonomy = 'questions_categories';
-$questions_terms = get_terms($questions_taxonomy); // Get all terms of a questions taxonomy
-
 $args = [
-    'post_type' => 'questions',
+    'post_type' => 'events',
     'orderby' => 'date',
     'order' => 'DESC',
     'posts_per_page' => '20',
-        'tax_query' => [
-        [
-            'taxonomy' => 'questions_categories',
-            'field' => 'slug',
-            'terms' => ['film']
-        ],
-    ]
 
 ];
 
@@ -52,23 +42,6 @@ dump($query->posts);
             <p class="page-description-paragraph-text">
                 <?php the_content() ?>
             </p>
-        </div>
-
-        <div class="category-container">
-            <?php foreach ( $questions_terms as $questions_term ) : ?>
-            <a href="<?= get_term_link($questions_term->slug, $questions_taxonomy); ?>">
-                <div class="category-box">
-                    <h2><?= $questions_term->name; ?></h2>
-                    <p class="number-of-questions">
-                        Broj pitanja: <span class="accent"><?= $questions_term->count; ?></span>
-                    </p>
-                    <p class="refresh-date">
-                        Zadnje osvježavanje: <span
-                            class="accent"><?php echo (get_the_date( 'j. n. Y.', $questions_term->ID, $questions_taxonomy )) ?></span>
-                    </p>
-                </div>
-            </a>
-            <?php endforeach; ?>
         </div>
 
 

@@ -186,7 +186,7 @@ if ( class_exists( 'WooCommerce' ) ) {
 }
 
 /**
- * Custom post type - Questions
+ * Custom post type declaration - 'questions'
  */
 
 function questions_register() {
@@ -219,6 +219,10 @@ function questions_register() {
 }
 add_action('init', 'questions_register');
 
+/**
+ * Custom post type taxonomy declaration - 'questions_categories'
+ */
+
 function create_questions_taxonomies() {
     $labels = array(
         'name'              => _x( 'Categories', 'taxonomy general name' ),
@@ -240,7 +244,7 @@ function create_questions_taxonomies() {
         'show_ui'           => true,
         'show_admin_column' => true,
         'query_var'         => true,
-        'rewrite'           => array( 'slug' => 'categories' ),
+        'rewrite'           => array( 'slug' => 'categories' )
     );
 
     register_taxonomy( 'questions_categories', array( 'questions' ), $args );
