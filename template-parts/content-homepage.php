@@ -15,13 +15,13 @@ $args = [
     'orderby' => 'date',
     'order' => 'DESC',
     'posts_per_page' => '20',
-        'tax_query' => [
+/*         'tax_query' => [
         [
             'taxonomy' => 'questions_categories',
             'field' => 'slug',
             'terms' => ['film']
         ],
-    ]
+    ] */
 
 ];
 

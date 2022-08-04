@@ -213,7 +213,8 @@ function questions_register() {
         'capability_type' => 'post',
         'hierarchical' => false,
         'menu_position' => 8,
-        'supports' => array('title','editor','thumbnail')
+        'supports' => array('title','editor','thumbnail'),
+        "menu_icon" => "dashicons-admin-customizer"
     ); 
     register_post_type( 'questions' , $args );
 }
