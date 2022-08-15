@@ -74,10 +74,11 @@ $posts=$query->posts;
 
         <div class="container-questions">
             <h2>Zadnje objavljena pitanja</h2>
-            <?php foreach($posts as $key => $item)://dump($item)?>
+            <?php foreach($posts as $key => $item): $terms = get_the_terms( $item, 'questions_categories'); //dump($terms)?>
             <div class="questions-homepage">
-                <p class="question-category"><a href="#">Naziv
-                        kategorije: <?=get_the_category($item);?></a></p>
+                <p class="question-category">Kategorija:<a
+                        href="<?= get_term_link($terms[0]->slug, $questions_taxonomy); ?>">
+                        <?php echo $terms[0]-> name ?></a></p>
                 <p class="question-date">Objavljeno: <span
                         class="question-accent"><?=get_the_date( 'j. n. Y.', $item->ID ) ?></span></p>
                 <p class="question-author">Autor: <a href="https://kvizopija.com" target="_blank">kvizopija.com</a></p>
