@@ -14,6 +14,7 @@ get_header();
 
     
     <p>arhiva kategorije archive-questions.php</p>
+    
 		<?php if ( have_posts() ) : ?>
 
 			<header class="page-header">
