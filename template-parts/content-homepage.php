@@ -15,7 +15,7 @@ $args = [
     'orderby' => 'date',
     'order' => 'DESC',
     'posts_per_page' => '20',
-/*         'tax_query' => [
+/*  'tax_query' => [
         [
             'taxonomy' => 'questions_categories',
             'field' => 'slug',
@@ -28,7 +28,7 @@ $args = [
 $query = new WP_Query($args);
 $posts=$query->posts;
 
-dump($query->posts);
+//dump($query->posts);
 
 ?>
 
@@ -55,7 +55,7 @@ dump($query->posts);
         </div>
 
         <div class="category-container">
-            <?php foreach ( $questions_terms as $questions_term ) : ?>
+            <?php foreach ( $questions_terms as $questions_term ) : //dump($questions_term)?>
             <a href="<?= get_term_link($questions_term->slug, $questions_taxonomy); ?>">
                 <div class="category-box">
                     <h2><?= $questions_term->name; ?></h2>
@@ -64,7 +64,7 @@ dump($query->posts);
                     </p>
                     <p class="refresh-date">
                         Zadnje osvježavanje: <span
-                            class="accent"><?php echo (get_the_date( 'j. n. Y.', $questions_term->ID, $questions_taxonomy )) ?></span>
+                            class="accent"><?php echo (get_the_modified_date( 'j. n. Y.', $questions_term->ID, $questions_taxonomy )) ?></span>
                     </p>
                 </div>
             </a>
@@ -74,10 +74,10 @@ dump($query->posts);
 
         <div class="container-questions">
             <h2>Zadnje objavljena pitanja</h2>
-            <?php foreach($posts as $key => $item): //print_r($item)?>
+            <?php foreach($posts as $key => $item)://dump($item)?>
             <div class="questions-homepage">
                 <p class="question-category"><a href="#">Naziv
-                        kategorije: <?=get_the_category( $item->ID);?></a></p>
+                        kategorije: <?=get_the_category($item);?></a></p>
                 <p class="question-date">Objavljeno: <span
                         class="question-accent"><?=get_the_date( 'j. n. Y.', $item->ID ) ?></span></p>
                 <p class="question-author">Autor: <a href="https://kvizopija.com" target="_blank">kvizopija.com</a></p>
@@ -94,5 +94,6 @@ dump($query->posts);
 
 
 </section>
+
 
 <!-- END Kvizopija Template -->
