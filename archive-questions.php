@@ -1,3 +1,4 @@
+<p>arhiva kategorije archive-questions.php</p>
 <?php
 /**
  * The template for displaying archive pages
