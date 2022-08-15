@@ -246,7 +246,7 @@ function create_questions_taxonomies() {
         'show_ui'           => true,
         'show_admin_column' => true,
         'query_var'         => true,
-        'rewrite'           => array( 'slug' => 'categories' )
+        'rewrite'           => array( 'slug' => 'questions' )
     );
 
     register_taxonomy( 'questions_categories', array( 'questions' ), $args );
