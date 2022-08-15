@@ -206,6 +206,7 @@ function questions_register() {
     $args = array(
         'labels' => $labels,
         'public' => true,
+        'has_archive' => true,
         'publicly_queryable' => true,
         'show_ui' => true,
         'query_var' => true,

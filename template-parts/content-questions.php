@@ -8,9 +8,9 @@
  */
 
 ?>
-
+<p>content-questions.php</p>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-<p>content.php</p>
+
 	<header class="entry-header">
 		<?php
 		if ( is_singular() ) :
@@ -18,16 +18,7 @@
 		else :
 			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 		endif;
-
-		if ( 'post' === get_post_type() ) :
-			?>
-			<div class="entry-meta">
-				<?php
-				kvizopija_posted_on();
-				kvizopija_posted_by();
-				?>
-			</div><!-- .entry-meta -->
-		<?php endif; ?>
+?>
 	</header><!-- .entry-header -->
 
 	<?php kvizopija_post_thumbnail(); ?>

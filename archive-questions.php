@@ -1,3 +1,4 @@
+<p>arhiva kategorije archive-questions.php</p>
 <?php
 /**
  * The template for displaying archive pages
@@ -9,11 +10,11 @@
 
 get_header();
 ?>
-
+<p>arhiva kategorije archive-questions.php</p>
 	<main id="primary" class="site-main">
 
-    <p>arhiva kategorije - archive.php</p>
-
+    
+    <p>arhiva kategorije archive-questions.php</p>
 		<?php if ( have_posts() ) : ?>
 
 			<header class="page-header">
