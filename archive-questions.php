@@ -14,7 +14,7 @@ get_header();
 	<main id="primary" class="site-main">
 
     
-    <p>arhiva kategorije archive-questios.php</p>
+    <p>arhiva kategorije archive-questions.php</p>
 		<?php if ( have_posts() ) : ?>
 
 			<header class="page-header">
