@@ -1,3 +1,6 @@
 {
-  "indentRainbow.colorOnWhiteSpaceOnly": true
+"indentRainbow.colorOnWhiteSpaceOnly": true,
+"githubPullRequests.ignoredPullRequestBranches": [
+    "develop"
+]
 }

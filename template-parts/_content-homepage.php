@@ -63,27 +63,14 @@ $posts=$query->posts;
                         Broj pitanja: <span class="accent"><?= $questions_term->count; ?></span>
                     </p>
                     <p class="refresh-date">
-                        <?php 
-                            $args = array(
-                                'post_type' => array('questions'),
-                                'post_status' => 'publish',
-                                'posts_per_page' => 1,
-                                'tax_query' => array(
-                                    array (
-                                        'taxonomy' => 'questions_categories',
-                                        'field' => 'slug',
-                                        'terms' => array($questions_term->slug),
-                                    )
-                                ),
-                            );
-                            $q = new WP_Query($args);
-                        ?>
-                        Zadnje osvježavanje: <span class="accent"><?php echo (date( 'd.m.Y.', strtotime($q->post->post_date) )) ?></span>
+                        Zadnje osvježavanje: <span
+                            class="accent"><?php echo (get_the_modified_date( 'j. n. Y.', $questions_term->ID, $questions_taxonomy )) ?></span>
                     </p>
                 </div>
             </a>
             <?php endforeach; ?>
         </div>
+
 
         <div class="container-questions">
             <h2>Zadnje objavljena pitanja</h2>
