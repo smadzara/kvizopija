@@ -8,22 +8,22 @@
  */
 
 ?>
-<p>content-questions.php</p>
+<!-- <p>content-questions.php</p> -->
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 	<header class="entry-header">
 		<?php
 		if ( is_singular() ) :
-			the_title( '<h1 class="entry-title">', '</h1>' );
+			the_title( '<p>', '</p>' );
 		else :
-			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
+			the_title( '<p>', '</p>'  );
 		endif;
 ?>
 	</header><!-- .entry-header -->
 
 	<?php kvizopija_post_thumbnail(); ?>
 
-	<div class="entry-content">
+	<div class="answer">
 		<?php
 		the_content(
 			sprintf(
@@ -39,7 +39,11 @@
 				wp_kses_post( get_the_title() )
 			)
 		);
+        ?>
+    </div>
 
+    <div class="entry-content">
+        <?php
 		wp_link_pages(
 			array(
 				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'kvizopija' ),

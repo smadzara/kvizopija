@@ -40,8 +40,6 @@ $posts=$query->posts;
 
     <div class="content-container">
 
-
-
         <div class="page-title">
             <h1>
                 <?php the_title() ?>
@@ -63,7 +61,7 @@ $posts=$query->posts;
                         Broj pitanja: <span class="accent"><?= $questions_term->count; ?></span>
                     </p>
                     <p class="refresh-date">
-                        <?php 
+                        <?php // Vadi datum iz zadnjeg objavljenog posta u kategoriji CPT-a
                             $args = array(
                                 'post_type' => array('questions'),
                                 'post_status' => 'publish',
@@ -108,7 +106,8 @@ $posts=$query->posts;
                         <p class="question-author">Autor: <a href="<?=$question_author_url;?>" target="_blank"><?=$question_author;?></a></p>
                     <?php endif; ?>
                     <p><?=get_the_title($item->ID) ?></p>
-                    <div class="answer"><?= apply_filters('the_content', get_the_content(null,false,$item)); ?></div>
+                    <div class="
+					"><?= apply_filters('the_content', get_the_content(null,false,$item)); ?></div>
                 </div>
             <?php endforeach; ?>
         </div>

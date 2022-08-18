@@ -1213,4 +1213,17 @@ p {
 	font-weight: bolder;
 }
 
+
+.cat-taxonomy{
+	margin-bottom: 3em;
+}
+
+.pagination {
+    font-family: "ProximaNova-Regular";
+    font-size: 1.5rem;
+    font-weight: bolder;
+    padding: 0.5rem;
+    text-align: center;
+}
+
 /*# sourceMappingURL=style.css.map */
