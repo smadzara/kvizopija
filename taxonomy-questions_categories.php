@@ -74,5 +74,6 @@ $questions_custom_taxonomy_term = get_queried_object();
 </div>
 
 <?php
-get_sidebar();
+//get_sidebar();
+get_sidebar('questions');
 get_footer();

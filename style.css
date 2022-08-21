@@ -523,7 +523,7 @@ a {
 }
 
 a:visited {
-	color: #800080;
+	color: #000000;
 }
 
 a:hover, a:focus, a:active {
@@ -1088,9 +1088,8 @@ textarea {
 
 .content-container {
 	background-color: #f6f6f6;
-	width: 70%;
+	width: 75%;
 	margin: auto;
-	/* border: 3px solid green; */
 	padding: 0.6rem;
 }
 
@@ -1225,5 +1224,35 @@ p {
     padding: 0.5rem;
     text-align: center;
 }
+
+.page-numbers {
+    color: #000000;
+}
+
+.page-numbers.current {
+    color: #04aa6d;
+    text-decoration-color: #04aa6d;
+    text-decoration-line: underline;
+}
+
+.sidebar-content-container {
+	width: 100%;
+	margin: auto;
+}
+
+.sidebar-categories {
+    align-items: center;
+    width: 75%;
+    display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+@media only screen and (max-width: 768px) {
+    .sidebar-categories {
+    width: 100%;
+    }
+  }
+
 
 /*# sourceMappingURL=style.css.map */

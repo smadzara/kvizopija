@@ -53,6 +53,7 @@ $posts=$query->posts;
         </div>
 
         <div class="category-container">
+        <h2>Zadnje objavljena pitanja</h2>
             <?php foreach ( $questions_terms as $questions_term ) : //dump($questions_term)?>
             <a href="<?= get_term_link($questions_term->slug, $questions_taxonomy); ?>">
                 <div class="category-box">
@@ -106,8 +107,7 @@ $posts=$query->posts;
                         <p class="question-author">Autor: <a href="<?=$question_author_url;?>" target="_blank"><?=$question_author;?></a></p>
                     <?php endif; ?>
                     <p><?=get_the_title($item->ID) ?></p>
-                    <div class="
-					"><?= apply_filters('the_content', get_the_content(null,false,$item)); ?></div>
+                    <div class="answer"><?= apply_filters('the_content', get_the_content(null,false,$item)); ?></div>
                 </div>
             <?php endforeach; ?>
         </div>
