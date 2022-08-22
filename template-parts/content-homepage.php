@@ -53,7 +53,7 @@ $posts=$query->posts;
         </div>
 
         <div class="category-container">
-        <h2>Zadnje objavljena pitanja</h2>
+        <h2 class="categories-title">Kategorije</h2>
             <?php foreach ( $questions_terms as $questions_term ) : //dump($questions_term)?>
             <a href="<?= get_term_link($questions_term->slug, $questions_taxonomy); ?>">
                 <div class="category-box">
@@ -111,13 +111,14 @@ $posts=$query->posts;
                 </div>
             <?php endforeach; ?>
         </div>
-
-
+        <div class="more-questions">
+        
+            <form action="<?php echo get_post_type_archive_link( 'questions' ); ?>">
+                <input type="submit" value="SVA KVIZ PITANJA" />
+            </form>
+        
+        </div>
     </div>
-
-
-
-
 </section>
 
 

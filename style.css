@@ -469,9 +469,9 @@ hr {
 }
 
 ul,
-ol {
+/* ol {
 	margin: 0 0 1.5em 3em;
-}
+} */
 
 ul {
 	list-style: disc;
@@ -551,6 +551,8 @@ input[type="submit"] {
 	color: rgba(0, 0, 0, 0.8);
 	line-height: 1;
 	padding: 0.6em 1em 0.4em;
+    font-family: "Axiforma-Regular";
+    font-size: 2rem;
 }
 
 button:hover,
@@ -558,6 +560,8 @@ input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover {
 	border-color: #ccc #bbb #aaa;
+    background-color: #04aa6d;
+    cursor: crosshair;
 }
 
 button:active, button:focus,
@@ -1010,44 +1014,114 @@ textarea {
 }
 
 /*everything below here is just setting up the page, so dont worry about it */
-/* Moji custom stilovi */
-/* Add a black background color to the top navigation */
-.topnav {
-	background-color: #333;
-	overflow: hidden;
-}
+/* Moji custom stilovi - Navigacija */
 
-/* Style the links inside the navigation bar */
-.topnav a {
-	float: left;
-	display: block;
-	color: #f2f2f2;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-	font-size: 17px;
-}
+/* NAVBAR STYLING STARTS */
+li {
+    list-style: none;
+   }
 
-/* Change the color of links on hover */
-.topnav a:hover {
-	background-color: #ddd;
-	color: black;
-}
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #739559;
+    color: #fff;
+   }
+.navigation-links a {
+    color: #fff;
+   }
+   /* LOGO */
+.logo {
+    font-size: 32px;
+   }
+   /* NAVBAR MENU */
+.menu {
+    display: flex;
+    gap: 1em;
+    font-size: 18px;
+   }
+.menu li:hover {
+    background-color: #4c9e9e;
+    border-radius: 5px;
+    transition: 0.3s ease;
+   }
+.menu li {
+    padding: 5px 14px;
+   }
+   /* DROPDOWN MENU */
+.services {
+    position: relative; 
+   }
+.dropdown {
+    background-color: rgb(1, 139, 139);
+    padding: 1em 0;
+    position: absolute; /*WITH RESPECT TO PARENT*/
+    display: none;
+    border-radius: 8px;
+    top: 35px;
+   }
+.dropdown li + li {
+    margin-top: 10px;
+   }
+.dropdown li {
+    padding: 0.5em 1em;
+    width: 8em;
+    text-align: center;
+   }
+.dropdown li:hover {
+    background-color: #4c9e9e;
+   }
+.services:hover .dropdown {
+    display: block;
+   }
 
-/* Add an active class to highlight the current page */
-.topnav a.active {
-	background-color: #04aa6d;
-	color: white;
-}
-
-/* Hide the link that should open and close the topnav on small screens */
-.topnav .icon {
-	display: none;
-}
-
-.custom-test {
-	display: none;
-}
+   /*RESPONSIVE NAVBAR MENU STARTS*/
+/* CHECKBOX HACK */
+input[type=checkbox]{
+    display: none;
+   } 
+   /*HAMBURGER MENU*/
+.hamburger {
+    display: none;
+    font-size: 24px;
+    user-select: none;
+   }
+/* APPLYING MEDIA QUERIES */
+   @media (max-width: 768px) {
+   .menu { 
+    display:none;
+    position: absolute;
+    background-color:#739559;
+    right: 0;
+    left: 0;
+    text-align: center;
+    padding: 16px 0;
+   }
+   .menu li:hover {
+    display: inline-block;
+    background-color:#4c9e9e;
+    transition: 0.3s ease;
+   }
+   .menu li + li {
+    margin-top: 12px;
+   }
+   input[type=checkbox]:checked ~ .menu{
+    display: block;
+   }
+   .hamburger {
+    display: block;
+   }
+   .dropdown {
+    left: 50%;
+    top: 30px;
+    transform: translateX(35%);
+   }
+   .dropdown li:hover {
+    background-color: #4c9e9e;
+   }
+   }
 
 /* Moji custom stilovi */
 @font-face {
@@ -1144,6 +1218,13 @@ p {
 	font-weight: bolder;
 }
 
+.categories-title {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 100%;
+    margin-top: 1rem;
+}
+
 .category-container {
 	display: flex;
     flex-grow: 1;
@@ -1170,8 +1251,8 @@ p {
     /* background-color: #677019; */
     display: block;
     flex-wrap: wrap;
-    padding-left: 7%;
-    padding-right: 4%;
+    /* padding-left: 7%;
+    padding-right: 4%; */
 }
 
 .questions-homepage {
@@ -1212,6 +1293,11 @@ p {
 	font-weight: bolder;
 }
 
+.more-questions {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-evenly;
+}
 
 .cat-taxonomy{
 	margin-bottom: 3em;
@@ -1225,7 +1311,7 @@ p {
     text-align: center;
 }
 
-.page-numbers {
+.page-numbers a {
     color: #000000;
 }
 

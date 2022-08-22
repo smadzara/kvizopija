@@ -7,7 +7,7 @@
  * @package kvizopija
  */
 
-//get_search_form();
+get_search_form();
 
 $questions_taxonomy = 'questions_categories';
 $questions_terms = get_terms($questions_taxonomy); // Get all terms of a questions taxonomy
