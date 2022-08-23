@@ -523,7 +523,7 @@ a {
 }
 
 a:visited {
-	color: #000000;
+	color: #823c22;
 }
 
 a:hover, a:focus, a:active {
@@ -1025,7 +1025,7 @@ li {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px;
+    padding: 5px;
     background-color: #739559;
     color: #fff;
    }
@@ -1035,6 +1035,7 @@ li {
    /* LOGO */
 .logo {
     font-size: 32px;
+	margin-bottom: 9px;
    }
    /* NAVBAR MENU */
 .menu {
@@ -1043,7 +1044,7 @@ li {
     font-size: 18px;
    }
 .menu li:hover {
-    background-color: #4c9e9e;
+    background-color: #87af68;
     border-radius: 5px;
     transition: 0.3s ease;
    }
@@ -1055,12 +1056,12 @@ li {
     position: relative; 
    }
 .dropdown {
-    background-color: rgb(1, 139, 139);
+    background-color: #739559;
     padding: 1em 0;
     position: absolute; /*WITH RESPECT TO PARENT*/
     display: none;
     border-radius: 8px;
-    top: 35px;
+    top: 37px;
    }
 .dropdown li + li {
     margin-top: 10px;
@@ -1071,7 +1072,7 @@ li {
     text-align: center;
    }
 .dropdown li:hover {
-    background-color: #4c9e9e;
+    background-color: #87af68;
    }
 .services:hover .dropdown {
     display: block;
@@ -1101,7 +1102,7 @@ input[type=checkbox]{
    }
    .menu li:hover {
     display: inline-block;
-    background-color:#4c9e9e;
+    background-color:#739559;;
     transition: 0.3s ease;
    }
    .menu li + li {
@@ -1114,8 +1115,8 @@ input[type=checkbox]{
     display: block;
    }
    .dropdown {
-    left: 50%;
-    top: 30px;
+    left: 10%;
+    top: 40px;
     transform: translateX(35%);
    }
    .dropdown li:hover {
