@@ -550,9 +550,11 @@ input[type="submit"] {
 	background: #e6e6e6;
 	color: rgba(0, 0, 0, 0.8);
 	line-height: 1;
-	padding: 0.6em 1em 0.4em;
+	padding: 0.45em 1em 0.45em;
     font-family: "Axiforma-Regular";
     font-size: 2rem;
+    width: 100%;
+    margin-top: 10px;
 }
 
 button:hover,
@@ -560,8 +562,8 @@ input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover {
 	border-color: #ccc #bbb #aaa;
-    background-color: #04aa6d;
-    cursor: crosshair;
+    background-color: #739559;
+    cursor: pointer;
 }
 
 button:active, button:focus,
@@ -594,6 +596,10 @@ textarea {
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	padding: 3px;
+    height: 40px;
+    font-family: "Gilroy-Bold";
+    font-size: 2em;
+    width: 100%; /* širina forme */
 }
 
 input[type="text"]:focus,
@@ -1340,6 +1346,31 @@ p {
     width: 100%;
     }
   }
+
+
+.search-form-custom {
+    /* širina forme  CHILD  */
+    padding: 10px;
+
+    align-self: center;
+    justify-self: center;
+
+    width: 1280px;
+    
+}
+
+@media only screen and (max-width: 1280px) {
+    .search-form-custom {
+    width: 90%;
+    }
+  }
+
+/*Parent*/
+.forma {
+
+    display: grid;
+
+}
 
 
 /*# sourceMappingURL=style.css.map */

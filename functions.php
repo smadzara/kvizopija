@@ -252,3 +252,34 @@ function create_questions_taxonomies() {
     register_taxonomy( 'questions_categories', array( 'questions' ), $args );
 }
 add_action( 'init', 'create_questions_taxonomies', 0 );
+
+
+
+// Limitiranje pretrage samo na pitanja 'questions'
+
+function searchfilter($query) {
+ 
+    if ($query->is_search && !is_admin() ) {
+        $query->set('post_type',array('questions'));
+    }
+ 
+return $query;
+}
+ 
+add_filter('pre_get_posts','searchfilter');
+
+
+// Custom Search form labels
+
+
+function custom_search_form( $search_form ) { 
+    $search_form = '<section class="search-form-custom"><form role="search" method="get" id="search-form" action="' . home_url( '/' ) . '" >
+     <label class="screen-reader-text" for="s">' . __('',  'domain') . '</label>
+     <input type="search" value="' . get_search_query() . '" name="s" id="s" placeholder="Pretraži pitanja..." />
+     <input type="submit" id="searchsubmit" value="'. esc_attr__('Traži', 'domain') .'" />
+     </form></section>';
+
+ return $search_form;
+}
+
+add_filter( 'get_search_form', 'custom_search_form' );

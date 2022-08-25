@@ -7,13 +7,15 @@
  * @package kvizopija
  */
 
-get_search_form();
 
 $questions_taxonomy = 'questions_categories';
 $questions_terms = get_terms($questions_taxonomy); // Get all terms of a questions taxonomy
 
 ?>
 
+<div class="forma">    
+<?=get_search_form();?>
+</div>
         <div class="sidebar-content-container sidebar-categories">
             <?php foreach ( $questions_terms as $questions_term ) : //dump($questions_term)?>
             <a href="<?= get_term_link($questions_term->slug, $questions_taxonomy); ?>">

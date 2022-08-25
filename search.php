@@ -14,14 +14,14 @@ get_header();
 
 		<?php if ( have_posts() ) : ?>
 
-			<header class="page-header">
-				<h1 class="page-title">
+			<div class="container">
+				<h2>
 					<?php
 					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'kvizopija' ), '<span>' . get_search_query() . '</span>' );
+					printf( esc_html__( 'Rezultati pretraživanja za pojam: %s', 'kvizopija' ), '<span>' . get_search_query() . '</span>' );
 					?>
-				</h1>
-			</header><!-- .page-header -->
+				</h2>
+            </div><!-- .page-header -->
 
 			<?php
 			/* Start the Loop */
