@@ -10,17 +10,17 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+	<main id="primary" class="site-main-search">
 
 		<?php if ( have_posts() ) : ?>
 
-			<div class="container">
-				<h2>
-					<?php
-					/* translators: %s: search query. */
-					printf( esc_html__( 'Rezultati pretraživanja za pojam: %s', 'kvizopija' ), '<span>' . get_search_query() . '</span>' );
-					?>
-				</h2>
+			<div class="search-title">
+                    <h2 class="search-title-body">
+                        <?php
+                        /* translators: %s: search query. */
+                        printf( esc_html__( 'Rezultati pretraživanja za pojam: %s', 'kvizopija' ), '<span class="search-results-highlited">' . get_search_query() . '</span>' );
+                        ?>
+                    </h2>
             </div><!-- .page-header -->
 
 			<?php
@@ -49,5 +49,5 @@ get_header();
 	</main><!-- #main -->
 
 <?php
-get_sidebar();
+get_sidebar('questions');
 get_footer();

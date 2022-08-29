@@ -12,18 +12,11 @@
 ?>
 
 	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'kvizopija' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'kvizopija' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'kvizopija' ), 'kvizopija', '<a href="https://automattic.com/">Automattic</a>' );
-				?>
+		<div class="footer-main">
+            <div class="footer-centered">
+                <p class="footer">Pub kviz pitanja - Powered by: <a class="footer-links" href="https://www.kvizopija.com/" target="_blank">Kvizopija</a></p>
+                <p class="footer-small">v0.01 - vrlo rana alfa sa gomilom mana i nedostataka</p>
+            </div>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->

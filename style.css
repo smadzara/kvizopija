@@ -1084,7 +1084,7 @@ li {
     display: block;
    }
 
-   /*RESPONSIVE NAVBAR MENU STARTS*/
+/*RESPONSIVE NAVBAR MENU STARTS*/
 /* CHECKBOX HACK */
 input[type=checkbox]{
     display: none;
@@ -1096,7 +1096,7 @@ input[type=checkbox]{
     user-select: none;
    }
 /* APPLYING MEDIA QUERIES */
-   @media (max-width: 768px) {
+   @media (max-width: 1024px) {
    .menu { 
     display:none;
     position: absolute;
@@ -1298,6 +1298,8 @@ p {
 .answer {
 	padding-top: 0.1rem;
 	font-weight: bolder;
+    font-size: 1.7rem;
+    font-family: "ProximaNova-Regular";
 }
 
 .more-questions {
@@ -1312,7 +1314,7 @@ p {
 
 .pagination {
     font-family: "ProximaNova-Regular";
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: bolder;
     padding: 0.5rem;
     text-align: center;
@@ -1373,4 +1375,60 @@ p {
 }
 
 
-/*# sourceMappingURL=style.css.map */
+.search-title{
+    background-color: white;
+}
+
+.search-title-body {
+    display: block;
+    flex-wrap: wrap;
+    margin-left: 12.80%;
+}
+
+@media only screen and (max-width: 768px) {
+    .search-title-body {
+    margin-left: 3%;
+    }
+  }
+
+/* Highlited search results */
+.search-results-highlited { 
+    background-color:rgb(255, 255, 121);
+    }
+
+
+/* FOOTER */
+.footer-main {
+    height: 100px;
+    background: #823c22;
+    text-align: center;
+}
+
+.footer-centered{
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+/* classed link styles, appropriate for navigation area */
+a.footer-links {color: white; text-decoration: underline;}
+a.footer-links:link {color: white; text-decoration: underline;}
+a.footer-links:visited {color: white; text-decoration: none;}
+a.footer-links:hover {color: rgb(206, 206, 206); text-decoration: none;}
+a.footer-links:active {color: white; text-decoration: none;}
+
+p.footer {
+    color: white;
+    font-size: 2.0rem;
+}
+
+p.footer-small {
+    color: rgb(194, 194, 194);
+    font-size: 1.2rem;
+}
+
+.site-main-search {
+    background-color: #f6f6f6;
+}
