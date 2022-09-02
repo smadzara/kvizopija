@@ -745,7 +745,9 @@ textarea {
 .page-content,
 .entry-content,
 .entry-summary {
-	margin: 1.5em 0 0;
+	/* margin: 1.5em 0 0; */
+    margin: auto;
+    padding-bottom: 1rem;
 }
 
 .page-links {
@@ -1174,6 +1176,12 @@ input[type=checkbox]{
 	padding: 0.6rem;
 }
 
+.content-container-fof {
+	background-color: #f6f6f6;
+	margin: auto;
+	padding: 0.6rem;
+}
+
 @media only screen and (max-width: 768px) {
     .content-container {
     width: 95%;
@@ -1197,6 +1205,14 @@ h2 {
 	font-family: "Gilroy-Bold";
 	color: #739559;
 	font-size: 2.8rem;
+	margin-top: 0rem;
+	margin-bottom: 0.5rem;
+}
+
+h3 {
+	font-family: "Gilroy-Bold";
+	color: #823c22;
+	font-size: 2.2rem;
 	margin-top: 0rem;
 	margin-bottom: 0.5rem;
 }
@@ -1431,4 +1447,12 @@ p.footer-small {
 
 .site-main-search {
     background-color: #f6f6f6;
+}
+
+p.fof {
+    margin: auto;
+}
+
+.form-consent-font-size {
+    font-size: 1.1rem;
 }

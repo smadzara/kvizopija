@@ -52,6 +52,37 @@ $posts=$query->posts;
             </p>
         </div>
 
+        <?php $total_questions = new WP_Query(array( 'post_type' => 'questions' ));?>
+            <?php if ($total_questions->have_posts()) { 
+                $count_posts = wp_count_posts('questions')->publish; 
+                if ( $count_posts == "1" ) { 
+                    echo "<h3>Trenutno imamo samo jedno kviz pitanje...</h3>"; }
+                else { echo "<h3>Trenutno brojimo $count_posts kviz pitanja.</h3>"; }
+                    } else { ?>
+                <h2>Trenutno nema kviz pitanja :(</h2>
+            <?php } 
+        ?>
+
+        <?php /* Last question date */
+            $latest_question = new WP_Query(
+                array(
+                    'post_type' => 'questions',
+                    'post_status' => 'publish',
+                    'posts_per_page' => 1,
+                    'orderby' => 'date',
+                    'order' => 'DESC'
+                )
+            );
+
+            if($latest_question->have_posts()){
+                $latest_question_date = date( 'j. n. Y.', strtotime($latest_question->posts[0]->post_modified) );
+                
+            }
+
+        ?>
+
+        <h3>Zadnje ažuriranje baze pitanja: <?= $latest_question_date; ?></h3>
+
         <div class="category-container">
         <h2 class="categories-title">Kategorije</h2>
             <?php foreach ( $questions_terms as $questions_term ) : //dump($questions_term)?>
@@ -77,7 +108,7 @@ $posts=$query->posts;
                             );
                             $q = new WP_Query($args);
                         ?>
-                        Zadnje osvježavanje: <span class="accent"><?php echo (date( 'd.m.Y.', strtotime($q->post->post_date) )) ?></span>
+                        Zadnje osvježavanje: <span class="accent"><?php echo (date( 'j. n. Y.', strtotime($q->post->post_date) )) ?></span>
                     </p>
                 </div>
             </a>

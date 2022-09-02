@@ -34,9 +34,9 @@
 		elseif ( is_search() ) :
 			?>
 
-			<p><?php esc_html_e( 'Upiši novi pojam ili odleti na krilima prepunim bratske ljubavi za čovjeka koji je zalutao.', 'kvizopija' ); ?></p>
+			<p><?php esc_html_e( 'Upiši novi pojam ili odleti na krilima prepunim bratske ljubavi za čovjeka koji je zalutao, tako što ćeš odabrati jednu od kategorija pitanja.', 'kvizopija' ); ?></p>
 			<?php
-			get_search_form();
+
 
 		else :
 			?>

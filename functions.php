@@ -255,12 +255,13 @@ add_action( 'init', 'create_questions_taxonomies', 0 );
 
 
 
-// Limitiranje pretrage samo na pitanja 'questions'
+// Limitiranje pretrage samo na pitanja 'questions' i 20 odgovora
 
 function searchfilter($query) {
  
     if ($query->is_search && !is_admin() ) {
         $query->set('post_type',array('questions'));
+        $query->set( 'posts_per_page', '20' );
     }
  
 return $query;
