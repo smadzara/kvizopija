@@ -141,7 +141,11 @@ function kvizopija_scripts() {
 	wp_enqueue_style( 'kvizopija-style', get_stylesheet_uri(), array(), KVIZOPIJA_VERSION );
 	wp_style_add_data( 'kvizopija-style', 'rtl', 'replace' );
 
-	wp_enqueue_script( 'kvizopija-navigation', get_template_directory_uri() . '/js/navigation.js', array(), KVIZOPIJA_VERSION, true );
+	/* wp_enqueue_script( 'kvizopija-navigation', get_template_directory_uri() . '/js/navigation.js', array(), KVIZOPIJA_VERSION, true ); */
+    /* wp_enqueue_script( 'kvizopija-navbar', get_template_directory_uri() . '/js/navbar.js', array(), KVIZOPIJA_VERSION, true ); */
+    wp_enqueue_script('my-custom-script', get_template_directory_uri() .'/js/navbar.js', array('jquery'), null, true);
+
+
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
