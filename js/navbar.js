@@ -1,5 +1,5 @@
 // on document ready
-$(document).ready(function() {
+jQuery(document).ready(function() {
 
     // show/hide the mobile menu based on class added to container
     $('.menu-icon').click(function() {
