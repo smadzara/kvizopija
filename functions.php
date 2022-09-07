@@ -143,7 +143,6 @@ function kvizopija_scripts() {
 
 	/* wp_enqueue_script( 'kvizopija-navigation', get_template_directory_uri() . '/js/navigation.js', array(), KVIZOPIJA_VERSION, true ); */
     /* wp_enqueue_script( 'kvizopija-navbar', get_template_directory_uri() . '/js/navbar.js', array(), KVIZOPIJA_VERSION, true ); */
-    wp_enqueue_script('my-custom-script', get_template_directory_uri() .'/js/navbar.js', array('jquery'), null, true);
 
 
 

@@ -8,7 +8,7 @@
  */
 
 ?>
-
+<div class="nav-spacing"></div>
 <section class="no-results not-found">
 	<header class="page-header">
 		<h1 class="page-title"><?php esc_html_e( 'Nešto se krivo skešalo ili stvarno ne postoji ono što ste tražili ili mislili da postoji.', 'kvizopija' ); ?></h1>
