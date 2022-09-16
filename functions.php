@@ -256,6 +256,37 @@ function create_questions_taxonomies() {
 }
 add_action( 'init', 'create_questions_taxonomies', 0 );
 
+/**
+ * Custom post type taxonomy declaration - 'questions_terms'
+ */
+
+function create_questions_terms() {
+    $labels = array(
+        'name'              => _x( 'Terms', 'term general name' ),
+        'singular_name'     => _x( 'Term', 'term singular name' ),
+        'search_items'      => __( 'Search Terms' ),
+        'all_items'         => __( 'All Terms' ),
+        'parent_item'       => __( 'Parent Term' ),
+        'parent_item_colon' => __( 'Parent Term:' ),
+        'edit_item'         => __( 'Edit Term' ),
+        'update_item'       => __( 'Update Term' ),
+        'add_new_item'      => __( 'Add New Term' ),
+        'new_item_name'     => __( 'New Term Name' ),
+        'menu_name'         => __( 'Terms' ),
+    );
+
+    $args = array(
+        'hierarchical'      => false, // Set this to 'false' for non-hierarchical taxonomy (like tags)
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        //'rewrite'           => array( 'slug' => 'questions' )
+    );
+
+    register_taxonomy( 'questions_terms', array( 'questions' ), $args );
+}
+add_action( 'init', 'create_questions_terms', 0 );
 
 
 // Limitiranje pretrage samo na pitanja 'questions' i 20 odgovora

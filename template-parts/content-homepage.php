@@ -138,7 +138,9 @@ $posts=$query->posts;
                         <p class="question-author">Autor: <a href="<?=$question_author_url;?>" target="_blank"><?=$question_author;?></a></p>
                     <?php endif; ?>
                     <p><?=get_the_title($item->ID) ?></p>
+                    <div class="hidden-answer">ODGOVOR</div>
                     <div class="answer"><?= apply_filters('the_content', get_the_content(null,false,$item)); ?></div>
+                    
                 </div>
             <?php endforeach; ?>
         </div>
@@ -151,6 +153,9 @@ $posts=$query->posts;
         </div>
     </div>
 </section>
+
+
+
 
 
 <!-- END Kvizopija Template -->

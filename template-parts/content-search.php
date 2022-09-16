@@ -10,9 +10,10 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
 <section class="container">
 
-    <div class="content-container">
+    <div class="content-container-search">
 
         <div class="container-questions">
                     <?php $title = get_the_title(); $keys= explode(" ",$s); $title = preg_replace('/('.implode('|', $keys) .')/iu', '<strong class="search-results-highlited">\0</strong>', $title); ?>
