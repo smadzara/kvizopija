@@ -24,7 +24,7 @@ $questions_custom_taxonomy_term = get_queried_object();
 
 	<div class="content-container">
 
-		<h1>Pub kviz pitanje za pojam: <?= $questions_custom_taxonomy_term->name; ?></h1>
+		<h1>Pub kviz pitanja za pojam: <?= $questions_custom_taxonomy_term->name; ?></h1>
 
 			<p class="cat-taxonomy"><?= $questions_custom_taxonomy_term->description; ?></p>
 
