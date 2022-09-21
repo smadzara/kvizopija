@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template part for displaying page content in page.php
  *
@@ -33,22 +34,6 @@ $questions_terms = get_terms($questions_taxonomy); // Get all terms of a questio
             </p>
         </div>
 
-
-        <div class="terms-container">
-        <h2 class="categories-title">Pojmovi</h2>
-            <?php foreach ( $questions_terms as $questions_term ) : //dump($questions_term)?>
-            <a href="<?= get_term_link($questions_term->slug, $questions_taxonomy); ?>">
-                <div class="terms-box">
-                    <p><?= $questions_term->name; ?> (<?= $questions_term->count; ?>)</p>
-                </div>
-            </a>
-            <?php endforeach; ?>
-        </div>
-
-        <div class="terms-container">
-        <h2 class="categories-title">Pojmovi 2</h2>
-
-
 <!-- query -->
 <?php
 
@@ -77,49 +62,65 @@ $query = new WP_Query( array(
 
 //dump($query);
 
-?>
+//kraučeva magija
 
-<?php if ( $query->have_posts() ) : ?>
+$terms = get_terms( array(
+    'taxonomy' => 'questions_terms',
+    'hide_empty' => false,
+) );
+$page = get_query_var('paged', '1' );
+$total = count( $terms); // ovo je broj termova
+$limit = 50; // koliko mi treba postova po stranici
+$totalPages = ceil( $total/ $limit );
+$page = min($page, $totalPages);
+$page = max($page, 1);
+$offset = ($page - 1) * $limit;
 
-<!-- begin loop -->
-<?php while ( $query->have_posts() ) : $query->the_post(); ?>
+if( $offset < 0 ) $offset = 0;
+$terms_10= array_slice( $terms, $offset, $limit ); ?>
 
-<?php echo(get_term($query->the_post())->name);  ?>
-
-<?php endwhile; ?>
-<!-- end loop -->
-
-
-<!-- WHAT GOES HERE?????? -->
-<div class="pagination">
-    <?php 
-        echo paginate_links( array(
-            'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
-            'total'        => $query->max_num_pages,
-            'current'      => max( 1, get_query_var( 'paged' ) ),
-            'format'       => '?paged=%#%',
-            'show_all'     => false,
-            'type'         => 'plain',
-            'end_size'     => 2,
-            'mid_size'     => 1,
-            'prev_next'    => true,
-            'prev_text'    => sprintf( '<i></i> %1$s', __( 'Newer Posts', 'text-domain' ) ),
-            'next_text'    => sprintf( '%1$s <i></i>', __( 'Older Posts', 'text-domain' ) ),
-            'add_args'     => false,
-            'add_fragment' => '',
-        ) );
-    ?>
-</div>
-<!-- WHAT GOES HERE?????? -->
-
-
-<?php wp_reset_postdata(); ?>
-
-<?php else : ?>
-    <p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
-<?php endif; ?>
-
+<div class="terms-container">
+        <h2 class="categories-title">Pojmovi po abecedi</h2>
+            <?php foreach ( $terms_10 as $questions_term ) : //dump($questions_term)?>
+            <a href="<?= get_term_link($questions_term->slug, $questions_taxonomy); ?>">
+                <div class="terms-box">
+                    <p><?= $questions_term->name; ?> (<?= $questions_term->count; ?>)</p>
+                </div>
+            </a>
+            <?php endforeach; ?>
         </div>
+                <div class="navigation pagination">
+                <?php 
+                $link = 'https://pubkvizpitanja.com/pojmovnik/page/';
+                $next_page = $page + 1;
+                $prev_page = $page - 1;
+                $pagerContainer = '<div style="width: 100%;">';   
+                if( $totalPages != 0 ) 
+                {
+                if( $page == 1 ) 
+                { 
+                    $pagerContainer .= ''; 
+                } 
+                else 
+                { 
+                    $pagerContainer .= sprintf( '<a href="' . $link . $prev_page . '" style="color: #c00"> &#171; prethodna stranica</a>', $page - 1 ); 
+                }
+                $pagerContainer .= ' <span> stranica <strong>' . $page . '</strong> od ' . $totalPages . '</span>'; 
+                if( $page == $totalPages ) 
+                { 
+                    $pagerContainer .= ''; 
+                }
+                else 
+                { 
+                    $pagerContainer .= sprintf( '<a href="' . $link . $next_page . '" style="color: #c00"> slijedeća stranica &#187; </a>', $page + 1 ); 
+                }           
+                }                   
+                $pagerContainer .= '</div>';
+
+                echo $pagerContainer;
+
+                ?>
+                </div>
 
     </div>
 </section>
