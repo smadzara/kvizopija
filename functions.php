@@ -295,7 +295,7 @@ function searchfilter($query) {
  
     if ($query->is_search && !is_admin() ) {
         $query->set('post_type',array('questions'));
-        $query->set( 'posts_per_page', '20' );
+        $query->set( 'posts_per_page', '50' );
     }
  
 return $query;

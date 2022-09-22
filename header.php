@@ -104,6 +104,7 @@ $questions_terms_cat = get_terms($questions_taxonomy_cat); // Get all terms of a
 						<?php endforeach; ?>
 				</ul>
 			</li>
+        <li><a href="<?=get_page_link( 712 )?>">Pojmovnik</a></li>
 		<li><a href="<?=get_page_link( 294 )?>">Slučajnih 40</a></li>
 		<li><a href="<?=get_page_link( 340 )?>">Kontakt</a></li>
         </ul>

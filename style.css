@@ -1766,3 +1766,7 @@ nav .content .links{
   font-size: 45px;
   margin: 5px 0;
 }
+
+p.term-title {
+    font-size: 2.0rem;
+}
