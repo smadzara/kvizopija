@@ -1169,6 +1169,23 @@ input[type=checkbox]{
 	flex-wrap: wrap;
 }
 
+.container-single {
+	background-color: #f6f6f6;
+	width: 100%;
+	margin: 0px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.content-container-single {
+    background-color: #f6f6f6;
+	width: 75%;
+	margin: auto;
+	padding: 0.6rem;
+    margin-top: 95px;
+    margin-bottom: 45px;
+}
+
 .content-container {
 	background-color: #f6f6f6;
 	width: 75%;
@@ -1298,7 +1315,7 @@ p {
 }
 
 .questions-homepage {
-	margin-bottom: 1.6rem;
+	margin-bottom: 0.6rem;
 }
 
 .questions-homepage a {
@@ -1332,6 +1349,7 @@ p {
 
 .answer {
 	padding-top: 0.1rem;
+    padding-bottom: 0.5rem;
 	font-weight: bolder;
     font-size: 1.7rem;
     font-family: "ProximaNova-Regular";
@@ -1344,7 +1362,7 @@ p {
 }
 
 .cat-taxonomy{
-	margin-bottom: 3em;
+	margin-bottom: 2em;
 }
 
 .pagination {
@@ -1770,3 +1788,4 @@ nav .content .links{
 p.term-title {
     font-size: 2.0rem;
 }
+

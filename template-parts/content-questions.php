@@ -39,19 +39,11 @@
 				wp_kses_post( get_the_title() )
 			)
 		);
+/*         $term_list = wp_get_post_terms( $post->ID, 'questions_terms', array( 'fields' => 'all' ) ); -- Ispisuje sve termove iz pitanja
+        print_r( $term_list ); */
         ?>
+        
     </div>
-
-    <div class="entry-content">
-        <?php
-		wp_link_pages(
-			array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'kvizopija' ),
-				'after'  => '</div>',
-			)
-		);
-		?>
-	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
 		<?php kvizopija_entry_footer(); ?>
