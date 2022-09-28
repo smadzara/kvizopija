@@ -16,7 +16,7 @@ $args = [
     'post_type' => 'questions',
     'orderby' => 'date',
     'order' => 'DESC',
-    'posts_per_page' => '20',
+    'posts_per_page' => '50',
 ];
 
 $query = new WP_Query($args);
