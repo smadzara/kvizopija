@@ -59,7 +59,8 @@ $posts=$query->posts;
                         <?php else: ?>
                         <p class="question-author">Autor: <a href="<?=$question_author_url;?>" target="_blank"><?=$question_author;?></a></p>
                     <?php endif; ?>
-                    <p><?=get_the_title($item->ID) ?></p>
+                    <p class="questions"><?=get_the_title($item->ID) ?></p>
+                    <div class="answer-homepage"><?= apply_filters('the_content', get_the_content(null,false,$item)); ?></div>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -68,10 +69,30 @@ $posts=$query->posts;
             <form action="<?php echo get_permalink(); ?>">
                 <input type="submit" value="PROMJEŠAJ PITANJA" />
             </form>
-        
+
         </div>
+
+        <div class="more-questions">
+
+<button id='btn' type="button" class="random40-button">Otkrij odgovore</button>
+
+</div>
     </div>
 </section>
 
+<?php // Otkrij odgovore - START ?>
+<script>
+
+const btn = document.getElementById('btn');
+const para = document.querySelectorAll('.answer-homepage');
+
+btn.addEventListener('click',()=>{
+  para.forEach(el => {
+    el.classList.toggle('show');
+  })
+})
+
+</script>
+<?php // Otkrij odgovore - END ?>
 
 <!-- END Kvizopija Template -->

@@ -83,6 +83,43 @@ $posts=$query->posts;
 
         <h3>Zadnje ažuriranje baze pitanja: <?= $latest_question_date; ?></h3>
 
+        <?php // Nove kategorije - Blok ?>
+
+            <section class="page-contain">
+            <?php foreach ( $questions_terms as $questions_term ) : //dump($questions_term)?>
+                <a href="<?= get_term_link($questions_term->slug, $questions_taxonomy); ?>" class="data-card">
+                    <h3><?= $questions_term->name; ?></h3>
+                    <?php // Vadi datum iz zadnjeg objavljenog posta u kategoriji CPT-a
+                            $args = array(
+                                'post_type' => array('questions'),
+                                'post_status' => 'publish',
+                                'posts_per_page' => 1,
+                                'tax_query' => array(
+                                    array (
+                                        'taxonomy' => 'questions_categories',
+                                        'field' => 'slug',
+                                        'terms' => array($questions_term->slug),
+                                    )
+                                ),
+                            );
+                            $q2 = new WP_Query($args);
+                        ?>
+                    <h4>Osvježeno: <?php echo (date( 'j. n. Y.', strtotime($q2->post->post_date) )) ?></h4>
+                    <p>Broj pitanja: <?= $questions_term->count; ?></p>
+                    <span class="link-text">
+                    Sva pitanja
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M17.8631 0.929124L24.2271 7.29308C24.6176 7.68361 24.6176 8.31677 24.2271 8.7073L17.8631 15.0713C17.4726 15.4618 16.8394 15.4618 16.4489 15.0713C16.0584 14.6807 16.0584 14.0476 16.4489 13.657L21.1058 9.00019H0.47998V7.00019H21.1058L16.4489 2.34334C16.0584 1.95281 16.0584 1.31965 16.4489 0.929124C16.8394 0.538599 17.4726 0.538599 17.8631 0.929124Z" fill="#753BBD"/>
+                </svg>
+                    </span>
+                </a>
+                <?php endforeach; ?>
+            </section>
+
+        <?php // Nove kategorije - Blok - END ?>
+
+        <?php /*Stare kategorije - START
+
         <div class="category-container">
         <h2 class="categories-title">Kategorije</h2>
             <?php foreach ( $questions_terms as $questions_term ) : //dump($questions_term)?>
@@ -115,6 +152,8 @@ $posts=$query->posts;
             <?php endforeach; ?>
         </div>
 
+        Stare kategorije - END*/?>
+
         <div class="container-questions">
             <h2>Zadnje objavljena pitanja</h2>
             <?php foreach($posts as $key => $item): 
@@ -136,7 +175,7 @@ $posts=$query->posts;
                         <?php else: ?>
                         <p class="question-author">Autor: <a href="<?=$question_author_url;?>" target="_blank"><?=$question_author;?></a></p>
                     <?php endif; ?>
-                    <p><?=get_the_title($item->ID) ?></p>
+                    <p class="questions"><?=get_the_title($item->ID) ?></p>
                     <div class="answer-homepage"><?= apply_filters('the_content', get_the_content(null,false,$item)); ?></div>
                     
                 </div>
@@ -153,9 +192,11 @@ $posts=$query->posts;
 		<button id='btn' type="button" class="homepage-button">Otkrij odgovore</button>
 
 		</div>
+
     </div>
 </section>
 
+<?php // Otkrij odgovore - START ?>
 <script>
 
 const btn = document.getElementById('btn');
@@ -168,3 +209,4 @@ btn.addEventListener('click',()=>{
 })
 
 </script>
+<?php // Otkrij odgovore - END ?>

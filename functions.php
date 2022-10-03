@@ -319,15 +319,3 @@ function custom_search_form( $search_form ) {
 
 add_filter( 'get_search_form', 'custom_search_form' );
 
-// enqueue script Accordion za pitanja na naslovnici
-function my_scripts_method() {
-    if ( !is_admin() ) {
-      wp_enqueue_script('jquery-ui-accordion');
-      wp_enqueue_script(
-        'custom-accordion',
-        get_stylesheet_directory_uri() . '/js/accordion.js',
-        array('jquery')
-        );
-      }
-    }
-    add_action('wp_enqueue_scripts', 'my_scripts_method');
