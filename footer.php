@@ -15,7 +15,7 @@
 		<div class="footer-main">
             <div class="footer-centered">
                 <p class="footer">Pub kviz pitanja - Powered by: <a class="footer-links" href="https://www.kvizopija.com/" target="_blank">Kvizopija</a></p>
-                <p class="footer-small">v0.01 - vrlo rana alfa sa gomilom mana i nedostataka</p>
+                <p class="footer-small">v0.11 - alfa sa gomilom mana i nedostataka, ali i nekih fixanih bugova iz verzije v0.01</p>
             </div>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->

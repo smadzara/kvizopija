@@ -1868,6 +1868,18 @@ p.term-title {
     background: #e7f3f1;
   }
 
+
+.data-card h2 {
+color: #2e3c40;
+font-size: 2.0em;
+font-weight: 600;
+line-height: 1;
+padding-bottom: 0.5em;
+margin: 0 0 0.142857143em;
+border-bottom: 2px solid #753bbd;
+transition: color 0.45s ease, border 0.45s ease;
+}
+  
 .data-card h3 {
   color: #2e3c40;
   font-size: 3.5em;
@@ -1878,6 +1890,7 @@ p.term-title {
   border-bottom: 2px solid #753bbd;
   transition: color 0.45s ease, border 0.45s ease;
 }
+
 .data-card h4 {
   color: #627084;
   text-transform: uppercase;
@@ -1888,6 +1901,17 @@ p.term-title {
   margin: 0 0 1.777777778em;
   transition: color 0.45s ease;
 }
+
+.data-card h5 {
+    color: #627084;
+    text-transform: uppercase;
+    font-size: 1.225em;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    margin: 0 0 1.777777778em;
+    transition: color 0.45s ease;
+  }
 .data-card p {
   opacity: 0;
   color: #ffffff;
@@ -1921,9 +1945,17 @@ p.term-title {
   color: #ffffff;
   border-bottom-color: #a754c4;
 }
+
+.data-card:hover h2 {
+    color: #ffffff;
+    border-bottom-color: #a754c4;
+  }
 .data-card:hover h4 {
   color: #ffffff;
 }
+.data-card:hover h5 {
+    color: #ffffff;
+  }
 .data-card:hover p {
   opacity: 1;
   transform: none;
@@ -1956,3 +1988,6 @@ p.term-title {
     transform: translateX(0.125em);
   }
 }
+
+
+/* Mini Cards blocks */
