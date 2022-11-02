@@ -82,6 +82,25 @@ $posts=$query->posts;
         ?>
 
         <h3>Zadnje ažuriranje baze pitanja: <?= $latest_question_date; ?></h3>
+        <br>
+
+        <?php // Reklame ?>
+
+<div align="center">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4983269975347159"
+        crossorigin="anonymous"></script>
+    <!-- pkp.com - responsive -->
+    <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-4983269975347159"
+        data-ad-slot="2181067593"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <p style="text-align:center">Klikom na reklamu podržavate rad ove stranice, na čemu najljubaznije zahvaljujemo. :)</p>
+</div>
 
         <?php // Nove kategorije - Blok ?>
 

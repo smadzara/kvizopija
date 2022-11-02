@@ -1990,4 +1990,11 @@ transition: color 0.45s ease, border 0.45s ease;
 }
 
 
-/* Mini Cards blocks */
+/* AdWords Center*/
+
+.adwords {
+    margin: auto;
+    width: 100%;
+    border: 5px solid #1d1d1d;
+    padding: 10px;
+    }
