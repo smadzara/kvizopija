@@ -65,6 +65,7 @@ $questions_custom_taxonomy_term = get_queried_object();
 						get_template_part( 'template-parts/content', 'none' );
 
 					endif;
+                    
 					?>
 
 				</main><!-- #main -->
@@ -73,7 +74,28 @@ $questions_custom_taxonomy_term = get_queried_object();
 
 </div>
 
+<div class="more-questions">
+
+<button id='btn' type="button" class="homepage-button">Otkrij odgovore</button>
+
+</div>
+
 <?php
 //get_sidebar();
 get_sidebar('questions');
 get_footer();
+?>
+<?php // Otkrij odgovore - START ?>
+<script>
+
+const btn = document.getElementById('btn');
+const para = document.querySelectorAll('.answer-category');
+
+btn.addEventListener('click',()=>{
+  para.forEach(el => {
+    el.classList.toggle('show');
+  })
+})
+
+</script>
+    <?php // Otkrij odgovore - END ?>

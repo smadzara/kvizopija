@@ -1355,6 +1355,10 @@ p {
 	font-size: 1.2rem;
 }
 
+.question-category-single {
+    margin-top: 1.8rem;
+}
+
 .answer {
 	padding-top: 0.1rem;
     padding-bottom: 0.5rem;
@@ -1373,6 +1377,17 @@ p {
 }
 
 .answer-homepage.show {
+	display: block;
+}
+
+.answer-category {
+	font-weight: bolder;
+    font-size: 1.7rem;
+    font-family: "ProximaNova-Regular";
+    display: none;
+}
+
+.answer-category.show {
 	display: block;
 }
 
@@ -1998,3 +2013,6 @@ transition: color 0.45s ease, border 0.45s ease;
     border: 5px solid #1d1d1d;
     padding: 10px;
     }
+
+ins.adsbygoogle { background: transparent !important; 
+padding: 5px;}

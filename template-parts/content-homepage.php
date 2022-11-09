@@ -179,12 +179,16 @@ $posts=$query->posts;
                 $terms = get_the_terms( $item, 'questions_categories'); // povezujem CPT taksonomiju sa postom
                 $question_author = get_field('question_author', $item->ID); // čupam ACF iz CPT
                 $question_author_url = get_field('question_author_url', $item->ID); // čupam ACF iz CPT
+                $term_list = wp_get_post_terms( $item->ID, 'questions_terms', array( 'fields' => 'all' ) );
             ?>
                 <div class="questions-homepage">
                     <p class="question-category">Kategorija:
                         <a href="<?= get_term_link($terms[0]->slug, $questions_taxonomy); ?>">
                             <?=$terms[0]-> name; ?>
                         </a>
+                    </p>
+                    <p class="question-category">Pojmovi:
+                    <?php print_r( $term_list ); ?>
                     </p>
                     <p class="question-date">Objavljeno:
                         <span class="question-accent"><?=get_the_date( 'j. n. Y.', $item->ID ) ?></span>

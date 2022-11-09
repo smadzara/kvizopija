@@ -52,7 +52,7 @@ $posts=$query->posts;
                                     <p class="question-author">Autor: <a href="<?=$question_author_url;?>" target="_blank"><?=$question_author;?></a></p>
                                 <?php endif; ?>
                                 <p><?=get_the_title($item->ID) ?></p>
-                                <div class="answer"><?= apply_filters('the_content', get_the_content(null,false,$item)); ?></div>
+                                <div class="answer-category"><?= apply_filters('the_content', get_the_content(null,false,$item)); ?></div>
                             </div>
                         <?php endforeach; 
                         
@@ -64,6 +64,9 @@ $posts=$query->posts;
                         
                         ?>
                 </div>
+                    <div class="more-questions">
+                        <button id='btn' type="button" class="homepage-button">Otkrij odgovore</button>
+                    </div>
             </div>
 
 	</main><!-- #main -->
@@ -71,3 +74,19 @@ $posts=$query->posts;
 <?php
 get_sidebar('questions');
 get_footer();
+?>
+
+<?php // Otkrij odgovore - START ?>
+<script>
+
+const btn = document.getElementById('btn');
+const para = document.querySelectorAll('.answer-category');
+
+btn.addEventListener('click',()=>{
+  para.forEach(el => {
+    el.classList.toggle('show');
+  })
+})
+
+</script>
+    <?php // Otkrij odgovore - END ?>
