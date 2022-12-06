@@ -35,6 +35,7 @@ $posts=$query->posts;
                             $terms = get_the_terms( $item, 'questions_categories'); // povezujem CPT taksonomiju sa postom
                             $question_author = get_field('question_author', $item->ID); // čupam ACF iz CPT
                             $question_author_url = get_field('question_author_url', $item->ID); // čupam ACF iz CPT
+                            $term_list = wp_get_post_terms( $item->ID, 'questions_terms', array( 'fields' => 'all' ) ); // čupam termove iz CPT
                             //dump($question_author);
                         ?>
                             <div class="questions-homepage">
@@ -51,6 +52,14 @@ $posts=$query->posts;
                                     <?php else: ?>
                                     <p class="question-author">Autor: <a href="<?=$question_author_url;?>" target="_blank"><?=$question_author;?></a></p>
                                 <?php endif; ?>
+                                <?php if($term_list):?>
+                        <p class="question-category">Pojmovi:
+                            <?php foreach ($term_list as $single_term_key):
+                                echo '<a href="'.get_term_link($single_term_key->slug, 'questions_terms').'">|' .$single_term_key->name.'| </a>';
+                            endforeach;
+                    endif;
+                     ?>
+                        </p>
                                 <p><?=get_the_title($item->ID) ?></p>
                                 <div class="answer-category"><?= apply_filters('the_content', get_the_content(null,false,$item)); ?></div>
                             </div>

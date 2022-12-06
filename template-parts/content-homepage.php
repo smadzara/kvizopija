@@ -137,49 +137,13 @@ $posts=$query->posts;
 
         <?php // Nove kategorije - Blok - END ?>
 
-        <?php /*Stare kategorije - START
-
-        <div class="category-container">
-        <h2 class="categories-title">Kategorije</h2>
-            <?php foreach ( $questions_terms as $questions_term ) : //dump($questions_term)?>
-            <a href="<?= get_term_link($questions_term->slug, $questions_taxonomy); ?>">
-                <div class="category-box">
-                    <h2><?= $questions_term->name; ?></h2>
-                    <p class="number-of-questions">
-                        Broj pitanja: <span class="accent"><?= $questions_term->count; ?></span>
-                    </p>
-                    <p class="refresh-date">
-                        <?php // Vadi datum iz zadnjeg objavljenog posta u kategoriji CPT-a
-                            $args = array(
-                                'post_type' => array('questions'),
-                                'post_status' => 'publish',
-                                'posts_per_page' => 1,
-                                'tax_query' => array(
-                                    array (
-                                        'taxonomy' => 'questions_categories',
-                                        'field' => 'slug',
-                                        'terms' => array($questions_term->slug),
-                                    )
-                                ),
-                            );
-                            $q = new WP_Query($args);
-                        ?>
-                        Zadnje osvježavanje: <span class="accent"><?php echo (date( 'j. n. Y.', strtotime($q->post->post_date) )) ?></span>
-                    </p>
-                </div>
-            </a>
-            <?php endforeach; ?>
-        </div>
-
-        Stare kategorije - END*/?>
-
         <div class="container-questions">
             <h2>Zadnje objavljena pitanja</h2>
             <?php foreach($posts as $key => $item): 
                 $terms = get_the_terms( $item, 'questions_categories'); // povezujem CPT taksonomiju sa postom
                 $question_author = get_field('question_author', $item->ID); // čupam ACF iz CPT
                 $question_author_url = get_field('question_author_url', $item->ID); // čupam ACF iz CPT
-                $term_list = wp_get_post_terms( $item->ID, 'questions_terms', array( 'fields' => 'all' ) );
+                $term_list = wp_get_post_terms( $item->ID, 'questions_terms', array( 'fields' => 'all' ) ); // čupam termove iz CPT
             ?>
                 <div class="questions-homepage">
                     <p class="question-category">Kategorija:
@@ -187,9 +151,15 @@ $posts=$query->posts;
                             <?=$terms[0]-> name; ?>
                         </a>
                     </p>
-                    <p class="question-category">Pojmovi:
-                    <?php print_r( $term_list ); ?>
-                    </p>
+                    
+                    <?php if($term_list):?>
+                        <p class="question-category">Pojmovi:
+                            <?php foreach ($term_list as $single_term_key):
+                                echo '<a href="'.get_term_link($single_term_key->slug, 'questions_terms').'">|' .$single_term_key->name.'| </a>';
+                            endforeach;
+                    endif;
+                     ?>
+                        </p>
                     <p class="question-date">Objavljeno:
                         <span class="question-accent"><?=get_the_date( 'j. n. Y.', $item->ID ) ?></span>
                     </p>
