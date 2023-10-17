@@ -23,6 +23,8 @@
 
 <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
 
+<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="pekape" data-description="Podrži nas i plati nam pivo!" data-message="Ako cijeniš ovo što čitaš, plati nam pivo ;)" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
 <?php wp_footer(); ?>
 
 </body>

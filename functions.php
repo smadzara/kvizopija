@@ -333,3 +333,86 @@ add_action( 'shutdown', function() {
    while ( @ob_end_flush() );
 } );
 
+// Spremanje rezultata
+function save_quiz_results() {
+    global $wpdb;
+
+    $player_name = $_POST['player_name'];
+    $total_questions = $_POST['total_questions'];
+    $correct_answers = $_POST['correct_answers'];
+    $percentage = $_POST['percentage'];
+    $time_taken = $_POST['time_taken'];
+
+    $table_name = $wpdb->prefix . 'quiz_results';
+
+    $wpdb->insert(
+        $table_name,
+        array(
+            'player_name' => $player_name,
+            'total_questions' => $total_questions,
+            'correct_answers' => $correct_answers,
+            'percentage' => $percentage,
+            'time_taken' => $time_taken
+        )
+    );
+
+    wp_send_json_success();
+}
+add_action('wp_ajax_save_quiz_results', 'save_quiz_results');
+add_action('wp_ajax_nopriv_save_quiz_results', 'save_quiz_results');
+
+
+
+
+
+// Registrirajte prilagođeni endpoint
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'custom/v1', '/questions/', array(
+        'methods' => 'GET',
+        'callback' => 'get_custom_questions',
+    ) );
+} );
+
+// Funkcija koja obrađuje prilagođeni endpoint
+function get_custom_questions( $request ) {
+    $args = array(
+        'post_type' => 'questions',
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'posts_per_page' => 10,
+        'paged' => $request['page']
+    );
+
+    $query = new WP_Query( $args );
+    $posts = $query->posts;
+
+    $response = array();
+    foreach ( $posts as $post ) {
+        $terms = get_the_terms( $post->ID, 'questions_categories' );
+        $term_list = wp_get_post_terms( $post->ID, 'questions_terms', array( 'fields' => 'all' ) );
+
+        // Dodajte URL-ove za svaku kategoriju i pojam
+        foreach ($terms as &$term) {
+            $term->link = get_term_link($term);
+        }
+        foreach ($term_list as &$single_term) {
+            $single_term->link = get_term_link($single_term);
+        }
+
+        $item_data = array(
+            'id' => $post->ID,
+            'title' => $post->post_title,
+            'content' => $post->post_content,
+            'terms' => $terms,
+            'question_author' => get_field('question_author', $post->ID),
+            'question_author_url' => get_field('question_author_url', $post->ID),
+            'term_list' => $term_list,
+            'date' => get_the_date( 'j. n. Y.', $post->ID )
+        );
+        $response[] = $item_data;
+    }
+
+    return new WP_REST_Response( $response, 200 );
+}
+
+

@@ -41,10 +41,17 @@ $questions_terms = get_terms($questions_taxonomy); // Get all terms of a questio
 $terms = get_terms( array(
     'taxonomy' => 'questions_terms',
     'hide_empty' => false,
-    'orderby' => 'count', 
-    'order' => 'DESC', /*sortira po broju postova u tagovima*/
-
 ) );
+
+usort($terms, function($a, $b) {
+    if ($a->count == $b->count) {
+        return strcasecmp($a->name, $b->name);
+    }
+    return $b->count - $a->count;
+});
+
+$total = count( $terms);
+
 $page = get_query_var('paged', '1' );
 $total = count( $terms); // ovo je broj termova
 $limit = 75; // koliko mi treba postova po stranici
@@ -59,6 +66,8 @@ $terms_10= array_slice( $terms, $offset, $limit ); ?>
                 <div class="terms-container">
                         <h2 class="categories-title">Pojmovi po broju pitanja</h2>
 <!-- Novi pojmovi start -->
+
+<?php //dump($terms) ?>
 
 <section class="page-contain">
                 <?php foreach ( $terms_10 as $questions_term ) : //dump($questions_term)?>
@@ -116,7 +125,21 @@ $terms_10= array_slice( $terms, $offset, $limit ); ?>
     </div>
 </section>
 
+<form method="get" id="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+  <input type="text" name="s" id="search" value="<?php echo get_search_query(); ?>" placeholder="Search Terms">
+  <input type="hidden" name="post_type" value="questions">
+  <button type="submit" id="search-button" class="btn">Search</button>
+</form>
 
+<?php 
+$terms = get_terms( array(
+    'taxonomy' => 'questions_terms',
+    'hide_empty' => false,
+    'orderby' => 'count', 
+    'order' => 'DESC',
+    'search' => get_search_query() // Add this line to filter terms by search query
+) );
+?>
 
 
 

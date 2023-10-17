@@ -2,5 +2,6 @@
 "indentRainbow.colorOnWhiteSpaceOnly": true,
 "githubPullRequests.ignoredPullRequestBranches": [
     "develop"
-]
+],
+"git.ignoreLimitWarning": true
 }

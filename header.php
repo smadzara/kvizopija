@@ -65,43 +65,15 @@ $questions_terms_cat = get_terms($questions_taxonomy_cat); // Get all terms of a
 ?>
         
 
-<?php /*
-<nav class="navbar">
-	<!-- LOGO -->
-	<div class="logo"><a href="<?= get_home_url(); ?>" style="color: #fff;">pubkvizpitanja.com</a></div>
-	<!-- NAVIGATION MENU -->
-		<ul class="navigation-links">
-		<!-- USING CHECKBOX HACK -->
-		<input type="checkbox" id="checkbox_toggle" />
-		<label for="checkbox_toggle" class="hamburger">&#9776;</label>
-		<!-- NAVIGATION MENUS -->
-			<div class="menu">
-				<li><a href="<?= get_home_url(); ?>">Početna</a></li>
-				<li class="services">
-				<a href="<?=get_post_type_archive_link( 'questions' ); ?>">Kviz pitanja</a>
-				<!-- DROPDOWN MENU -->
-				<ul class="dropdown">
-					<?php foreach ( $questions_terms_cat as $questions_term_cat ) : //dump($questions_term_cat)?>
-						<li><a href="<?= get_term_link($questions_term_cat->slug, $questions_taxonomy_cat); ?>"><?= $questions_term_cat->name; ?></a></li>
-					<?php endforeach; ?>
-				</ul>
-				</li>
-				<li><a href="<?=get_page_link( 294 )?>">Slučajnih 40</a></li>
-				<li><a href="<?=get_page_link( 340 )?>">Kontakt</a></li>
-			</div>
-		</ul>
-</nav>
-*/ ?>
-
 <div class="wrapper">
-    <nav>
+
+	<nav>
       <input type="checkbox" id="show-search">
       <input type="checkbox" id="show-menu">
       <label for="show-menu" class="menu-icon"><i class="fas fa-bars"></i></label>
       <div class="content">
       <div class="logo"><a href="<?= get_home_url(); ?>" style="color: #fff;">pubkvizpitanja.com</a></div>
         <ul class="links">
-        <li><a href="<?= get_home_url(); ?>">Početna</a></li>
 			<li>
 				<a href="<?=get_post_type_archive_link( 'questions' ); ?>" class="desktop-link">Kviz pitanja</a>
 				<input type="checkbox" id="show-features">
@@ -112,12 +84,29 @@ $questions_terms_cat = get_terms($questions_taxonomy_cat); // Get all terms of a
 						<?php endforeach; ?>
 				</ul>
 			</li>
-        <li><a href="<?=get_page_link( 712 )?>">Pojmovnik</a></li>
-		<li><a href="<?=get_page_link( 294 )?>">Slučajnih 40</a></li>
-		<li><a href="<?=get_page_link( 340 )?>">Kontakt</a></li>
+			<li><a href="<?=get_page_link( 712 )?>">Pojmovnik</a></li>
+			<li><a href="<?=get_page_link( 294 )?>">Slučajnih 40</a></li>
+			<li><a href="<?=get_page_link( 340 )?>">Kontakt</a></li>
         </ul>
       </div>
     </nav>
-  </div>
 
-	</header><!-- #masthead -->
+</div>
+
+<div align="center" style="padding-top: 80px; position: relative; z-index: -9999 !important;">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4983269975347159"
+        crossorigin="anonymous"></script>
+    <!-- pkp.com - responsive -->
+    <ins class="adsbygoogle"
+        style="display:block; z-index: -9999 !important;"
+        data-ad-client="ca-pub-4983269975347159"
+        data-ad-slot="2181067593"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <p style="text-align:center">Klikom na reklamu podržavate rad ove stranice, na čemu najljubaznije zahvaljujemo. :)</p>
+</div>
+
+	

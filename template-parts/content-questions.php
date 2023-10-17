@@ -8,8 +8,26 @@
  */
 
 ?>
+
+<?php
+$questions_taxonomy = 'questions_categories';
+$questions_terms = get_terms($questions_taxonomy); // Get all terms of a questions taxonomy
+$term_list = wp_get_post_terms( $questions_taxonomy, 'questions_terms', array( 'fields' => 'all' ) ); // čupam termove iz CPT
+$terms = get_the_terms( get_the_ID(), 'questions_terms' );
+
+//dump($terms);
+?>
+
 <!-- <p>content-questions.php</p> -->
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+<?php if($terms):?>
+                        <p class="question-category">Pojmovi:
+                            <?php foreach ($terms as $term):
+                                echo '<a href="'.get_term_link($term->slug, 'questions_terms').'">|' .$term->name.'| </a>';
+                            endforeach;
+                    endif;
+                     ?>
 
 	<header class="question-category-single">
 		<?php

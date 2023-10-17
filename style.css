@@ -1195,7 +1195,7 @@ input[type=checkbox]{
 	width: 75%;
 	margin: auto;
 	padding: 0.6rem;
-    margin-top: 75px;
+    margin-top: 30px;
 }
 
 .content-container-fof {
@@ -1356,7 +1356,8 @@ p {
 }
 
 .question-category-single {
-    margin-top: 1.8rem;
+    margin-top: 0.4rem;
+    margin-bottom: 15px;
 }
 
 .answer {
@@ -1577,9 +1578,16 @@ p.fof {
   align-items: center;
   justify-content: space-between;
 }
+
+nav {
+  position: relative; /* or you can use 'fixed' if you want the nav to be fixed at the top */
+  z-index: 9999 !important; /* a high value to ensure it stays on top */
+}
+
 nav .content{
   display: flex;
   align-items: center;
+  z-index: 9999 !important;
 }
 nav .content .links{
   margin-left: 80px;
@@ -2016,3 +2024,83 @@ transition: color 0.45s ease, border 0.45s ease;
 
 ins.adsbygoogle { background: transparent !important; 
 padding: 5px;}
+
+
+/* Kviz Generator*/
+
+form {
+  padding: 30px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px #ccc;
+}
+label {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+}
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+input[type=checkbox] {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+input[type=checkbox]:checked {
+  background-color: green;
+}
+
+.post-question-generator {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding-top: 15px;
+  padding-left: 15px;
+  float:left !important!;
+  background-color: #e7f3f1;
+}
+
+.post-answer-generator {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  color: green;
+  padding-left: 15px;
+  float:left!important!;
+}
+
+/* Load more button */
+
+.homepage-button {
+  display: block;      /* Postavlja svaki gumb kao blok element */
+  margin-bottom: 10px; /* Dodaje malo razmaka između gumba */
+  width: 100%;         /* Postavlja širinu gumba na cijelu širinu roditeljskog elementa */
+}

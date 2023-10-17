@@ -16,7 +16,7 @@ $args = [
     'post_type' => 'questions',
     'orderby' => 'date',
     'order' => 'DESC',
-    'posts_per_page' => '25',
+    'posts_per_page' => '50',
 ];
 
 $query = new WP_Query($args);
@@ -64,16 +64,19 @@ $posts=$query->posts;
                                 <div class="answer-category"><?= apply_filters('the_content', get_the_content(null,false,$item)); ?></div>
                             </div>
                         <?php endforeach; 
+                        
+                        the_posts_pagination( array(
+                            'prev_text'          => __( 'Novija pitanja', 'pkp' ),
+                            'next_text'          => __( 'starija pitanja', 'pkp' ),
+                            'before_page_number' => '<span class="meta-nav screen-reader-text pagination">' . __( 'Stranica', 'pkp' ) . ' </span>',
+                        ) );
+                        
                         ?>
                 </div>
-                    <div>
+                    <div class="more-questions">
                         <button id='btn' type="button" class="homepage-button">Otkrij odgovore</button>
-                        <button id="loadMore" type="button" class="homepage-button">Učitaj više</button>
-                        <!-- <button id="loadMore" type="button" class="load-more-button">+</button> -->
                     </div>
             </div>
-
-
 
 	</main><!-- #main -->
 
@@ -82,55 +85,17 @@ get_sidebar('questions');
 get_footer();
 ?>
 
-    <?php // Otkrij odgovore - START ?>
-        <script>
+<?php // Otkrij odgovore - START ?>
+<script>
 
-            const btn = document.getElementById('btn');
+const btn = document.getElementById('btn');
+const para = document.querySelectorAll('.answer-category');
 
-            btn.addEventListener('click', () => {
-                const answers = document.querySelectorAll('.answer-category');
-                answers.forEach(answer => {
-                    answer.classList.add('show');
-                });
-            });
+btn.addEventListener('click',()=>{
+  para.forEach(el => {
+    el.classList.toggle('show');
+  })
+})
 
-        </script>
+</script>
     <?php // Otkrij odgovore - END ?>
-
-    <?php // LOAD MORE - START ?>
-        <script>
-            let page = 2;
-
-            document.getElementById('loadMore').addEventListener('click', function() {
-                fetch(`${window.location.protocol}//${window.location.host}/kvizopija/wp-json/custom/v1/questions?page=${page}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.length) {
-                        data.forEach(post => {
-                            const postElement = document.createElement('div');
-                            postElement.classList.add('questions-homepage');
-                            postElement.innerHTML = `
-                                <p class="question-category">Kategorija:
-                                    <a href="${post.terms[0].link}">${post.terms[0].name}</a>
-                                </p>
-                                <p class="question-date">Objavljeno:
-                                    <span class="question-accent">${post.date}</span>
-                                </p>
-                                ${post.question_author_url ? `<p class="question-author">Autor: <a href="${post.question_author_url}" target="_blank">${post.question_author}</a></p>` : '<p class="question-author">Autor: <a href="https://kvizopija.com" target="_blank">kvizopija.com</a></p>'}
-                                <p class="question-category">Pojmovi:
-                                    ${post.term_list.map(term => `<a href="${term.link}">|${term.name}| </a>`).join('')}
-                                </p>
-                                <p>${post.title}</p>
-                                <div class="answer-category">${post.content}</div>
-                            `;
-                            document.querySelector('.container-questions').appendChild(postElement);
-                        });
-                        page++;
-                    } else {
-                        document.getElementById('loadMore').style.display = 'none';
-                    }
-                });
-            });
-        </script>
-
-    <?php // LOAD MORE - END ?>

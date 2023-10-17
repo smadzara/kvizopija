@@ -36,15 +36,14 @@ $posts=$query->posts;
 
 <section class="container">
 
-    <!-- <img src="img/Logo-70px.png" alt="Pub kviz pitanja by kvizopija.com - Logo"> -->
-
     <div class="content-container">
-
+        <?php /*
         <div class="page-title">
             <h1>
                 <?php the_title() ?>
             </h1>
-        </div>
+        </div> */
+        ?>
 
         <div class="page-description">
             <p class="page-description-paragraph-text">
@@ -84,24 +83,6 @@ $posts=$query->posts;
         <h3>Zadnje ažuriranje baze pitanja: <?= $latest_question_date; ?></h3>
         <br>
 
-        <?php // Reklame ?>
-
-<div align="center">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4983269975347159"
-        crossorigin="anonymous"></script>
-    <!-- pkp.com - responsive -->
-    <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-4983269975347159"
-        data-ad-slot="2181067593"
-        data-ad-format="auto"
-        data-full-width-responsive="true"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-    <p style="text-align:center">Klikom na reklamu podržavate rad ove stranice, na čemu najljubaznije zahvaljujemo. :)</p>
-</div>
-
         <?php // Nove kategorije - Blok ?>
 
             <section class="page-contain">
@@ -136,6 +117,11 @@ $posts=$query->posts;
             </section>
 
         <?php // Nove kategorije - Blok - END ?>
+
+        <div class="forma">
+        <h2>Pronađi pitanja i odgovore</h2>    
+            <?=get_search_form();?>
+        </div>
 
         <div class="container-questions">
             <h2>Zadnje objavljena pitanja</h2>
@@ -174,10 +160,11 @@ $posts=$query->posts;
                 </div>
             <?php endforeach; ?>
         </div>
+        
         <div class="more-questions">
 
-            <form action="<?php echo get_post_type_archive_link( 'questions' ); ?>">
-                <input type="submit" value="SVA KVIZ PITANJA" />
+            <form action="<?php echo get_post_type_archive_link( 'questions' ); ?>" style="padding: 0px;">
+                <input type="submit" value="SVA KVIZ PITANJA" style="background-color: red; margin-top: 0px;" />
             </form>
         </div>
 		<div class="more-questions">
@@ -186,8 +173,23 @@ $posts=$query->posts;
 
 		</div>
 
+        <h2>Pomozi zajednici, pošalji nam svoj set</h2>
+
+        <p>Ukoliko želite pomoći našem malom projektu, slobodno nam pošaljite vaš set pitanja koji ćemo s ponosom objaviti. Pa ako ste zainteresirani, slobodno se javite.</p>
+        <br>
+
+        <?php 
+
+            echo do_shortcode('[gravityform id="2" title="false" description="false"]');
+
+        ?>
+
     </div>
+
+
 </section>
+
+
 
 <?php // Otkrij odgovore - START ?>
 <script>
