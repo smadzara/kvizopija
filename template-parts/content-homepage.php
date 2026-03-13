@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for displaying page content in page.php
+ * Template part for displaying homepage content.
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
@@ -8,200 +8,209 @@
  */
 
 $questions_taxonomy = 'questions_categories';
-$questions_terms = get_terms($questions_taxonomy); // Get all terms of a questions taxonomy
+$questions_terms    = get_terms(
+	array(
+		'taxonomy'   => $questions_taxonomy,
+		'hide_empty' => false,
+		'orderby'    => 'name',
+		'order'      => 'ASC',
+	)
+);
 
-$args = [
-    'post_type' => 'questions',
-    'orderby' => 'date',
-    'order' => 'DESC',
-    'posts_per_page' => '20',
-/*  'tax_query' => [
-        [
-            'taxonomy' => 'questions_categories',
-            'field' => 'slug',
-            'terms' => ['film']
-        ],
-    ] */
+if ( is_wp_error( $questions_terms ) ) {
+	$questions_terms = array();
+}
 
-];
+$questions_count_obj = wp_count_posts( 'questions' );
+$questions_count     = ( $questions_count_obj && isset( $questions_count_obj->publish ) ) ? (int) $questions_count_obj->publish : 0;
 
-$query = new WP_Query($args);
-$posts=$query->posts;
+$latest_questions = get_posts(
+	array(
+		'post_type'              => 'questions',
+		'post_status'            => 'publish',
+		'posts_per_page'         => 1,
+		'orderby'                => 'date',
+		'order'                  => 'DESC',
+		'no_found_rows'          => true,
+		'update_post_meta_cache' => false,
+		'update_post_term_cache' => false,
+	)
+);
 
-//dump($query->posts);
+$latest_question_date = '';
+if ( ! empty( $latest_questions ) && $latest_questions[0] instanceof WP_Post ) {
+	$latest_question_date = get_the_date( 'j. n. Y.', $latest_questions[0] );
+}
 
+$news_query = new WP_Query(
+	array(
+		'post_type'           => 'post',
+		'post_status'         => 'publish',
+		'posts_per_page'      => 4,
+		'orderby'             => 'date',
+		'order'               => 'DESC',
+		'ignore_sticky_posts' => true,
+		'no_found_rows'       => true,
+	)
+);
+
+$novosti_category = get_category_by_slug( 'novosti' );
+$news_page_url    = '';
+
+if ( $novosti_category instanceof WP_Term ) {
+	$news_page_url = get_category_link( $novosti_category->term_id );
+}
+
+if ( empty( $news_page_url ) || is_wp_error( $news_page_url ) ) {
+	$news_page_url = home_url( '/category/novosti/' );
+}
+
+$memberpress_login_html = '';
+if ( shortcode_exists( 'mepr-login-form' ) ) {
+	$memberpress_login_html = do_shortcode( '[mepr-login-form use_redirect="true"]' );
+} elseif ( shortcode_exists( 'mepr-login' ) ) {
+	$memberpress_login_html = do_shortcode( '[mepr-login]' );
+}
+
+if ( '' === trim( wp_strip_all_tags( (string) $memberpress_login_html ) ) ) {
+	ob_start();
+	wp_login_form(
+		array(
+			'echo'           => true,
+			'remember'       => true,
+			'label_username' => __( 'Korisničko ime', 'kvizopija' ),
+			'label_password' => __( 'Lozinka', 'kvizopija' ),
+			'label_log_in'   => __( 'Prijava', 'kvizopija' ),
+		)
+	);
+	$memberpress_login_html = ob_get_clean();
+}
 ?>
 
-<!-- Kvizopija Template -->
+<section class="container home-modern">
+	<div class="content-container home-modern__container">
+		<div class="home-modern__hero">
+			<div class="home-modern__text">
+				<div class="page-description">
+					<div class="page-description-paragraph-text">
+						<?php the_content(); ?>
+					</div>
+				</div>
+			</div>
 
-<section class="container">
+			<div class="home-modern__quick-buttons" aria-label="Brze informacije">
+				<a class="home-modern__quick-button home-modern__quick-button--donate" href="https://buymeacoffee.com/pekape" target="_blank" rel="noopener noreferrer">
+					<span class="home-modern__quick-button-label">Doniraj</span>
+					<span class="home-modern__quick-button-value">Podrži rad ovih stranica</span>
+				</a>
 
-    <div class="content-container">
-        <?php /*
-        <div class="page-title">
-            <h1>
-                <?php the_title() ?>
-            </h1>
-        </div> */
-        ?>
+				<div class="home-modern__quick-button home-modern__quick-button--count" role="status" aria-live="polite">
+					<span class="home-modern__quick-button-label">Broj pitanja</span>
+					<span class="home-modern__quick-button-value"><?= esc_html( number_format_i18n( $questions_count ) ); ?></span>
+				</div>
 
-        <div class="page-description">
-            <p class="page-description-paragraph-text">
-                <?php the_content() ?>
-            </p>
-        </div>
-
-        <?php $total_questions = new WP_Query(array( 'post_type' => 'questions' ));?>
-            <?php if ($total_questions->have_posts()) { 
-                $count_posts = wp_count_posts('questions')->publish; 
-                if ( $count_posts == "1" ) { 
-                    echo "<h3>Trenutno imamo samo jedno kviz pitanje...</h3>"; }
-                else { echo "<h3>Trenutno brojimo $count_posts kviz pitanja.</h3>"; }
-                    } else { ?>
-                <h2>Trenutno nema kviz pitanja :(</h2>
-            <?php } 
-        ?>
-
-        <?php /* Last question date */
-            $latest_question = new WP_Query(
-                array(
-                    'post_type' => 'questions',
-                    'post_status' => 'publish',
-                    'posts_per_page' => 1,
-                    'orderby' => 'date',
-                    'order' => 'DESC'
-                )
-            );
-
-            if($latest_question->have_posts()){
-                $latest_question_date = date( 'j. n. Y.', strtotime($latest_question->posts[0]->post_modified) );
-                
-            }
-
-        ?>
-
-        <h3>Zadnje ažuriranje baze pitanja: <?= $latest_question_date; ?></h3>
-        <br>
-
-        <?php // Nove kategorije - Blok ?>
-
-            <section class="page-contain">
-            <?php foreach ( $questions_terms as $questions_term ) : //dump($questions_term)?>
-                <a href="<?= get_term_link($questions_term->slug, $questions_taxonomy); ?>" class="data-card">
-                    <h3><?= $questions_term->name; ?></h3>
-                    <?php // Vadi datum iz zadnjeg objavljenog posta u kategoriji CPT-a
-                            $args = array(
-                                'post_type' => array('questions'),
-                                'post_status' => 'publish',
-                                'posts_per_page' => 1,
-                                'tax_query' => array(
-                                    array (
-                                        'taxonomy' => 'questions_categories',
-                                        'field' => 'slug',
-                                        'terms' => array($questions_term->slug),
-                                    )
-                                ),
-                            );
-                            $q2 = new WP_Query($args);
-                        ?>
-                    <h4>Osvježeno: <?php echo (date( 'j. n. Y.', strtotime($q2->post->post_date) )) ?></h4>
-                    <p>Broj pitanja: <?= $questions_term->count; ?></p>
-                    <span class="link-text">
-                    Sva pitanja
-                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M17.8631 0.929124L24.2271 7.29308C24.6176 7.68361 24.6176 8.31677 24.2271 8.7073L17.8631 15.0713C17.4726 15.4618 16.8394 15.4618 16.4489 15.0713C16.0584 14.6807 16.0584 14.0476 16.4489 13.657L21.1058 9.00019H0.47998V7.00019H21.1058L16.4489 2.34334C16.0584 1.95281 16.0584 1.31965 16.4489 0.929124C16.8394 0.538599 17.4726 0.538599 17.8631 0.929124Z" fill="#753BBD"/>
-                </svg>
-                    </span>
-                </a>
-                <?php endforeach; ?>
-            </section>
-
-        <?php // Nove kategorije - Blok - END ?>
-
-        <div class="forma">
-        <h2>Pronađi pitanja i odgovore</h2>    
-            <?=get_search_form();?>
-        </div>
-
-        <div class="container-questions">
-            <h2>Zadnje objavljena pitanja</h2>
-            <?php foreach($posts as $key => $item): 
-                $terms = get_the_terms( $item, 'questions_categories'); // povezujem CPT taksonomiju sa postom
-                $question_author = get_field('question_author', $item->ID); // čupam ACF iz CPT
-                $question_author_url = get_field('question_author_url', $item->ID); // čupam ACF iz CPT
-                $term_list = wp_get_post_terms( $item->ID, 'questions_terms', array( 'fields' => 'all' ) ); // čupam termove iz CPT
-            ?>
-                <div class="questions-homepage">
-                    <p class="question-category">Kategorija:
-                        <a href="<?= get_term_link($terms[0]->slug, $questions_taxonomy); ?>">
-                            <?=$terms[0]-> name; ?>
-                        </a>
-                    </p>
-                    
-                    <?php if($term_list):?>
-                        <p class="question-category">Pojmovi:
-                            <?php foreach ($term_list as $single_term_key):
-                                echo '<a href="'.get_term_link($single_term_key->slug, 'questions_terms').'">|' .$single_term_key->name.'| </a>';
-                            endforeach;
-                    endif;
-                     ?>
-                        </p>
-                    <p class="question-date">Objavljeno:
-                        <span class="question-accent"><?=get_the_date( 'j. n. Y.', $item->ID ) ?></span>
-                    </p>
-                    <?php if(empty($question_author) || (empty($question_author_url))): ?>
-                        <p class="question-author">Autor: <a href="https://kvizopija.com" target="_blank">kvizopija.com</a></p>
-                        <?php else: ?>
-                        <p class="question-author">Autor: <a href="<?=$question_author_url;?>" target="_blank"><?=$question_author;?></a></p>
-                    <?php endif; ?>
-                    <p class="questions"><?=get_the_title($item->ID) ?></p>
-                    <div class="answer-homepage"><?= apply_filters('the_content', get_the_content(null,false,$item)); ?></div>
-                    
-                </div>
-            <?php endforeach; ?>
-        </div>
-        
-        <div class="more-questions">
-
-            <form action="<?php echo get_post_type_archive_link( 'questions' ); ?>" style="padding: 0px;">
-                <input type="submit" value="SVA KVIZ PITANJA" style="background-color: red; margin-top: 0px;" />
-            </form>
-        </div>
-		<div class="more-questions">
-
-		<button id='btn' type="button" class="homepage-button">Otkrij odgovore</button>
-
+				<div class="home-modern__quick-button home-modern__quick-button--updated" role="status" aria-live="polite">
+					<span class="home-modern__quick-button-label">Ažurirano</span>
+					<span class="home-modern__quick-button-value">
+						<?= '' !== $latest_question_date ? esc_html( $latest_question_date ) : esc_html__( 'Nema pitanja', 'kvizopija' ); ?>
+					</span>
+				</div>
+			</div>
 		</div>
 
-        <h2>Pomozi zajednici, pošalji nam svoj set</h2>
+		<div class="home-modern__grid">
+			<section class="home-modern__panel home-modern__panel--news" aria-labelledby="home-news-title">
+				<div class="home-modern__panel-head">
+					<h2 id="home-news-title">Novosti</h2>
+					<a class="home-modern__panel-link" href="<?= esc_url( $news_page_url ); ?>">Sve novosti</a>
+				</div>
 
-        <p>Ukoliko želite pomoći našem malom projektu, slobodno nam pošaljite vaš set pitanja koji ćemo s ponosom objaviti. Pa ako ste zainteresirani, slobodno se javite.</p>
-        <br>
+				<?php if ( $news_query->have_posts() ) : ?>
+					<div class="home-modern-news-grid">
+						<?php
+						while ( $news_query->have_posts() ) :
+							$news_query->the_post();
+							?>
+							<a class="home-modern-news-card-link" href="<?= esc_url( get_permalink() ); ?>">
+								<article class="home-modern-news-card">
+									<p class="home-modern-news-date"><?= esc_html( get_the_date( 'j. n. Y.' ) ); ?></p>
+									<h3 class="home-modern-news-title"><?= esc_html( get_the_title() ); ?></h3>
+									<p class="home-modern-news-excerpt"><?= esc_html( wp_trim_words( wp_strip_all_tags( get_the_excerpt() ), 20 ) ); ?></p>
+								</article>
+							</a>
+						<?php endwhile; ?>
+					</div>
+				<?php else : ?>
+					<p class="home-modern-empty">Trenutno nema objavljenih novosti.</p>
+				<?php endif; ?>
+				<?php wp_reset_postdata(); ?>
+			</section>
 
-        <?php 
+			<section class="home-modern__panel home-modern__panel--login" aria-labelledby="home-login-title">
+				<div class="home-modern__panel-head">
+					<h2 id="home-login-title">Prijava</h2>
+				</div>
+				<p class="home-modern-login-note">Za pristup premium sadržaju prijavite se svojim korisničkim računom.</p>
+				<div class="home-modern-login-form">
+					<?php echo $memberpress_login_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				</div>
+			</section>
+		</div>
 
-            echo do_shortcode('[gravityform id="2" title="false" description="false"]');
+		<section class="home-modern__panel home-modern__panel--categories" aria-labelledby="home-categories-title">
+			<div class="home-modern__panel-head">
+				<h2 id="home-categories-title">Kategorije pitanja</h2>
+			</div>
 
-        ?>
+			<?php if ( ! empty( $questions_terms ) ) : ?>
+				<div class="home-modern-categories">
+					<?php foreach ( $questions_terms as $questions_term ) : ?>
+						<?php
+						$term_link = get_term_link( $questions_term );
+						if ( is_wp_error( $term_link ) ) {
+							continue;
+						}
 
-    </div>
+						$latest_term_posts = get_posts(
+							array(
+								'post_type'              => 'questions',
+								'post_status'            => 'publish',
+								'posts_per_page'         => 1,
+								'orderby'                => 'modified',
+								'order'                  => 'DESC',
+								'no_found_rows'          => true,
+								'update_post_meta_cache' => false,
+								'update_post_term_cache' => false,
+								'tax_query'              => array(
+									array(
+										'taxonomy' => $questions_taxonomy,
+										'field'    => 'term_id',
+										'terms'    => array( (int) $questions_term->term_id ),
+									),
+								),
+							)
+						);
 
+						$latest_term_date = '';
+						if ( ! empty( $latest_term_posts ) && $latest_term_posts[0] instanceof WP_Post ) {
+							$latest_term_date = get_the_modified_date( 'j. n. Y.', $latest_term_posts[0] );
+						}
 
+						$term_count       = (int) $questions_term->count;
+						$term_count_label = $term_count . ' ' . ( 1 === $term_count ? 'pitanje' : 'pitanja' );
+						?>
+						<a class="home-modern-category-card" href="<?= esc_url( $term_link ); ?>">
+							<h3 class="home-modern-category-title"><?= esc_html( $questions_term->name ); ?></h3>
+							<?php if ( '' !== $latest_term_date ) : ?>
+								<p class="home-modern-category-meta">Osvježeno: <?= esc_html( $latest_term_date ); ?></p>
+							<?php endif; ?>
+							<span class="home-modern-category-count"><?= esc_html( $term_count_label ); ?></span>
+						</a>
+					<?php endforeach; ?>
+				</div>
+			<?php else : ?>
+				<p class="home-modern-empty">Trenutno nema dostupnih kategorija pitanja.</p>
+			<?php endif; ?>
+		</section>
+	</div>
 </section>
-
-
-
-<?php // Otkrij odgovore - START ?>
-<script>
-
-const btn = document.getElementById('btn');
-const para = document.querySelectorAll('.answer-homepage');
-
-btn.addEventListener('click',()=>{
-  para.forEach(el => {
-    el.classList.toggle('show');
-  })
-})
-
-</script>
-<?php // Otkrij odgovore - END ?>

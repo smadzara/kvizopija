@@ -1,170 +1,222 @@
 <?php
 /**
- * Template part for displaying page content in page.php
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ * Template part for Quiz App results page content.
  *
  * @package kvizopija
  */
 
+defined( 'ABSPATH' ) || exit;
 ?>
 
-<style>
-    .main {
-        background-color: #e7f3f1 !important;
-    }
+<section class="container quizapp-results-page">
+	<div class="content-container quizapp-results-page__container">
+		<div class="page-title">
+			<h1><?php the_title(); ?></h1>
+		</div>
 
-    .custom-table {
-        font-size: 18px; /* Povećajte font tablice */
-    }
+		<div class="page-description quizapp-results-page__description">
+			<div class="page-description-paragraph-text">
+				<?php the_content(); ?>
+			</div>
+		</div>
 
-    .custom-table thead {
-        background-color: #753bbd; /* Primjer boje za zaglavlje */
-        color: white; /* Boja teksta za zaglavlje */
-    }
+		<?php
+		global $wpdb;
 
-    .custom-table thead th:hover {
-    background-color: #0056b3; /* Primjer tamnije nijanse plave boje */
-    cursor: pointer; /* Promijenite kursor u pokazivač */
-    }
+		$date_30_days_ago = wp_date( 'Y-m-d', strtotime( '-30 days', current_time( 'timestamp' ) ) );
+		$table_name       = $wpdb->prefix . 'quiz_results';
+		$sql              = $wpdb->prepare(
+			"SELECT * FROM {$table_name} WHERE date_recorded >= %s ORDER BY date_recorded DESC",
+			$date_30_days_ago
+		);
+		$results          = $wpdb->get_results( $sql );
+		?>
 
-    /* Medij upit za mobilne uređaje */
-    @media (max-width: 768px) {
-    .custom-table {
-        font-size: calc(18px * 0.7); /* Smanjite font za 30% */
-        }
-    .custom-table td, .custom-table th {
-        vertical-align: middle !important; /* Poravnajte sadržaj ćelija okomito na sredini */
-    }
-    }
+		<div class="quizapp-results-mobile-sort">
+			<label for="quizResultsMobileSort">Sortiranje:</label>
+			<select id="quizResultsMobileSort" aria-label="Sortiranje rezultata">
+				<option value="5_desc" selected>Datum igranja (najnovije)</option>
+				<option value="5_asc">Datum igranja (najstarije)</option>
+				<option value="3_desc">Postotak (najve&#263;i)</option>
+				<option value="3_asc">Postotak (najmanji)</option>
+				<option value="4_asc">Vrijeme (najbr&#382;e)</option>
+				<option value="4_desc">Vrijeme (najsporije)</option>
+			</select>
+		</div>
 
-
-</style>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-<section style="background-color: #e7f3f1;">
-    <div class="content-container">
-
-        <div class="page-title">
-            <h1>
-                <?php the_title() ?>
-            </h1>
-        </div>
-
-        <div class="page-description">
-            <p class="page-description-paragraph-text">
-                <?php the_content() ?>
-            </p>
-        </div>
-    </div>
-
-    <?php
-global $wpdb;
-$results = $wpdb->get_results("SELECT * FROM kv_quiz_results ORDER BY date_recorded DESC");
-?>
-<div class="table-responsive">
-    <table class="table table-bordered table-hover custom-table">
-        <thead>
-            <tr>
-                <th onclick="sortTable(0)">Igrač</th>
-                <th onclick="sortTable(1)">Broj postavljenih pitanja</th>
-                <th onclick="sortTable(2)">Broj točnih odgovora</th>
-                <th onclick="sortTable(3)">Postotak uspješnosti</th>
-                <th onclick="sortTable(4)">Vrijeme odgovora m:s</th>
-                <th onclick="sortTable(5)">Datum igranja</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($results as $result): ?>
-                <tr>
-                    <td><?php echo esc_html($result->player_name); ?></td>
-                    <td><?php echo intval($result->total_questions); ?></td>
-                    <td><?php echo intval($result->correct_answers); ?></td>
-                    <td><?php echo floatval($result->percentage) . '%'; ?></td>
-                    <td><?php echo esc_html($result->time_taken); ?></td>
-                    <td><?php echo date('d.m.Y., H:i:s', strtotime($result->date_recorded)); ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-</div>
-
-
+		<div class="quizapp-results-table-wrap">
+			<table id="quizResultsTable" class="quizapp-results-table custom-table">
+				<thead>
+					<tr>
+						<th data-sort-col="0" onclick="sortTable(0)" aria-sort="none">Igra&#269; <span class="sort-indicator" aria-hidden="true">&#8597;</span></th>
+						<th data-sort-col="1" onclick="sortTable(1)" aria-sort="none">Broj postavljenih pitanja <span class="sort-indicator" aria-hidden="true">&#8597;</span></th>
+						<th data-sort-col="2" onclick="sortTable(2)" aria-sort="none">Broj to&#269;nih odgovora <span class="sort-indicator" aria-hidden="true">&#8597;</span></th>
+						<th data-sort-col="3" onclick="sortTable(3)" aria-sort="none">Postotak uspje&#353;nosti <span class="sort-indicator" aria-hidden="true">&#8597;</span></th>
+						<th data-sort-col="4" onclick="sortTable(4)" aria-sort="none">Vrijeme odgovora m:ss <span class="sort-indicator" aria-hidden="true">&#8597;</span></th>
+						<th data-sort-col="5" onclick="sortTable(5)" aria-sort="descending">Datum igranja <span class="sort-indicator" aria-hidden="true">&#9660;</span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php if ( ! empty( $results ) ) : ?>
+						<?php foreach ( $results as $result ) : ?>
+							<tr>
+								<td data-label="Igra&#269;"><?php echo esc_html( $result->player_name ); ?></td>
+								<td data-label="Pitanja"><?php echo (int) $result->total_questions; ?></td>
+								<td data-label="To&#269;ni"><?php echo (int) $result->correct_answers; ?></td>
+								<td data-label="Postotak"><?php echo esc_html( (float) $result->percentage . '%' ); ?></td>
+								<td data-label="Vrijeme">
+									<?php
+									$time_parts = explode( ':', (string) $result->time_taken );
+									$minutes    = isset( $time_parts[0] ) ? (int) $time_parts[0] : 0;
+									$seconds    = isset( $time_parts[1] ) ? (int) $time_parts[1] : 0;
+									echo esc_html( $minutes . ':' . str_pad( (string) $seconds, 2, '0', STR_PAD_LEFT ) );
+									?>
+								</td>
+								<?php
+								$date_timestamp_raw = strtotime( (string) $result->date_recorded );
+								$date_timestamp     = $date_timestamp_raw ? (int) $date_timestamp_raw : 0;
+								?>
+								<td data-label="Datum igranja" data-sort-ts="<?php echo esc_attr( $date_timestamp ); ?>">
+									<?php echo $date_timestamp ? esc_html( wp_date( 'd.m.Y., H:i:s', $date_timestamp ) ) : ''; ?>
+								</td>
+							</tr>
+						<?php endforeach; ?>
+					<?php else : ?>
+						<tr class="quizapp-results-table__empty-row">
+							<td colspan="6" class="quizapp-results-table__empty">Nema rezultata u zadnjih 30 dana.</td>
+						</tr>
+					<?php endif; ?>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </section>
 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
 <script>
+(function () {
+	var table = document.getElementById('quizResultsTable');
+	var mobileSort = document.getElementById('quizResultsMobileSort');
+	if (!table) {
+		return;
+	}
 
-function sortTable(n) {
-    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-    table = document.querySelector(".table");
-    switching = true;
-    dir = "asc";
+	var currentSortColumn = 5;
+	var currentSortDirection = 'desc';
 
-    while (switching) {
-        switching = false;
-        rows = table.rows;
+	function getCellSortValue(cell, columnIndex) {
+		if (!cell) {
+			return 0;
+		}
 
-        for (i = 1; i < (rows.length - 1); i++) {
-            shouldSwitch = false;
-            x = rows[i].getElementsByTagName("TD")[n];
-            y = rows[i + 1].getElementsByTagName("TD")[n];
+		var content = (cell.textContent || '').trim();
 
-            if (x && y) {
-                var xContent = x.innerHTML.trim();
-                var yContent = y.innerHTML.trim();
+		if (columnIndex === 1 || columnIndex === 2) {
+			return parseInt(content, 10) || 0;
+		}
 
-                if (n === 1 || n === 2) { // Broj postavljenih pitanja i Broj točnih odgovora
-                    xContent = parseInt(xContent, 10);
-                    yContent = parseInt(yContent, 10);
-                } else if (n === 3) { // Postotak uspješnosti
-                    xContent = parseFloat(xContent.replace('%', ''));
-                    yContent = parseFloat(yContent.replace('%', ''));
-                } else if (n === 4) { // Vrijeme odgovora m:s
-                    var xTimeParts = xContent.split(':');
-                    var yTimeParts = yContent.split(':');
-                    xContent = parseInt(xTimeParts[0], 10) * 60 + parseInt(xTimeParts[1], 10);
-                    yContent = parseInt(yTimeParts[0], 10) * 60 + parseInt(yTimeParts[1], 10);
-                }
+		if (columnIndex === 3) {
+			return parseFloat(content.replace('%', '')) || 0;
+		}
 
-                if (!isNaN(xContent) && !isNaN(yContent)) {
-                    if (dir == "asc" ? xContent > yContent : xContent < yContent) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                } else if (Date.parse(xContent) && Date.parse(yContent)) {
-                    if (dir == "asc" ? new Date(xContent) > new Date(yContent) : new Date(xContent) < new Date(yContent)) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                } else {
-                    if (dir == "asc" ? xContent.toLowerCase() > yContent.toLowerCase() : xContent.toLowerCase() < yContent.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
-            }
-        }
+		if (columnIndex === 4) {
+			var timeParts = content.split(':');
+			var minutes = parseInt(timeParts[0], 10) || 0;
+			var seconds = parseInt(timeParts[1], 10) || 0;
+			return (minutes * 60) + seconds;
+		}
 
-        if (shouldSwitch) {
-            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-            switching = true;
-            switchcount++;
-        } else {
-            if (switchcount == 0 && dir == "asc") {
-                dir = "desc";
-                switching = true;
-            }
-        }
-    }
-}
+		if (columnIndex === 5) {
+			return parseInt(cell.getAttribute('data-sort-ts') || '0', 10);
+		}
 
+		return content.toLowerCase();
+	}
 
+	function updateSortIndicators(activeColumn, direction) {
+		var headers = table.querySelectorAll('thead th[data-sort-col]');
+
+		headers.forEach(function (header) {
+			var indicator = header.querySelector('.sort-indicator');
+			var column = parseInt(header.getAttribute('data-sort-col'), 10);
+			var isActive = column === activeColumn;
+
+			if (indicator) {
+				indicator.textContent = isActive ? (direction === 'asc' ? '▲' : '▼') : '↕';
+			}
+
+			header.setAttribute('aria-sort', isActive ? (direction === 'asc' ? 'ascending' : 'descending') : 'none');
+		});
+	}
+
+	function sortTableBy(columnIndex, direction) {
+		var tbody = table.tBodies[0];
+		if (!tbody) {
+			return;
+		}
+
+		var rows = Array.from(tbody.rows).filter(function (row) {
+			return !row.classList.contains('quizapp-results-table__empty-row');
+		});
+
+		rows.sort(function (rowA, rowB) {
+			var xCell = rowA.cells[columnIndex] ? rowA.cells[columnIndex] : null;
+			var yCell = rowB.cells[columnIndex] ? rowB.cells[columnIndex] : null;
+			var xContent = getCellSortValue(xCell, columnIndex);
+			var yContent = getCellSortValue(yCell, columnIndex);
+
+			if (xContent < yContent) {
+				return direction === 'asc' ? -1 : 1;
+			}
+			if (xContent > yContent) {
+				return direction === 'asc' ? 1 : -1;
+			}
+			return 0;
+		});
+
+		rows.forEach(function (row) {
+			tbody.appendChild(row);
+		});
+
+		currentSortColumn = columnIndex;
+		currentSortDirection = direction;
+		updateSortIndicators(columnIndex, direction);
+
+		if (mobileSort) {
+			var selectedValue = String(columnIndex) + '_' + direction;
+			var hasOption = Array.from(mobileSort.options).some(function (option) {
+				return option.value === selectedValue;
+			});
+
+			if (hasOption) {
+				mobileSort.value = selectedValue;
+			}
+		}
+	}
+
+	window.sortTable = function (columnIndex) {
+		var direction = 'asc';
+
+		if (currentSortColumn === columnIndex) {
+			direction = currentSortDirection === 'asc' ? 'desc' : 'asc';
+		}
+
+		sortTableBy(columnIndex, direction);
+	};
+
+	if (mobileSort) {
+		mobileSort.addEventListener('change', function () {
+			var raw = (mobileSort.value || '5_desc').split('_');
+			var columnIndex = parseInt(raw[0], 10);
+			var direction = raw[1] === 'asc' ? 'asc' : 'desc';
+
+			if (isNaN(columnIndex)) {
+				return;
+			}
+
+			sortTableBy(columnIndex, direction);
+		});
+	}
+
+	updateSortIndicators(currentSortColumn, currentSortDirection);
+})();
 </script>
-

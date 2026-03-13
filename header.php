@@ -10,6 +10,7 @@
  */
 
 ?>
+
 <!doctype html>
 
 <html <?php language_attributes(); ?>>
@@ -57,42 +58,43 @@
 
 	</head>
 
-<?php 
+<body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
+<div id="page" class="site">
+	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'kvizopija' ); ?></a>
 
-$questions_taxonomy_cat = 'questions_categories';
-$questions_terms_cat = get_terms($questions_taxonomy_cat); // Get all terms of a questions taxonomy
+	<header id="masthead" class="site-header">
+		<div class="site-branding">
+			<?php
+			if ( is_front_page() && is_home() ) :
+				?>
+				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+				<?php
+			else :
+				?>
+				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+				<?php
+			endif;
+			$kvizopija_description = get_bloginfo( 'description', 'display' );
+			if ( $kvizopija_description || is_customize_preview() ) :
+				?>
+				<p class="site-description"><?php echo $kvizopija_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+			<?php endif; ?>
+		</div>
 
-?>
-        
-
-<div class="wrapper">
-
-	<nav>
-      <input type="checkbox" id="show-search">
-      <input type="checkbox" id="show-menu">
-      <label for="show-menu" class="menu-icon"><i class="fas fa-bars"></i></label>
-      <div class="content">
-      <div class="logo"><a href="<?= get_home_url(); ?>" style="color: #fff;">pubkvizpitanja.com</a></div>
-        <ul class="links">
-			<li>
-				<a href="<?=get_post_type_archive_link( 'questions' ); ?>" class="desktop-link">Kviz pitanja</a>
-				<input type="checkbox" id="show-features">
-				<label for="show-features">Kviz pitanja</label>
-				<ul>
-						<?php foreach ( $questions_terms_cat as $questions_term_cat ) : //dump($questions_term_cat)?>
-							<li><a href="<?= get_term_link($questions_term_cat->slug, $questions_taxonomy_cat); ?>"><?= $questions_term_cat->name; ?></a></li>
-						<?php endforeach; ?>
-				</ul>
-			</li>
-			<li><a href="<?=get_page_link( 712 )?>">Pojmovnik</a></li>
-			<li><a href="<?=get_page_link( 294 )?>">Slučajnih 40</a></li>
-			<li><a href="<?=get_page_link( 340 )?>">Kontakt</a></li>
-        </ul>
-      </div>
-    </nav>
-
-</div>
-
+		<nav id="site-navigation" class="main-navigation">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'kvizopija' ); ?></button>
+			<?php
+			wp_nav_menu(
+				array(
+					'theme_location' => 'menu-1',
+					'menu_id'        => 'primary-menu',
+				)
+			);
+			?>
+		</nav>
+	</header>
+<?php /*
 <div align="center" style="padding-top: 80px; position: relative; z-index: -9999 !important;">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4983269975347159"
         crossorigin="anonymous"></script>
@@ -107,6 +109,60 @@ $questions_terms_cat = get_terms($questions_taxonomy_cat); // Get all terms of a
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
     <p style="text-align:center">Klikom na reklamu podržavate rad ove stranice, na čemu najljubaznije zahvaljujemo. :)</p>
+
+	<script>
+
+		// Function to send data to the server
+		function sendVisitorData(userData) {
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "https://localhost/kvizopija/record_visitor.php", true);
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xhr.send("data=" + encodeURIComponent(JSON.stringify(userData)));
+		}
+
+		// Collecting various information from the browser
+		var userData = {
+			userAgent: navigator.userAgent,
+			language: navigator.language,
+			screenWidth: screen.width,
+			screenHeight: screen.height,
+			screenColorDepth: screen.colorDepth || 'unknown',
+			screenPixelDepth: screen.pixelDepth || 'unknown',
+			deviceMemory: navigator.deviceMemory || 'unknown',
+			hardwareConcurrency: navigator.hardwareConcurrency || 'unknown',
+			platform: navigator.platform,
+			maxTouchPoints: navigator.maxTouchPoints || 0,
+			isJavaEnabled: navigator.javaEnabled() ? 'Yes' : 'No',
+			cookieEnabled: navigator.cookieEnabled ? 'Yes' : 'No',
+			onlineStatus: navigator.onLine ? 'Online' : 'Offline',
+			doNotTrack: navigator.doNotTrack || 'unknown',
+			connectionType: navigator.connection ? navigator.connection.effectiveType : 'unknown',
+			connectionDownlink: navigator.connection ? navigator.connection.downlink : 'unknown',
+			connectionRtt: navigator.connection ? navigator.connection.rtt : 'unknown',
+			connectionSaveData: navigator.connection ? (navigator.connection.saveData ? 'Yes' : 'No') : 'unknown',
+			// ... other properties
+		};
+
+		// Check if userAgentData is available and use it to get more detailed information
+		if (navigator.userAgentData) {
+			navigator.userAgentData.getHighEntropyValues(["model", "platform", "platformVersion"])
+				.then(uaData => {
+					userData.uaModel = uaData.model || 'unknown';
+					userData.uaPlatform = uaData.platform || 'unknown';
+					userData.uaPlatformVersion = uaData.platformVersion || 'unknown';
+
+					// Send the data after getting additional information
+					sendVisitorData(userData);
+				});
+		} else {
+			// Send the data immediately if userAgentData is not available
+			sendVisitorData(userData);
+		}
+
+    </script>
+
 </div>
+*/?>
 
 	
+

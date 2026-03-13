@@ -1,0 +1,109 @@
+﻿/* News category archive redesign */
+.category,
+.category #page,
+.category #content,
+.category-news,
+.category-news #page,
+.category-news #content {
+  background-color: #e7f3f1;
+}
+
+.news-archive-modern__container {
+  width: min(1280px, 90%);
+  margin-top: 95px;
+  margin-bottom: 38px;
+}
+
+.news-archive-modern__header {
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(117, 59, 189, 0.14);
+  background: linear-gradient(135deg, rgba(117, 59, 189, 0.08), rgba(92, 184, 228, 0.12));
+  box-shadow: 0 10px 18px rgba(48, 66, 82, 0.06);
+}
+
+.news-archive-modern__title {
+  margin: 0;
+  color: #24394b;
+  font-size: 3rem;
+}
+
+.news-archive-modern__description {
+  margin-top: 8px;
+  font-size: 1.65rem;
+  color: #3f5666;
+}
+
+.news-archive-modern__list {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 10px;
+}
+
+.news-archive-modern__card {
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(117, 59, 189, 0.14);
+  background: #eef7f6;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.news-archive-modern__card:hover,
+.news-archive-modern__card:focus-within {
+  transform: translateY(-2px);
+  border-color: rgba(117, 59, 189, 0.36);
+  background: #f8f4fd;
+  box-shadow: 0 12px 20px rgba(48, 66, 82, 0.08);
+}
+
+.news-archive-modern__date {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #3f5666;
+}
+
+.news-archive-modern__card-title {
+  margin: 6px 0 0;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.news-archive-modern__card-title a {
+  color: #24394b;
+  text-decoration: none;
+}
+
+.news-archive-modern__card-title a:hover {
+  color: #6d3db2;
+}
+
+.news-archive-modern__excerpt {
+  margin-top: 7px;
+  font-size: 1.45rem;
+  line-height: 1.5;
+  color: #3f5666;
+}
+
+.news-archive-modern__read-more {
+  margin-top: 9px;
+  display: inline-flex;
+  font-family: "Gilroy-Bold";
+  font-size: 1.45rem;
+  color: #6d3db2;
+  text-decoration: none;
+}
+
+.news-archive-modern__read-more:hover {
+  text-decoration: underline;
+}
+
+.news-archive-modern__actions {
+  margin-top: 14px;
+}
+
+.news-archive-modern__button {
+  width: 100%;
+}
+
+

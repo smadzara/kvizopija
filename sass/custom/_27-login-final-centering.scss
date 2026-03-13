@@ -1,0 +1,22 @@
+﻿/* Login page final centering (isolated to /login/ only) */
+body.page-login #primary.site-main {
+  width: min(1280px, 90%) !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+body.page-login #primary.site-main > #mepro-login-hero,
+body.page-login #primary.site-main > .mp_wrapper.mp_login_form {
+  width: min(620px, 100%) !important;
+  max-width: 620px !important;
+  margin: 24px 0 0 !important;
+}
+
+body.page-login .mp_wrapper.mp_login_form,
+body.page-login #mepr-template-login.mp_wrapper.mp_login_form {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  float: none !important;
+}
+

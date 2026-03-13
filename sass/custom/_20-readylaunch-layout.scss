@@ -1,0 +1,45 @@
+﻿/* MemberPress pricing pages in ReadyLaunch: align with theme layout */
+.mepr-pro-template.mepr-app-layout,
+.mepr-pro-template.mepr-app-layout #page,
+.mepr-pro-template.mepr-app-layout #primary.site-main {
+  background-color: #e7f3f1;
+}
+
+.mepr-pro-template.mepr-app-layout .memberpress-pricing-page .memberpress-pricing-page__container {
+  margin-top: 95px;
+  margin-bottom: 24px;
+}
+
+.mepr-pro-template.mepr-app-layout .memberpress-pricing-page .mepr-price-menu {
+  width: 100%;
+}
+
+.mepr-pro-template.mepr-app-layout .memberpress-pricing-page .mepr-pricing-title h1 {
+  color: #753bbd;
+}
+
+.mepr-pro-template.mepr-app-layout .memberpress-pricing-page .mepr-price-box {
+  border: 1px solid rgba(117, 59, 189, 0.2);
+  border-radius: 12px;
+  background: #eef7f6;
+}
+
+.mepr-pro-template.mepr-app-layout .memberpress-pricing-page .mepr-price-box-button a {
+  border: 1px solid rgba(117, 59, 189, 0.32);
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f8f4fd 0%, #efe7fb 100%);
+  color: #6e3eb3;
+}
+
+.mepr-pro-template.mepr-app-layout .memberpress-pricing-page .mepr-price-box-button a:hover,
+.mepr-pro-template.mepr-app-layout .memberpress-pricing-page .mepr-price-box-button a:focus {
+  border-color: rgba(117, 59, 189, 0.55);
+  background: linear-gradient(180deg, #f3ecfb 0%, #e9ddfa 100%);
+}
+
+.mepr-pro-template.mepr-app-layout .questions-sidebar {
+  margin-top: 0;
+  margin-bottom: 36px;
+}
+
+

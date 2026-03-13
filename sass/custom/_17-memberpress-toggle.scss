@@ -1,0 +1,66 @@
+﻿/* MemberPress password toggle alignment across login/checkout forms */
+.mepr-form .mepr_password .mp-hide-pw,
+.mepr-form .mepr_password_confirm .mp-hide-pw,
+.mepro-form .mepr_password .mp-hide-pw,
+.mepro-form .mepr_password_confirm .mp-hide-pw {
+  position: relative;
+}
+
+.mepr-form .mepr_password .mp-hide-pw > input[type=password],
+.mepr-form .mepr_password .mp-hide-pw > input[type=text],
+.mepr-form .mepr_password_confirm .mp-hide-pw > input[type=password],
+.mepr-form .mepr_password_confirm .mp-hide-pw > input[type=text],
+.mepro-form .mepr_password .mp-hide-pw > input[type=password],
+.mepro-form .mepr_password .mp-hide-pw > input[type=text],
+.mepro-form .mepr_password_confirm .mp-hide-pw > input[type=password],
+.mepro-form .mepr_password_confirm .mp-hide-pw > input[type=text] {
+  padding-right: 46px !important;
+}
+
+.mepr-form .mepr_password .mp-hide-pw > button.mp-hide-pw,
+.mepr-form .mepr_password_confirm .mp-hide-pw > button.mp-hide-pw,
+.mepro-form .mepr_password .mp-hide-pw > button.mp-hide-pw,
+.mepro-form .mepr_password_confirm .mp-hide-pw > button.mp-hide-pw {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px !important;
+  height: 30px;
+  min-height: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #6e3eb3;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.mepr-form .mepr_password .mp-hide-pw > button.mp-hide-pw:hover,
+.mepr-form .mepr_password .mp-hide-pw > button.mp-hide-pw:focus,
+.mepr-form .mepr_password_confirm .mp-hide-pw > button.mp-hide-pw:hover,
+.mepr-form .mepr_password_confirm .mp-hide-pw > button.mp-hide-pw:focus,
+.mepro-form .mepr_password .mp-hide-pw > button.mp-hide-pw:hover,
+.mepro-form .mepr_password .mp-hide-pw > button.mp-hide-pw:focus,
+.mepro-form .mepr_password_confirm .mp-hide-pw > button.mp-hide-pw:hover,
+.mepro-form .mepr_password_confirm .mp-hide-pw > button.mp-hide-pw:focus {
+  color: #5b2ca0;
+  background: transparent !important;
+}
+
+.mepr-form .mepr_password .mp-hide-pw > button.mp-hide-pw .dashicons,
+.mepr-form .mepr_password_confirm .mp-hide-pw > button.mp-hide-pw .dashicons,
+.mepro-form .mepr_password .mp-hide-pw > button.mp-hide-pw .dashicons,
+.mepro-form .mepr_password_confirm .mp-hide-pw > button.mp-hide-pw .dashicons {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+}
+
+

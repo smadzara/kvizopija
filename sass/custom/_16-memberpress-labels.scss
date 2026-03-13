@@ -1,0 +1,20 @@
+﻿/* MemberPress form labels */
+.mp_wrapper .mp-form-label,
+.mepr-form .mp-form-label {
+  display: block;
+  margin: 0 0 8px;
+  color: inherit;
+  font-family: "ProximaNova-Regular";
+  font-size: 1.35rem;
+  font-weight: 100;
+  line-height: inherit;
+  letter-spacing: normal;
+}
+
+.mp_wrapper .mp-form-label .required,
+.mepr-form .mp-form-label .required {
+  color: inherit;
+  opacity: 1;
+}
+
+

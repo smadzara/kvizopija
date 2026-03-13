@@ -1,0 +1,155 @@
+﻿/* MemberPress checkout form fields: match site form design */
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper .mp-form-label label {
+  color: #24394b;
+  font-family: "Axiforma-Regular";
+  font-size: 1.42rem;
+  line-height: 1.3;
+}
+
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper .mp-form-row {
+  margin-bottom: 12px;
+}
+
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper .mepr-form-input,
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper input[type=text],
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper input[type=email],
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper input[type=url],
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper input[type=tel],
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper input[type=password],
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper select,
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper textarea {
+  border: 1px solid rgba(117, 59, 189, 0.25) !important;
+  border-radius: 12px !important;
+  background: #ffffff !important;
+  color: #26374a !important;
+  font-family: "ProximaNova-Regular";
+  font-size: 1.6rem;
+  line-height: 1.35;
+  box-shadow: none !important;
+}
+
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper .mepr-form-input:focus,
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper input[type=text]:focus,
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper input[type=email]:focus,
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper input[type=url]:focus,
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper input[type=tel]:focus,
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper input[type=password]:focus,
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper select:focus,
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper textarea:focus {
+  outline: none !important;
+  border-color: #753bbd !important;
+  box-shadow: 0 0 0 3px rgba(117, 59, 189, 0.14) !important;
+}
+
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper .mepr-form-input::placeholder,
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper input::placeholder,
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper textarea::placeholder {
+  color: #5f7285;
+}
+
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper .mp-form-row-group {
+  gap: 10px;
+}
+
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper .mp-form-row-group > .mepr-form-input + .mepr-form-input {
+  margin-left: 0;
+}
+
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper .mp-form-row-group .mepr-form-input:not(:first-child),
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper .mp-form-row-group .mepr-form-input:not(:last-child) {
+  border-radius: 12px !important;
+}
+
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper .mp-form-row-group-wrapper .mp-form-label,
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper .mp-form-row-group-wrapper .mp-form-label label {
+  display: block;
+  text-align: center;
+}
+
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper .mp-form-row-group-wrapper .mp-form-label {
+  margin: 0 0 6px;
+}
+
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper .mp-form-row-group-wrapper .mp-form-label label {
+  margin: 0 auto;
+  font-size: 1.24rem;
+  line-height: 1.2;
+  color: #3f5666;
+}
+
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper .mp-form-row-group-wrapper .mp-form-label .placeholder-text {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+  text-align: center;
+  width: auto !important;
+  max-width: none;
+  padding: 0 !important;
+  background: transparent !important;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+  pointer-events: auto;
+  font-size: 1.24rem !important;
+  line-height: 1.2;
+  color: #3f5666 !important;
+}
+
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper .mp-form-row-group-wrapper .mp-form-label .placeholder-text.active {
+  transform: none !important;
+  padding: 0 !important;
+  background: transparent !important;
+  font-size: 1.24rem !important;
+  color: #3f5666 !important;
+}
+
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .invoice-wrapper .mp-cart-item {
+  align-items: flex-start;
+}
+
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .invoice-wrapper .mp-cart-item .mp-cart-item-details > p:first-child {
+  font-family: "ProximaNova-Regular";
+  font-size: 1.7rem;
+  line-height: 1.3;
+}
+
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .invoice-wrapper .mp-cart-item .mp-currency-cell,
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .invoice-wrapper .mp-cart-coupon .mp-currency-cell,
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .invoice-wrapper .mp-cart-footer .mp-currency-cell {
+  margin-left: auto;
+  padding-left: 12px;
+  min-width: 68px;
+  text-align: right;
+  align-self: flex-start;
+  font-family: "ProximaNova-Regular";
+  font-size: 1.4rem;
+  line-height: 1.2;
+  color: #24394b;
+  font-weight: 400;
+  padding-top: 2px;
+}
+
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper input[type=submit],
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper .mepr-submit {
+  border: 1px solid rgba(117, 59, 189, 0.32) !important;
+  border-radius: 12px !important;
+  background: linear-gradient(180deg, #f8f4fd 0%, #efe7fb 100%) !important;
+  color: #6e3eb3 !important;
+  font-family: "Gilroy-Bold";
+  font-size: 1.9rem;
+  line-height: 1.2;
+  padding: 12px 18px;
+  box-shadow: 0 10px 18px rgba(48, 66, 82, 0.08);
+}
+
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper input[type=submit]:hover,
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper .mepr-submit:hover,
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper input[type=submit]:focus,
+.mepr-pro-template.mepr-app-layout #primary.site-main .mepr-checkout-container .form-wrapper .mepr-submit:focus {
+  border-color: rgba(117, 59, 189, 0.55) !important;
+  background: linear-gradient(180deg, #f3ecfb 0%, #e9ddfa 100%) !important;
+}
+
+

@@ -1,0 +1,190 @@
+﻿/* Dedicated /login/ page redesign */
+.page-login,
+.page-login #page,
+.page-login #content {
+  background-color: #e7f3f1;
+}
+
+.page-login #primary.site-main,
+body:has(.mp_wrapper.mp_login_form.mp_login_form--page) #primary.site-main {
+  margin-top: 0;
+}
+
+.page-login .mp_wrapper.mp_login_form,
+.mp_wrapper.mp_login_form.mp_login_form--page {
+  max-width: 560px;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(117, 59, 189, 0.14);
+  background: linear-gradient(135deg, rgba(117, 59, 189, 0.08), rgba(92, 184, 228, 0.12));
+  box-shadow: 0 10px 18px rgba(48, 66, 82, 0.06);
+}
+
+.page-login .mp_wrapper.mp_login_form .mepr-form,
+.mp_wrapper.mp_login_form.mp_login_form--page .mepr-form {
+  margin: 0;
+}
+
+.page-login .mp_wrapper.mp_login_form .mp-form-row,
+.mp_wrapper.mp_login_form.mp_login_form--page .mp-form-row {
+  margin-bottom: 12px;
+}
+
+.page-login .mp_wrapper.mp_login_form .mp-form-label label,
+.mp_wrapper.mp_login_form.mp_login_form--page .mp-form-label label {
+  color: #24394b;
+  font-family: "Axiforma-Regular";
+  font-size: 1.42rem;
+  line-height: 1.3;
+}
+
+.page-login .mp_wrapper.mp_login_form input[type=text],
+.page-login .mp_wrapper.mp_login_form input[type=email],
+.page-login .mp_wrapper.mp_login_form input[type=password],
+.mp_wrapper.mp_login_form.mp_login_form--page input[type=text],
+.mp_wrapper.mp_login_form.mp_login_form--page input[type=email],
+.mp_wrapper.mp_login_form.mp_login_form--page input[type=password] {
+  width: 100%;
+  border: 1px solid rgba(117, 59, 189, 0.25);
+  border-radius: 12px;
+  background: #ffffff;
+  color: #26374a;
+  font-size: 1.6rem;
+  line-height: 1.35;
+  box-shadow: none;
+}
+
+.page-login .mp_wrapper.mp_login_form input[type=text]:focus,
+.page-login .mp_wrapper.mp_login_form input[type=email]:focus,
+.page-login .mp_wrapper.mp_login_form input[type=password]:focus,
+.mp_wrapper.mp_login_form.mp_login_form--page input[type=text]:focus,
+.mp_wrapper.mp_login_form.mp_login_form--page input[type=email]:focus,
+.mp_wrapper.mp_login_form.mp_login_form--page input[type=password]:focus {
+  outline: none;
+  border-color: #753bbd;
+  box-shadow: 0 0 0 3px rgba(117, 59, 189, 0.14);
+}
+
+.page-login .mp_wrapper.mp_login_form .mepr_password .mp-hide-pw,
+.mp_wrapper.mp_login_form.mp_login_form--page .mepr_password .mp-hide-pw {
+  position: relative;
+}
+
+.page-login .mp_wrapper.mp_login_form .mepr_password .mp-hide-pw > input[type=password],
+.page-login .mp_wrapper.mp_login_form .mepr_password .mp-hide-pw > input[type=text],
+.mp_wrapper.mp_login_form.mp_login_form--page .mepr_password .mp-hide-pw > input[type=password],
+.mp_wrapper.mp_login_form.mp_login_form--page .mepr_password .mp-hide-pw > input[type=text] {
+  padding-right: 46px !important;
+}
+
+.page-login .mp_wrapper.mp_login_form .mepr_password .mp-hide-pw > button.mp-hide-pw,
+.mp_wrapper.mp_login_form.mp_login_form--page .mepr_password .mp-hide-pw > button.mp-hide-pw {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  z-index: 2;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px !important;
+  height: 30px;
+  min-height: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #6e3eb3;
+  line-height: 1;
+}
+
+.page-login .mp_wrapper.mp_login_form .mepr_password .mp-hide-pw > button.mp-hide-pw:hover,
+.page-login .mp_wrapper.mp_login_form .mepr_password .mp-hide-pw > button.mp-hide-pw:focus,
+.mp_wrapper.mp_login_form.mp_login_form--page .mepr_password .mp-hide-pw > button.mp-hide-pw:hover,
+.mp_wrapper.mp_login_form.mp_login_form--page .mepr_password .mp-hide-pw > button.mp-hide-pw:focus {
+  background: transparent !important;
+  color: #5b2ca0;
+}
+
+.page-login .mp_wrapper.mp_login_form .mepr_password .mp-hide-pw > button.mp-hide-pw .dashicons,
+.mp_wrapper.mp_login_form.mp_login_form--page .mepr_password .mp-hide-pw > button.mp-hide-pw .dashicons {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+}
+
+.page-login .mp_wrapper.mp_login_form .mepr_remember_me label,
+.page-login .mp_wrapper.mp_login_form .mepr_remember_me,
+.mp_wrapper.mp_login_form.mp_login_form--page .mepr_remember_me label,
+.mp_wrapper.mp_login_form.mp_login_form--page .mepr_remember_me {
+  font-size: 1.35rem;
+  color: #3f5666;
+}
+
+.page-login .mp_wrapper.mp_login_form .submit input[type=submit],
+.mp_wrapper.mp_login_form.mp_login_form--page .submit input[type=submit] {
+  width: 100%;
+  margin: 0;
+  border-radius: 12px;
+  border: 1px solid rgba(117, 59, 189, 0.32);
+  background: linear-gradient(180deg, #f8f4fd 0%, #efe7fb 100%);
+  color: #6e3eb3;
+  font-family: "Gilroy-Bold";
+  font-size: 1.8rem;
+  line-height: 1.2;
+  padding: 12px 18px;
+  box-shadow: 0 10px 18px rgba(48, 66, 82, 0.08);
+}
+
+.page-login .mp_wrapper.mp_login_form .submit input[type=submit]:hover,
+.page-login .mp_wrapper.mp_login_form .submit input[type=submit]:focus,
+.mp_wrapper.mp_login_form.mp_login_form--page .submit input[type=submit]:hover,
+.mp_wrapper.mp_login_form.mp_login_form--page .submit input[type=submit]:focus {
+  border-color: rgba(117, 59, 189, 0.55);
+  background: linear-gradient(180deg, #f3ecfb 0%, #e9ddfa 100%);
+}
+
+.page-login .mp_wrapper.mp_login_form .mepr-login-actions,
+.mp_wrapper.mp_login_form.mp_login_form--page .mepr-login-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 10px;
+}
+
+.page-login .mp_wrapper.mp_login_form .mepr-login-actions .mepr-login-register-link,
+.mp_wrapper.mp_login_form.mp_login_form--page .mepr-login-actions .mepr-login-register-link {
+  margin-left: auto;
+}
+
+.page-login .mp_wrapper.mp_login_form .mepr-login-actions a,
+.mp_wrapper.mp_login_form.mp_login_form--page .mepr-login-actions a {
+  color: #6e3eb3;
+  font-size: 1.32rem;
+  line-height: 1.2;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.page-login .mp_wrapper.mp_login_form .mepr-login-actions a:hover,
+.page-login .mp_wrapper.mp_login_form .mepr-login-actions a:focus,
+.mp_wrapper.mp_login_form.mp_login_form--page .mepr-login-actions a:hover,
+.mp_wrapper.mp_login_form.mp_login_form--page .mepr-login-actions a:focus {
+  color: #5b2ca0;
+}
+
+@media only screen and (max-width: 768px) {
+  .page-login #primary.site-main,
+  body:has(.mp_wrapper.mp_login_form.mp_login_form--page) #primary.site-main {
+    margin-top: 0;
+  }
+  .page-login .mp_wrapper.mp_login_form,
+  .mp_wrapper.mp_login_form.mp_login_form--page {
+    width: 95%;
+    padding: 14px;
+    margin: 30px auto 20px;
+  }
+}
+

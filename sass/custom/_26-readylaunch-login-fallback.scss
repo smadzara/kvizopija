@@ -1,0 +1,251 @@
+﻿/* Force ReadyLaunch login page to follow theme design (fallback selectors) */
+#mepro-login-hero {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+#mepro-login-hero .mepro-boxed {
+  width: min(1280px, 90%) !important;
+  margin: 95px auto 32px !important;
+  padding: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+#mepro-login-hero .mepro-login-contents {
+  width: min(620px, 100%) !important;
+  max-width: 620px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+#mepro-login-hero.with-sidebar .mepro-login-hero-image {
+  display: none !important;
+}
+
+.page-login #mepro-login-hero > p,
+.page-login #mepro-login-hero > h1,
+.page-login #mepro-login-hero > h2,
+.page-login #mepro-login-hero > h3,
+.page-login #mepro-login-hero > h4,
+.page-login #mepro-login-hero > h5,
+.page-login #mepro-login-hero > h6,
+.page-login #mepro-login-hero .mepro-login-contents > .mepr-unauthorized-excerpt {
+  display: none !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 20px !important;
+  border-radius: 18px !important;
+  border: 1px solid rgba(117, 59, 189, 0.14) !important;
+  background: linear-gradient(135deg, rgba(117, 59, 189, 0.08), rgba(92, 184, 228, 0.12)) !important;
+  box-shadow: 0 10px 18px rgba(48, 66, 82, 0.06) !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form > h1 {
+  margin: 0 0 14px !important;
+  color: #24394b !important;
+  font-family: "Gilroy-Bold";
+  font-size: 2.8rem !important;
+  line-height: 1.2 !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form .mp-form-row {
+  width: 100% !important;
+  max-width: none !important;
+  display: block !important;
+  float: none !important;
+  margin: 0 0 12px !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form .mp-form-label {
+  width: 100% !important;
+  max-width: none !important;
+  display: block !important;
+  margin: 0 0 6px !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form .mp-form-label .placeholder-text,
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form .mp-form-label .placeholder-text.active {
+  position: static !important;
+  transform: none !important;
+  display: block !important;
+  width: auto !important;
+  margin: 0 0 6px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  color: #24394b !important;
+  font-family: "Axiforma-Regular";
+  font-size: 1.35rem !important;
+  line-height: 1.3 !important;
+  pointer-events: auto !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form input[type=text],
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form input[type=email],
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form input[type=password] {
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 48px !important;
+  margin: 0 !important;
+  border: 1px solid rgba(117, 59, 189, 0.25) !important;
+  border-radius: 12px !important;
+  background: #ffffff !important;
+  color: #26374a !important;
+  font-family: "ProximaNova-Regular";
+  font-size: 1.65rem !important;
+  line-height: 1.35 !important;
+  box-shadow: none !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form input[type=text]:focus,
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form input[type=email]:focus,
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form input[type=password]:focus {
+  outline: none !important;
+  border-color: #753bbd !important;
+  box-shadow: 0 0 0 3px rgba(117, 59, 189, 0.14) !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form .mepr_password .mp-hide-pw {
+  position: relative !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form .mepr_password .mp-hide-pw > input[type=password],
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form .mepr_password .mp-hide-pw > input[type=text] {
+  padding-right: 46px !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form .mepr_password .mp-hide-pw > button.mp-hide-pw {
+  position: absolute !important;
+  top: 50% !important;
+  right: 10px !important;
+  transform: translateY(-50%) !important;
+  z-index: 2 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #6e3eb3 !important;
+  line-height: 1 !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form .mepr_password .mp-hide-pw > button.mp-hide-pw:hover,
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form .mepr_password .mp-hide-pw > button.mp-hide-pw:focus {
+  color: #5b2ca0 !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form .mepr_password .mp-hide-pw > button.mp-hide-pw .dashicons {
+  width: 18px !important;
+  height: 18px !important;
+  font-size: 18px !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form .mepr_remember_me {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-top: 4px !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form .mepr_remember_me label {
+  margin: 0 !important;
+  color: #3f5666 !important;
+  font-family: "ProximaNova-Regular";
+  font-size: 1.35rem !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form .submit {
+  width: 100% !important;
+  max-width: none !important;
+  display: block !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form .submit input[type=submit] {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(117, 59, 189, 0.32) !important;
+  background: linear-gradient(180deg, #f8f4fd 0%, #efe7fb 100%) !important;
+  color: #6e3eb3 !important;
+  font-family: "Gilroy-Bold";
+  font-size: 2.1rem !important;
+  line-height: 1.2 !important;
+  padding: 12px 18px !important;
+  box-shadow: 0 10px 18px rgba(48, 66, 82, 0.08) !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form .submit input[type=submit]:hover,
+#mepr-template-login.mp_wrapper.mp_login_form .mepro-form .submit input[type=submit]:focus {
+  border-color: rgba(117, 59, 189, 0.55) !important;
+  background: linear-gradient(180deg, #f3ecfb 0%, #e9ddfa 100%) !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepr-login-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px 14px !important;
+  margin-top: 12px !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepr-login-actions .mepr-login-register-link {
+  margin-left: auto !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepr-login-actions a {
+  color: #6e3eb3 !important;
+  font-size: 1.32rem !important;
+  line-height: 1.2 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px !important;
+}
+
+#mepr-template-login.mp_wrapper.mp_login_form .mepr-login-actions a:hover,
+#mepr-template-login.mp_wrapper.mp_login_form .mepr-login-actions a:focus {
+  color: #5b2ca0 !important;
+}
+
+@media only screen and (max-width: 768px) {
+  #mepro-login-hero .mepro-boxed {
+    width: 95% !important;
+    margin-top: 84px !important;
+    margin-bottom: 26px !important;
+  }
+  #mepro-login-hero .mepro-login-contents {
+    max-width: none !important;
+  }
+  #mepr-template-login.mp_wrapper.mp_login_form {
+    padding: 14px !important;
+  }
+}
+.page-login .questions-sidebar {
+  margin-top: 12px;
+}
+
+

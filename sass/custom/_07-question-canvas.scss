@@ -1,0 +1,190 @@
+﻿/* Keep question list templates on the same mint canvas as content/sidebars */
+.tax-questions_terms,
+.tax-questions_terms #page,
+.tax-questions_terms #content,
+.tax-questions_categories,
+.tax-questions_categories #page,
+.tax-questions_categories #content,
+.post-type-archive-questions,
+.post-type-archive-questions #page,
+.post-type-archive-questions #content {
+  background-color: #e7f3f1;
+}
+
+.questions-sidebar__search-panel,
+.questions-sidebar__panel {
+  border-radius: 16px;
+  border: 1px solid rgba(117, 59, 189, 0.14);
+  background: linear-gradient(135deg, rgba(117, 59, 189, 0.08), rgba(92, 184, 228, 0.12));
+  box-shadow: 0 10px 18px rgba(48, 66, 82, 0.06);
+  padding: 12px;
+}
+
+.questions-sidebar__panel-head {
+  margin-bottom: 10px;
+}
+
+.questions-sidebar__title {
+  margin: 0;
+  color: #753bbd;
+  font-family: "Gilroy-Bold";
+  font-size: 2.2rem;
+}
+
+.questions-sidebar__subtitle {
+  margin: 4px 0 0;
+  color: #3f5666;
+  font-size: 1.35rem;
+}
+
+.questions-sidebar .search-form-custom {
+  width: 100%;
+  padding: 0;
+}
+
+.questions-sidebar .search-form-custom form {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.questions-sidebar .search-form-custom input[type=search] {
+  border-radius: 12px;
+  border: 1px solid rgba(117, 59, 189, 0.25);
+  background: #ffffff;
+  color: #26374a;
+  font-size: 1.7rem;
+}
+
+.questions-sidebar .search-form-custom input[type=submit] {
+  border-radius: 12px;
+  border: 1px solid rgba(117, 59, 189, 0.32);
+  background: linear-gradient(180deg, #f8f4fd 0%, #efe7fb 100%);
+  color: #6e3eb3;
+  font-family: "Gilroy-Bold";
+  font-size: 1.65rem;
+}
+
+.questions-sidebar .search-form-custom input[type=submit]:hover {
+  background: linear-gradient(180deg, #f3ecfb 0%, #e9ddfa 100%);
+  border-color: rgba(117, 59, 189, 0.55);
+}
+
+.questions-sidebar__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 12px;
+}
+
+.questions-sidebar__card {
+  display: block;
+  text-decoration: none;
+  border-radius: 12px;
+  border: 1px solid rgba(117, 59, 189, 0.14);
+  background: #eef7f6;
+  padding: 12px 12px 11px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.questions-sidebar__card:hover,
+.questions-sidebar__card:focus {
+  transform: translateY(-2px);
+  border-color: rgba(117, 59, 189, 0.36);
+  background: #f8f4fd;
+  box-shadow: 0 12px 20px rgba(48, 66, 82, 0.08);
+}
+
+.questions-sidebar__card-title {
+  margin: 0;
+  line-height: 1.24;
+  color: #24394b;
+  font-family: "Gilroy-Bold";
+  font-size: 1.95rem;
+}
+
+.questions-sidebar__meta {
+  margin: 8px 0 0;
+  color: #3f5666;
+  font-family: "ProximaNova-Regular";
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.questions-sidebar__badge {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-top: 8px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(117, 59, 189, 0.18);
+  background: rgba(117, 59, 189, 0.08);
+  color: #6d3db2;
+  font-family: "Axiforma-Regular";
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.sidebar-categories {
+  align-items: center;
+  width: 75%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .questions-sidebar {
+    width: 95%;
+    margin-bottom: 24px;
+  }
+  .questions-sidebar__grid {
+    grid-template-columns: 1fr;
+  }
+  .sidebar-categories {
+    width: 100%;
+  }
+}
+.search-form-custom {
+  /* Ãƒâ€¦Ã‚Â¡irina forme  CHILD  */
+  padding: 10px;
+  align-self: center;
+  justify-self: center;
+  width: 1280px;
+}
+
+@media only screen and (max-width: 1280px) {
+  .search-form-custom {
+    width: 90%;
+  }
+}
+/*Parent*/
+.forma {
+  display: grid;
+}
+
+.search-title {
+  background-color: transparent;
+  padding-top: 0;
+  margin-top: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.search-title-body {
+  display: block;
+  flex-wrap: wrap;
+  margin-left: 0;
+}
+
+#searchResultsList {
+  margin-top: 8px;
+}
+
+.search-result-item .answer-category p {
+  margin: 0;
+}
+
+
