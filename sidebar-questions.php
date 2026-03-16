@@ -1,6 +1,6 @@
 <?php
 /**
- * The sidebar containing the main widget area
+ * Questions sidebar.
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
@@ -8,78 +8,76 @@
  */
 
 $questions_taxonomy = 'questions_categories';
-$questions_terms = get_terms($questions_taxonomy); // Get all terms of a questions taxonomy
+$questions_terms    = get_terms(
+	array(
+		'taxonomy'   => $questions_taxonomy,
+		'hide_empty' => false,
+		'orderby'    => 'name',
+		'order'      => 'ASC',
+	)
+);
 
+if ( is_wp_error( $questions_terms ) || ! is_array( $questions_terms ) ) {
+	$questions_terms = array();
+}
 ?>
 
-<div align="center">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4983269975347159"
-        crossorigin="anonymous"></script>
-    <!-- pkp.com - responsive -->
-    <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-4983269975347159"
-        data-ad-slot="2181067593"
-        data-ad-format="auto"
-        data-full-width-responsive="true"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-    <p style="text-align:center">Klikom na reklamu podržavate rad ove stranice, na čemu najljubaznije zahvaljujemo. :)</p>
-</div>
+<aside class="questions-sidebar" aria-label="Questions sidebar">
+	<div class="questions-sidebar__search-panel">
+		<?= get_search_form(); ?>
+	</div>
 
-<div class="forma">    
-<?=get_search_form();?>
-</div>
-        <div class="sidebar-content-container sidebar-categories">
-        <?php // Nove kategorije - Blok ?>
+	<div class="questions-sidebar__panel">
+		<div class="questions-sidebar__panel-head">
+			<h2 class="questions-sidebar__title">Kategorije pitanja</h2>
+			<p class="questions-sidebar__subtitle">Brzi pregled svih kategorija</p>
+		</div>
 
-            <section class="page-contain sidebar">
-            <?php foreach ( $questions_terms as $questions_term ) : //dump($questions_term)?>
-                <a href="<?= get_term_link($questions_term->slug, $questions_taxonomy); ?>" class="data-card sidebar">
-                    <h3><?= $questions_term->name; ?></h3>
-                    <?php // Vadi datum iz zadnjeg objavljenog posta u kategoriji CPT-a
-                            $args = array(
-                                'post_type' => array('questions'),
-                                'post_status' => 'publish',
-                                'posts_per_page' => 1,
-                                'tax_query' => array(
-                                    array (
-                                        'taxonomy' => 'questions_categories',
-                                        'field' => 'slug',
-                                        'terms' => array($questions_term->slug),
-                                    )
-                                ),
-                            );
-                            $q2 = new WP_Query($args);
-                        ?>
-                    <h4>Osvježeno: <?php echo (date( 'j. n. Y.', strtotime($q2->post->post_date) )) ?></h4>
-                    <p>Broj pitanja: <?= $questions_term->count; ?></p>
-                    <span class="link-text">
-                    Sva pitanja
-                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M17.8631 0.929124L24.2271 7.29308C24.6176 7.68361 24.6176 8.31677 24.2271 8.7073L17.8631 15.0713C17.4726 15.4618 16.8394 15.4618 16.4489 15.0713C16.0584 14.6807 16.0584 14.0476 16.4489 13.657L21.1058 9.00019H0.47998V7.00019H21.1058L16.4489 2.34334C16.0584 1.95281 16.0584 1.31965 16.4489 0.929124C16.8394 0.538599 17.4726 0.538599 17.8631 0.929124Z" fill="#753BBD"/>
-                </svg>
-                    </span>
-                </a>
-                <?php endforeach; ?>
-            </section>
+		<div class="questions-sidebar__grid">
+			<?php foreach ( $questions_terms as $questions_term ) : ?>
+				<?php
+				$term_link = get_term_link( $questions_term->slug, $questions_taxonomy );
+				if ( is_wp_error( $term_link ) ) {
+					continue;
+				}
 
-        <?php // Nove kategorije - Blok - END ?>
-        </div>
+				$latest_questions = get_posts(
+					array(
+						'post_type'              => 'questions',
+						'post_status'            => 'publish',
+						'posts_per_page'         => 1,
+						'orderby'                => 'date',
+						'order'                  => 'DESC',
+						'no_found_rows'          => true,
+						'update_post_meta_cache' => false,
+						'update_post_term_cache' => false,
+						'tax_query'              => array(
+							array(
+								'taxonomy' => 'questions_categories',
+								'field'    => 'slug',
+								'terms'    => array( $questions_term->slug ),
+							),
+						),
+					)
+				);
 
-    <div align="center">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4983269975347159"
-        crossorigin="anonymous"></script>
-    <!-- pkp.com - responsive -->
-    <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-4983269975347159"
-        data-ad-slot="2181067593"
-        data-ad-format="auto"
-        data-full-width-responsive="true"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-    <p style="text-align:center">Klikom na reklamu podržavate rad ove stranice, na čemu najljubaznije zahvaljujemo. :)</p>
-</div>
+				$latest_date = '';
+				if ( ! empty( $latest_questions ) && $latest_questions[0] instanceof WP_Post ) {
+					$latest_date = get_the_date( 'j. n. Y.', $latest_questions[0] );
+				}
+
+				$term_count       = (int) $questions_term->count;
+				$term_count_label = $term_count . ' ' . ( 1 === $term_count ? 'pitanje' : 'pitanja' );
+				?>
+
+				<a class="questions-sidebar__card" href="<?= esc_url( $term_link ); ?>">
+					<p class="questions-sidebar__card-title"><?= esc_html( $questions_term->name ); ?></p>
+					<?php if ( '' !== $latest_date ) : ?>
+						<p class="questions-sidebar__meta">Osvježeno: <?= esc_html( $latest_date ); ?></p>
+					<?php endif; ?>
+					<span class="questions-sidebar__badge"><?= esc_html( $term_count_label ); ?></span>
+				</a>
+			<?php endforeach; ?>
+		</div>
+	</div>
+</aside>

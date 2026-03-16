@@ -24,12 +24,18 @@ if ( is_wp_error( $questions_terms ) ) {
 $questions_count_obj = wp_count_posts( 'questions' );
 $questions_count     = ( $questions_count_obj && isset( $questions_count_obj->publish ) ) ? (int) $questions_count_obj->publish : 0;
 
+if ( 1 === $questions_count ) {
+	$questions_count_text = 'Trenutno imamo samo jedno kviz pitanje...';
+} else {
+	$questions_count_text = sprintf( 'Trenutno brojimo %s kviz pitanja.', number_format_i18n( $questions_count ) );
+}
+
 $latest_questions = get_posts(
 	array(
 		'post_type'              => 'questions',
 		'post_status'            => 'publish',
 		'posts_per_page'         => 1,
-		'orderby'                => 'date',
+		'orderby'                => 'modified',
 		'order'                  => 'DESC',
 		'no_found_rows'          => true,
 		'update_post_meta_cache' => false,
@@ -39,18 +45,17 @@ $latest_questions = get_posts(
 
 $latest_question_date = '';
 if ( ! empty( $latest_questions ) && $latest_questions[0] instanceof WP_Post ) {
-	$latest_question_date = get_the_date( 'j. n. Y.', $latest_questions[0] );
+	$latest_question_date = get_the_modified_date( 'j. n. Y.', $latest_questions[0] );
 }
 
 $news_query = new WP_Query(
 	array(
 		'post_type'           => 'post',
 		'post_status'         => 'publish',
-		'posts_per_page'      => 4,
+		'posts_per_page'      => 6,
 		'orderby'             => 'date',
 		'order'               => 'DESC',
 		'ignore_sticky_posts' => true,
-		'no_found_rows'       => true,
 	)
 );
 
@@ -98,23 +103,15 @@ if ( '' === trim( wp_strip_all_tags( (string) $memberpress_login_html ) ) ) {
 				</div>
 			</div>
 
-			<div class="home-modern__quick-buttons" aria-label="Brze informacije">
-				<a class="home-modern__quick-button home-modern__quick-button--donate" href="https://buymeacoffee.com/pekape" target="_blank" rel="noopener noreferrer">
-					<span class="home-modern__quick-button-label">Doniraj</span>
-					<span class="home-modern__quick-button-value">Podrži rad ovih stranica</span>
-				</a>
-
-				<div class="home-modern__quick-button home-modern__quick-button--count" role="status" aria-live="polite">
-					<span class="home-modern__quick-button-label">Broj pitanja</span>
-					<span class="home-modern__quick-button-value"><?= esc_html( number_format_i18n( $questions_count ) ); ?></span>
-				</div>
-
-				<div class="home-modern__quick-button home-modern__quick-button--updated" role="status" aria-live="polite">
-					<span class="home-modern__quick-button-label">Ažurirano</span>
-					<span class="home-modern__quick-button-value">
-						<?= '' !== $latest_question_date ? esc_html( $latest_question_date ) : esc_html__( 'Nema pitanja', 'kvizopija' ); ?>
-					</span>
-				</div>
+			<div class="home-modern__stats">
+				<p class="home-modern__stat">
+					<span class="home-modern__stat-accent"><?= esc_html( $questions_count_text ); ?></span>
+				</p>
+				<?php if ( '' !== $latest_question_date ) : ?>
+					<p class="home-modern__stat">
+						<span class="home-modern__stat-accent">Zadnje ažuriranje baze pitanja: <?= esc_html( $latest_question_date ); ?>.</span>
+					</p>
+				<?php endif; ?>
 			</div>
 		</div>
 
@@ -131,13 +128,13 @@ if ( '' === trim( wp_strip_all_tags( (string) $memberpress_login_html ) ) ) {
 						while ( $news_query->have_posts() ) :
 							$news_query->the_post();
 							?>
-							<a class="home-modern-news-card-link" href="<?= esc_url( get_permalink() ); ?>">
-								<article class="home-modern-news-card">
-									<p class="home-modern-news-date"><?= esc_html( get_the_date( 'j. n. Y.' ) ); ?></p>
-									<h3 class="home-modern-news-title"><?= esc_html( get_the_title() ); ?></h3>
-									<p class="home-modern-news-excerpt"><?= esc_html( wp_trim_words( wp_strip_all_tags( get_the_excerpt() ), 20 ) ); ?></p>
-								</article>
-							</a>
+							<article class="home-modern-news-card">
+								<p class="home-modern-news-date"><?= esc_html( get_the_date( 'j. n. Y.' ) ); ?></p>
+								<h3 class="home-modern-news-title">
+									<a href="<?= esc_url( get_permalink() ); ?>"><?= esc_html( get_the_title() ); ?></a>
+								</h3>
+								<p class="home-modern-news-excerpt"><?= esc_html( wp_trim_words( wp_strip_all_tags( get_the_excerpt() ), 20 ) ); ?></p>
+							</article>
 						<?php endwhile; ?>
 					</div>
 				<?php else : ?>

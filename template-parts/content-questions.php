@@ -29,6 +29,10 @@ $terms = get_the_terms( get_the_ID(), 'questions_terms' );
                     endif;
                      ?>
 
+	<p class="question-date">Objavljeno:
+		<span class="question-accent"><?= esc_html( get_the_date( 'j. n. Y.' ) ); ?></span>
+	</p>
+
 	<header class="question-category-single">
 		<?php
 		if ( is_singular() ) :
