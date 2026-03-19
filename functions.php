@@ -12,6 +12,325 @@ if ( ! defined( 'KVIZOPIJA_VERSION' ) ) {
 	define( 'KVIZOPIJA_VERSION', '1.0.0' );
 }
 
+if ( ! defined( 'KVIZOPIJA_QOTD_OPTION' ) ) {
+	define( 'KVIZOPIJA_QOTD_OPTION', 'kvizopija_question_of_the_day_state' );
+}
+
+if ( ! function_exists( 'kvizopija_is_question_available_for_daily_pick' ) ) {
+	/**
+	 * Check whether a Question CPT item is valid for the Question of the Day slot.
+	 *
+	 * @param int $question_id Question post ID.
+	 * @return bool
+	 */
+	function kvizopija_is_question_available_for_daily_pick( $question_id ) {
+		$question_id = absint( $question_id );
+		if ( $question_id <= 0 ) {
+			return false;
+		}
+
+		$question_post = get_post( $question_id );
+		if ( ! ( $question_post instanceof WP_Post ) ) {
+			return false;
+		}
+
+		if ( 'questions' !== $question_post->post_type || 'publish' !== $question_post->post_status ) {
+			return false;
+		}
+
+		return true;
+	}
+}
+
+if ( ! function_exists( 'kvizopija_get_daily_question_category_ids' ) ) {
+	/**
+	 * Fetch all question category IDs that currently have at least one question.
+	 *
+	 * @return int[]
+	 */
+	function kvizopija_get_daily_question_category_ids() {
+		$category_ids = get_terms(
+			array(
+				'taxonomy'   => 'questions_categories',
+				'hide_empty' => true,
+				'fields'     => 'ids',
+			)
+		);
+
+		if ( is_wp_error( $category_ids ) || ! is_array( $category_ids ) ) {
+			return array();
+		}
+
+		return array_values(
+			array_unique(
+				array_filter(
+					array_map( 'absint', $category_ids )
+				)
+			)
+		);
+	}
+}
+
+if ( ! function_exists( 'kvizopija_pick_random_daily_question_for_category' ) ) {
+	/**
+	 * Pick one random question from a category, excluding previously used IDs.
+	 *
+	 * @param int   $category_id       Question category term ID.
+	 * @param int[] $used_question_ids Question IDs already used in previous days.
+	 * @return int Question post ID, or 0 when no candidate is available.
+	 */
+	function kvizopija_pick_random_daily_question_for_category( $category_id, $used_question_ids ) {
+		$category_id       = absint( $category_id );
+		$used_question_ids = array_values(
+			array_unique(
+				array_filter(
+					array_map( 'absint', is_array( $used_question_ids ) ? $used_question_ids : array() )
+				)
+			)
+		);
+
+		if ( $category_id <= 0 ) {
+			return 0;
+		}
+
+		$query_args = array(
+			'post_type'              => 'questions',
+			'post_status'            => 'publish',
+			'posts_per_page'         => 40,
+			'orderby'                => 'rand',
+			'fields'                 => 'ids',
+			'no_found_rows'          => true,
+			'update_post_meta_cache' => false,
+			'update_post_term_cache' => false,
+			'tax_query'              => array(
+				array(
+					'taxonomy' => 'questions_categories',
+					'field'    => 'term_id',
+					'terms'    => array( $category_id ),
+				),
+			),
+		);
+
+		if ( ! empty( $used_question_ids ) ) {
+			$query_args['post__not_in'] = $used_question_ids;
+		}
+
+		$question_ids = get_posts( $query_args );
+		if ( ! is_array( $question_ids ) || empty( $question_ids ) ) {
+			return 0;
+		}
+
+		foreach ( $question_ids as $question_id ) {
+			$question_id = absint( $question_id );
+			if ( kvizopija_is_question_available_for_daily_pick( $question_id ) ) {
+				return $question_id;
+			}
+		}
+
+		return 0;
+	}
+}
+
+if ( ! function_exists( 'kvizopija_normalize_daily_question_state' ) ) {
+	/**
+	 * Normalize stored Question of the Day option payload.
+	 *
+	 * @param mixed $state Raw state from the database.
+	 * @return array<string,mixed>
+	 */
+	function kvizopija_normalize_daily_question_state( $state ) {
+		if ( ! is_array( $state ) ) {
+			$state = array();
+		}
+
+		$used_question_ids = isset( $state['used_question_ids'] ) && is_array( $state['used_question_ids'] ) ? $state['used_question_ids'] : array();
+		$used_category_ids = isset( $state['used_category_ids'] ) && is_array( $state['used_category_ids'] ) ? $state['used_category_ids'] : array();
+
+		return array(
+			'question_id'       => isset( $state['question_id'] ) ? absint( $state['question_id'] ) : 0,
+			'category_id'       => isset( $state['category_id'] ) ? absint( $state['category_id'] ) : 0,
+			'picked_at'         => isset( $state['picked_at'] ) ? absint( $state['picked_at'] ) : 0,
+			'expires_at'        => isset( $state['expires_at'] ) ? absint( $state['expires_at'] ) : 0,
+			'used_question_ids' => array_values(
+				array_unique(
+					array_filter(
+						array_map( 'absint', $used_question_ids )
+					)
+				)
+			),
+			'used_category_ids' => array_values(
+				array_unique(
+					array_filter(
+						array_map( 'absint', $used_category_ids )
+					)
+				)
+			),
+		);
+	}
+}
+
+if ( ! function_exists( 'kvizopija_build_next_daily_question_state' ) ) {
+	/**
+	 * Generate the next Question of the Day state.
+	 *
+	 * @param array<string,mixed> $state Current normalized state.
+	 * @param int                 $now   Current timestamp in site timezone.
+	 * @return array<string,mixed>
+	 */
+	function kvizopija_build_next_daily_question_state( $state, $now ) {
+		$all_category_ids = kvizopija_get_daily_question_category_ids();
+		if ( empty( $all_category_ids ) ) {
+			$state['question_id'] = 0;
+			$state['category_id'] = 0;
+			$state['picked_at']   = 0;
+			$state['expires_at']  = 0;
+
+			return $state;
+		}
+
+		$used_question_ids = isset( $state['used_question_ids'] ) ? $state['used_question_ids'] : array();
+		$used_category_ids = isset( $state['used_category_ids'] ) ? $state['used_category_ids'] : array();
+
+		$attempt_counter    = 0;
+		$selected_question  = 0;
+		$selected_category  = 0;
+
+		while ( $attempt_counter < 3 && 0 === $selected_question ) {
+			$candidate_categories = array_values( array_diff( $all_category_ids, $used_category_ids ) );
+
+			if ( empty( $candidate_categories ) ) {
+				$used_category_ids    = array();
+				$candidate_categories = $all_category_ids;
+			}
+
+			shuffle( $candidate_categories );
+
+			foreach ( $candidate_categories as $candidate_category_id ) {
+				$question_id = kvizopija_pick_random_daily_question_for_category( $candidate_category_id, $used_question_ids );
+				if ( $question_id > 0 ) {
+					$selected_question = $question_id;
+					$selected_category = absint( $candidate_category_id );
+					break;
+				}
+			}
+
+			if ( 0 !== $selected_question ) {
+				break;
+			}
+
+			// All currently available questions were already used; start a fresh cycle.
+			$used_question_ids = array();
+			$used_category_ids = array();
+			++$attempt_counter;
+		}
+
+		if ( 0 === $selected_question ) {
+			$state['question_id'] = 0;
+			$state['category_id'] = 0;
+			$state['picked_at']   = 0;
+			$state['expires_at']  = 0;
+
+			return $state;
+		}
+
+		$used_question_ids[] = $selected_question;
+		$used_category_ids[] = $selected_category;
+
+		$state['question_id']       = $selected_question;
+		$state['category_id']       = $selected_category;
+		$state['picked_at']         = $now;
+		$state['expires_at']        = $now + DAY_IN_SECONDS;
+		$state['used_question_ids'] = array_values(
+			array_unique(
+				array_filter(
+					array_map( 'absint', $used_question_ids )
+				)
+			)
+		);
+		$state['used_category_ids'] = array_values(
+			array_unique(
+				array_filter(
+					array_map( 'absint', $used_category_ids )
+				)
+			)
+		);
+
+		return $state;
+	}
+}
+
+if ( ! function_exists( 'kvizopija_prepare_daily_question_payload' ) ) {
+	/**
+	 * Build a template-friendly data payload from state.
+	 *
+	 * @param array<string,mixed> $state Normalized state.
+	 * @return array<string,mixed>
+	 */
+	function kvizopija_prepare_daily_question_payload( $state ) {
+		$question_id = isset( $state['question_id'] ) ? absint( $state['question_id'] ) : 0;
+		if ( $question_id <= 0 || ! kvizopija_is_question_available_for_daily_pick( $question_id ) ) {
+			return array();
+		}
+
+		$category_id   = isset( $state['category_id'] ) ? absint( $state['category_id'] ) : 0;
+		$category_term = $category_id > 0 ? get_term( $category_id, 'questions_categories' ) : null;
+
+		if ( ! ( $category_term instanceof WP_Term ) ) {
+			$question_terms = get_the_terms( $question_id, 'questions_categories' );
+			if ( is_array( $question_terms ) && ! empty( $question_terms[0] ) && $question_terms[0] instanceof WP_Term ) {
+				$category_term = $question_terms[0];
+				$category_id   = (int) $category_term->term_id;
+			}
+		}
+
+		$category_link = '';
+		$category_name = '';
+		if ( $category_term instanceof WP_Term ) {
+			$term_link = get_term_link( $category_term );
+			if ( ! is_wp_error( $term_link ) ) {
+				$category_link = $term_link;
+			}
+			$category_name = $category_term->name;
+		}
+
+		return array(
+			'question_id'     => $question_id,
+			'question_title'  => get_the_title( $question_id ),
+			'question_link'   => get_permalink( $question_id ),
+			'category_id'     => $category_id,
+			'category_name'   => $category_name,
+			'category_link'   => $category_link,
+			'picked_at'       => isset( $state['picked_at'] ) ? absint( $state['picked_at'] ) : 0,
+			'expires_at'      => isset( $state['expires_at'] ) ? absint( $state['expires_at'] ) : 0,
+		);
+	}
+}
+
+if ( ! function_exists( 'kvizopija_get_question_of_the_day' ) ) {
+	/**
+	 * Return the current Question of the Day. Rotates every 24 hours.
+	 *
+	 * @return array<string,mixed>
+	 */
+	function kvizopija_get_question_of_the_day() {
+		$now   = (int) current_time( 'timestamp' );
+		$state = kvizopija_normalize_daily_question_state( get_option( KVIZOPIJA_QOTD_OPTION, array() ) );
+
+		$is_current_question_valid = (
+			$state['question_id'] > 0 &&
+			$state['expires_at'] > $now &&
+			kvizopija_is_question_available_for_daily_pick( $state['question_id'] )
+		);
+
+		if ( ! $is_current_question_valid ) {
+			$state = kvizopija_build_next_daily_question_state( $state, $now );
+			update_option( KVIZOPIJA_QOTD_OPTION, $state, false );
+		}
+
+		return kvizopija_prepare_daily_question_payload( $state );
+	}
+}
+
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
@@ -156,6 +475,18 @@ function kvizopija_scripts() {
 	wp_enqueue_script( 'kvizopija-navigation', get_template_directory_uri() . '/js/navigation.js', array(), KVIZOPIJA_VERSION, true );
     /* wp_enqueue_script( 'kvizopija-navbar', get_template_directory_uri() . '/js/navbar.js', array(), KVIZOPIJA_VERSION, true ); */
 
+	$is_questions_list_view = is_post_type_archive( 'questions' ) || is_tax( array( 'questions_categories', 'questions_terms' ) ) || is_search();
+	$list_actions_path      = get_template_directory() . '/js/questions-list-actions.js';
+
+	if ( $is_questions_list_view && file_exists( $list_actions_path ) ) {
+		wp_enqueue_script(
+			'kvizopija-questions-list-actions',
+			get_template_directory_uri() . '/js/questions-list-actions.js',
+			array(),
+			(string) filemtime( $list_actions_path ),
+			true
+		);
+	}
 
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {

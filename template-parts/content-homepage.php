@@ -65,6 +65,8 @@ if ( empty( $news_page_url ) || is_wp_error( $news_page_url ) ) {
 	$news_page_url = home_url( '/category/novosti/' );
 }
 
+$question_of_the_day = function_exists( 'kvizopija_get_question_of_the_day' ) ? kvizopija_get_question_of_the_day() : array();
+
 $memberpress_login_html = '';
 if ( shortcode_exists( 'mepr-login-form' ) ) {
 	$memberpress_login_html = do_shortcode( '[mepr-login-form use_redirect="true"]' );
@@ -117,6 +119,25 @@ if ( '' === trim( wp_strip_all_tags( (string) $memberpress_login_html ) ) ) {
 				</div>
 			</div>
 		</div>
+
+		<?php if ( ! empty( $question_of_the_day ) ) : ?>
+			<section class="home-modern__panel home-modern__panel--question-of-day" aria-labelledby="home-question-of-day-title">
+				<div class="home-modern__question-of-day-head">
+					<h2 id="home-question-of-day-title">Pub kviz pitanje dana</h2>
+					<?php if ( ! empty( $question_of_the_day['category_name'] ) ) : ?>
+						<?php if ( ! empty( $question_of_the_day['category_link'] ) ) : ?>
+							<a class="home-modern__question-category" href="<?= esc_url( $question_of_the_day['category_link'] ); ?>">
+								<?= esc_html( $question_of_the_day['category_name'] ); ?>
+							</a>
+						<?php else : ?>
+							<span class="home-modern__question-category"><?= esc_html( $question_of_the_day['category_name'] ); ?></span>
+						<?php endif; ?>
+					<?php endif; ?>
+				</div>
+
+				<p><?= esc_html( $question_of_the_day['question_title'] ); ?></p>
+			</section>
+		<?php endif; ?>
 
 		<div class="home-modern__grid">
 			<section class="home-modern__panel home-modern__panel--news" aria-labelledby="home-news-title">

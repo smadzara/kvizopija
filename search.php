@@ -52,16 +52,34 @@ $show_load_more = $max_pages > $current_page && $total_results > 50;
 						id="loadMoreSearchResults"
 						type="button"
 						class="homepage-button terms-load-more search-results-action-button"
+						data-questions-load-more="1"
+						data-url-mode="search"
 						data-page="<?= esc_attr( $current_page ); ?>"
 						data-max-pages="<?= esc_attr( $max_pages ); ?>"
 						data-search-query="<?= esc_attr( get_search_query() ); ?>"
 						data-home-url="<?= esc_url( home_url( '/' ) ); ?>"
+						data-container-selector="#primary.site-main"
+						data-items-selector="#primary.site-main article.search-result-item"
+						data-answer-selector=".answer-category"
+						data-reveal-body-class="answers-revealed-search"
+						data-default-text="U&#269;itaj vi&#353;e"
+						data-loading-text="U&#269;itavam..."
+						data-retry-text="Poku&#353;aj ponovno"
 					>
-						Učitaj više
+						U&#269;itaj vi&#353;e
 					</button>
 				<?php endif; ?>
 
-				<button id="revealSearchAnswers" type="button" class="homepage-button terms-load-more search-results-action-button">Otkrij odgovore</button>
+				<button
+					id="revealSearchAnswers"
+					type="button"
+					class="homepage-button terms-load-more search-results-action-button"
+					data-answers-reveal="1"
+					data-reveal-target=".search-result-item .answer-category"
+					data-reveal-body-class="answers-revealed-search"
+				>
+					Otkrij odgovore
+				</button>
 			</div>
 
 			<?php if ( ! $show_load_more && $max_pages > $current_page ) : ?>
@@ -83,101 +101,3 @@ $show_load_more = $max_pages > $current_page && $total_results > 50;
 get_sidebar( 'questions' );
 get_footer();
 ?>
-
-<script>
-(function() {
-	const revealButton = document.getElementById('revealSearchAnswers');
-	const allAnswersSelector = '.search-result-item .answer-category';
-
-	if (revealButton) {
-		revealButton.addEventListener('click', function() {
-			document.body.classList.add('answers-revealed-search');
-			document.querySelectorAll(allAnswersSelector).forEach(function(answer) {
-				answer.classList.add('show');
-			});
-		});
-	}
-
-	const loadMoreButton = document.getElementById('loadMoreSearchResults');
-	const container = document.querySelector('#primary.site-main');
-
-	if (!loadMoreButton || !container) {
-		return;
-	}
-
-	let currentPage = parseInt(loadMoreButton.dataset.page || '1', 10);
-	const maxPages = parseInt(loadMoreButton.dataset.maxPages || '1', 10);
-	const searchQuery = loadMoreButton.dataset.searchQuery || '';
-	const homeUrl = loadMoreButton.dataset.homeUrl || window.location.origin;
-	let isLoading = false;
-
-	function buildPageUrl(pageNumber) {
-		const url = new URL(homeUrl, window.location.origin);
-		url.searchParams.set('s', searchQuery);
-		url.searchParams.set('post_type', 'questions');
-		url.searchParams.set('paged', String(pageNumber));
-		return url.toString();
-	}
-
-	loadMoreButton.addEventListener('click', async function() {
-		if (isLoading || currentPage >= maxPages) {
-			return;
-		}
-
-		isLoading = true;
-		loadMoreButton.disabled = true;
-		loadMoreButton.textContent = 'U\u010ditavam...';
-
-		try {
-			const nextPage = currentPage + 1;
-			const response = await fetch(buildPageUrl(nextPage), { credentials: 'same-origin' });
-
-			if (!response.ok) {
-				throw new Error('Search results request failed');
-			}
-
-			const html = await response.text();
-			const parser = new DOMParser();
-			const doc = parser.parseFromString(html, 'text/html');
-			const newItems = doc.querySelectorAll('#primary.site-main article.search-result-item');
-
-			if (!newItems.length) {
-				loadMoreButton.style.display = 'none';
-				return;
-			}
-
-			const answersAlreadyRevealed = document.body.classList.contains('answers-revealed-search');
-			const fragment = document.createDocumentFragment();
-
-			newItems.forEach(function(item) {
-				if (answersAlreadyRevealed) {
-					item.querySelectorAll('.answer-category').forEach(function(answer) {
-						answer.classList.add('show');
-					});
-				}
-
-				fragment.appendChild(item);
-			});
-
-			container.appendChild(fragment);
-
-			currentPage = nextPage;
-			loadMoreButton.dataset.page = String(currentPage);
-
-			if (currentPage >= maxPages) {
-				loadMoreButton.style.display = 'none';
-				return;
-			}
-
-			loadMoreButton.textContent = 'U\u010ditaj vi\u0161e';
-			loadMoreButton.disabled = false;
-		} catch (error) {
-			console.error(error);
-			loadMoreButton.textContent = 'Poku\u0161aj ponovno';
-			loadMoreButton.disabled = false;
-		} finally {
-			isLoading = false;
-		}
-	});
-})();
-</script>
