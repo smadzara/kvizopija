@@ -4,7 +4,7 @@
  *
  * @link https://woocommerce.com/
  *
- * @package kvizopija
+ * @package pkp
  */
 
 /**
@@ -181,11 +181,11 @@ if ( ! function_exists( 'kvizopija_woocommerce_cart_link' ) ) {
 	 */
 	function kvizopija_woocommerce_cart_link() {
 		?>
-		<a class="cart-contents" href="<?php echo esc_url( wc_get_cart_url() ); ?>" title="<?php esc_attr_e( 'View your shopping cart', 'kvizopija' ); ?>">
+		<a class="cart-contents" href="<?php echo esc_url( wc_get_cart_url() ); ?>" title="<?php esc_attr_e( 'View your shopping cart', 'pkp' ); ?>">
 			<?php
 			$item_count_text = sprintf(
 				/* translators: number of items in the mini cart. */
-				_n( '%d item', '%d items', WC()->cart->get_cart_contents_count(), 'kvizopija' ),
+				_n( '%d item', '%d items', WC()->cart->get_cart_contents_count(), 'pkp' ),
 				WC()->cart->get_cart_contents_count()
 			);
 			?>

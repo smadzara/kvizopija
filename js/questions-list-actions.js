@@ -7,6 +7,7 @@
 	'use strict';
 
 	const answerShownClass = 'show';
+	const isCoarsePointer = window.matchMedia && window.matchMedia( '(pointer: coarse)' ).matches;
 
 	function toInt( value, fallback ) {
 		const parsed = parseInt( value, 10 );
@@ -24,6 +25,18 @@
 		document.querySelectorAll( targetSelector ).forEach( function( answer ) {
 			answer.classList.add( answerShownClass );
 		} );
+
+		clearTapFocus( button );
+	}
+
+	function clearTapFocus( element ) {
+		if ( ! isCoarsePointer || ! element || typeof element.blur !== 'function' ) {
+			return;
+		}
+
+		window.setTimeout( function() {
+			element.blur();
+		}, 0 );
 	}
 
 	function buildLoadMoreUrl( button, pageNumber ) {
@@ -116,10 +129,12 @@
 
 			button.textContent = defaultText;
 			button.disabled = false;
+			clearTapFocus( button );
 		} catch ( error ) {
 			console.error( error );
 			button.textContent = retryText;
 			button.disabled = false;
+			clearTapFocus( button );
 		} finally {
 			button.dataset.loading = '0';
 		}

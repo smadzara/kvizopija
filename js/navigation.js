@@ -20,6 +20,7 @@
 	}
 
 	const menu = siteNavigation.getElementsByTagName( 'ul' )[ 0 ];
+	const isCoarsePointer = window.matchMedia && window.matchMedia( '(pointer: coarse)' ).matches;
 
 	// Hide menu toggle button if menu is empty and return early.
 	if ( 'undefined' === typeof menu ) {
@@ -43,6 +44,16 @@
 		}
 	}
 
+	function clearTapFocus( element ) {
+		if ( ! isCoarsePointer || ! element || typeof element.blur !== 'function' ) {
+			return;
+		}
+
+		window.setTimeout( function() {
+			element.blur();
+		}, 0 );
+	}
+
 	// Toggle the .toggled class and the aria-expanded value each time the button is clicked.
 	button.addEventListener( 'click', function() {
 		siteNavigation.classList.toggle( 'toggled' );
@@ -53,6 +64,8 @@
 		} else {
 			button.setAttribute( 'aria-expanded', 'true' );
 		}
+
+		clearTapFocus( button );
 	} );
 
 	// Remove the .toggled class and set aria-expanded to false when the user clicks outside the navigation.
@@ -94,6 +107,7 @@
 
 			this.setAttribute( 'aria-expanded', isExpanded ? 'false' : 'true' );
 			menuItem.classList.toggle( 'focus', ! isExpanded );
+			clearTapFocus( this );
 		} );
 	}
 

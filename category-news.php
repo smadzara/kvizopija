@@ -2,7 +2,7 @@
 /**
  * Template for News category archive with load-more behavior.
  *
- * @package kvizopija
+ * @package pkp
  */
 
 get_header();

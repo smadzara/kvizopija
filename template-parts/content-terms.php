@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package kvizopija
+ * @package pkp
  */
 
 $questions_taxonomy = 'questions_terms';

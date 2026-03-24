@@ -23,14 +23,7 @@
   src: url(fonts/Gilroy-Bold.woff) format("woff");
   src: url(fonts/Gilroy-Bold.woff2) format("woff2");
 }
-.container {
-  background-color: #e7f3f1;
-  width: 100%;
-  margin: 0px;
-  display: flex;
-  flex-wrap: wrap;
-}
-
+.container,
 .container-single {
   background-color: #e7f3f1;
   width: 100%;
@@ -39,27 +32,23 @@
   flex-wrap: wrap;
 }
 
-.content-container-single {
+.content-container-single,
+.content-container,
+.content-container-fof {
   background-color: #e7f3f1;
-  width: 75%;
   margin: auto;
   padding: 0.6rem;
+}
+
+.content-container-single {
+  width: 75%;
   margin-top: 95px;
   margin-bottom: 45px;
 }
 
 .content-container {
-  background-color: #e7f3f1;
   width: 75%;
-  margin: auto;
-  padding: 0.6rem;
   margin-top: 30px;
-}
-
-.content-container-fof {
-  background-color: #e7f3f1;
-  margin: auto;
-  padding: 0.6rem;
 }
 
 @media only screen and (max-width: 768px) {

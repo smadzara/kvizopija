@@ -2,7 +2,7 @@
 /**
  * Template part for Quiz App results page content.
  *
- * @package kvizopija
+ * @package pkp
  */
 
 defined( 'ABSPATH' ) || exit;

@@ -6,7 +6,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package kvizopija
+ * @package pkp
  */
 
 ?>
@@ -61,7 +61,7 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'kvizopija' ); ?></a>
+	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'pkp' ); ?></a>
 
 	<header id="masthead" class="site-header">
 		<div class="site-branding">
@@ -83,7 +83,7 @@
 		</div>
 
 		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'kvizopija' ); ?></button>
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'pkp' ); ?></button>
 			<?php
 			wp_nav_menu(
 				array(
@@ -115,7 +115,7 @@
 		// Function to send data to the server
 		function sendVisitorData(userData) {
 			var xhr = new XMLHttpRequest();
-			xhr.open("POST", "https://localhost/kvizopija/record_visitor.php", true);
+			xhr.open("POST", "https://localhost/pkp/record_visitor.php", true);
 			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			xhr.send("data=" + encodeURIComponent(JSON.stringify(userData)));
 		}
@@ -165,4 +165,3 @@
 */?>
 
 	
-

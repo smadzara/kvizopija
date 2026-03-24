@@ -9,7 +9,8 @@
 
 .container-questions--random40 .questions-homepage,
 .questions-list--readable > .questions-homepage,
-.questions-list--readable > article {
+.questions-list--readable > article,
+.search-results-page #primary.site-main > article.search-result-item {
   margin: 0;
   padding: 14px 16px;
   border-radius: 10px;
@@ -17,35 +18,54 @@
   background: #eef7f6;
 }
 
+.search-results-page #primary.site-main > article.search-result-item {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .container-questions--random40 .questions-homepage:nth-child(even),
 .questions-list--readable > .questions-homepage:nth-of-type(even),
-.questions-list--readable > article:nth-of-type(even) {
+.questions-list--readable > article:nth-of-type(even),
+.search-results-page #primary.site-main > article.search-result-item:nth-of-type(even) {
   background: #e3eeec;
 }
 
 .container-questions--random40 .question-author,
-.questions-list--readable .question-author {
+.questions-list--readable .question-author,
+.search-results-page .search-result-item .question-author {
   margin: 0 0 0px;
   color: #34424d;
 }
 
 .container-questions--random40 .question-category,
-.container-questions--random40 .question-date {
+.container-questions--random40 .question-date,
+.search-results-page .search-result-item .question-category,
+.search-results-page .search-result-item .question-date {
   margin: 0 0 6px;
   color: #34424d;
 }
 
 .container-questions--random40 .questions,
 .questions-list--readable .questions,
-.questions-list--readable .question-category-single p {
+.questions-list--readable .question-category-single p,
+.search-results-page .search-result-item .questions {
   margin: 0;
   line-height: 1.45;
 }
 
+.search-results-page .search-result-item .questions {
+  padding-bottom: 0;
+}
+
 .container-questions--random40 .answer-homepage,
 .questions-list--readable .answer-homepage,
-.questions-list--readable .answer-category {
+.questions-list--readable .answer-category,
+.search-results-page .search-result-item .answer-category {
   margin-top: 8px;
+}
+
+.search-results-page .search-result-item .answer-category p {
+  margin: 0;
 }
 
 .questions-list--onlinequiz {

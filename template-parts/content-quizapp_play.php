@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package kvizopija
+ * @package pkp
  */
 
 $player_name = get_transient( 'player_name' );

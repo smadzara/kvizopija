@@ -5,7 +5,7 @@ sidebar.php
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package kvizopija
+ * @package pkp
  */
 
 if ( ! is_active_sidebar( 'sidebar-1' ) ) {

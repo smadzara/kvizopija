@@ -4,7 +4,7 @@
  *
  * Reuses the same modern archive layout as category-news.
  *
- * @package kvizopija
+ * @package pkp
  */
 
 locate_template( 'category-news.php', true, false );

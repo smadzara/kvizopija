@@ -6,7 +6,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package kvizopija
+ * @package pkp
  */
 
 ?>
@@ -15,7 +15,7 @@
 		<div class="footer-main">
 			<?php if ( has_nav_menu( 'footer-menu' ) ) : ?>
 				<div class="footer-row footer-row-menu">
-					<nav id="footer-navigation" class="footer-navigation" aria-label="<?php esc_attr_e( 'Footer Menu', 'kvizopija' ); ?>">
+					<nav id="footer-navigation" class="footer-navigation" aria-label="<?php esc_attr_e( 'Footer Menu', 'pkp' ); ?>">
 						<?php
 						wp_nav_menu(
 							array(
@@ -32,8 +32,8 @@
 
 			<div class="footer-row footer-row-info">
 				<div class="footer-centered">
-	                <p class="footer">pubkvizpitanja.com Premium - Powered by: <a class="footer-links" href="https://www.kvizopija.com/" target="_blank">Kvizopija</a></p>
-	                <p class="footer-small">v0.3 - beta sa gomilom mana i nedostataka, ali i nekih fixanih bugova iz verzije v0.11</p>
+	                <p class="footer">pubkvizpitanja.com - Powered by: <a class="footer-links" href="https://www.kvizopija.com/" target="_blank">Kvizopija</a></p>
+	                <p class="footer-small">v0.4 - redizajn (konačno!)</p>
 	            </div>
 			</div>
 		</div><!-- .site-info -->
@@ -42,6 +42,7 @@
 
 <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
 
+<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="pekape" data-description="Support me on Buy me a coffee!" data-message="Podrži sakupljače pitanja, plati im cugu :)" data-color="#FF5F5F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
 <?php wp_footer(); ?>
 
 </body>

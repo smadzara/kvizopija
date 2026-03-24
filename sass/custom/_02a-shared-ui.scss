@@ -1,0 +1,153 @@
+/* Shared UI primitives across modern custom partials */
+
+/* Consistent wide container width for modern page sections */
+.home-modern .home-modern__container,
+.single-post-page .single-post-page__container,
+.news-archive-modern__container,
+.questions-term-page .content-container,
+.questions-archive-page .content-container,
+.questions-category-page .content-container,
+.questions-sidebar {
+  width: min(1280px, 90%);
+}
+
+/* Elevated gradient surface variants */
+.home-modern__hero,
+.home-modern__panel,
+.page-login .mp_wrapper.mp_login_form,
+.mp_wrapper.mp_login_form.mp_login_form--page,
+.mepr-pro-template.mepr-app-layout #mepr-template-login.mp_login_form--page {
+  border-radius: 18px;
+  border: 1px solid rgba(117, 59, 189, 0.14);
+  background: linear-gradient(135deg, rgba(117, 59, 189, 0.08), rgba(92, 184, 228, 0.12));
+  box-shadow: 0 10px 18px rgba(48, 66, 82, 0.06);
+}
+
+.single-post-modern__header,
+.single-post-modern__body,
+.single-post-modern__tax,
+.news-archive-modern__header,
+.questions-sidebar__search-panel,
+.questions-sidebar__panel {
+  border-radius: 16px;
+  border: 1px solid rgba(117, 59, 189, 0.14);
+  background: linear-gradient(135deg, rgba(117, 59, 189, 0.08), rgba(92, 184, 228, 0.12));
+  box-shadow: 0 10px 18px rgba(48, 66, 82, 0.06);
+}
+
+/* Reusable interactive card style */
+.home-modern-news-card,
+.home-modern-category-card,
+.news-archive-modern__card,
+.terms-page .term-card,
+.questions-sidebar__card {
+  border-radius: 12px;
+  border: 1px solid rgba(117, 59, 189, 0.14);
+  background: #eef7f6;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.home-modern-news-card-link:hover .home-modern-news-card,
+.home-modern-news-card-link:focus .home-modern-news-card,
+.home-modern-news-card-link:focus-visible .home-modern-news-card,
+.home-modern-category-card:hover,
+.home-modern-category-card:focus,
+.news-archive-modern__card:hover,
+.news-archive-modern__card:focus-within,
+.terms-page .term-card-link:hover .term-card,
+.terms-page .term-card-link:focus .term-card,
+.questions-sidebar__card:hover,
+.questions-sidebar__card:focus {
+  transform: translateY(-2px);
+  border-color: rgba(117, 59, 189, 0.36);
+  background: #f8f4fd;
+  box-shadow: 0 12px 20px rgba(48, 66, 82, 0.08);
+}
+
+/* Reusable pill/badge style */
+.home-modern__question-category,
+.home-modern-category-count,
+.terms-page .term-count-badge,
+.questions-sidebar__badge {
+  display: inline-flex;
+  border-radius: 999px;
+  color: #6d3db2;
+  font-family: "Axiforma-Regular";
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.home-modern__question-category,
+.home-modern-category-count,
+.terms-page .term-count-badge,
+.questions-sidebar__badge {
+  border: 1px solid rgba(117, 59, 189, 0.18);
+  background: rgba(117, 59, 189, 0.08);
+}
+
+/* Reusable empty-state container style */
+.home-modern-empty,
+.terms-empty {
+  border-radius: 12px;
+  border: 1px dashed rgba(117, 59, 189, 0.32);
+  background: #f8f5fd;
+  color: #3f5666;
+}
+
+/* Shared field controls for sidebar + homepage login forms */
+.home-modern-login-form input[type=text],
+.home-modern-login-form input[type=email],
+.home-modern-login-form input[type=password],
+.questions-sidebar .search-form-custom input[type=search],
+.search .questions-sidebar .search-form-custom input[type=search] {
+  border-radius: 12px;
+  border: 1px solid rgba(117, 59, 189, 0.25);
+  background: #ffffff;
+  color: #26374a;
+}
+
+.questions-sidebar .search-form-custom input[type=search]:focus,
+.search .questions-sidebar .search-form-custom input[type=search]:focus {
+  outline: none;
+  border-color: #753bbd;
+  box-shadow: 0 0 0 3px rgba(117, 59, 189, 0.14);
+}
+
+/* Shared primary action gradient for theme buttons/forms */
+.terms-load-more,
+.home-modern-login-form input[type=submit],
+.home-modern-login-form button[type=submit],
+.home-modern-login-form .mepr-submit,
+.questions-sidebar .search-form-custom input[type=submit],
+.search .questions-sidebar .search-form-custom input[type=submit] {
+  border-radius: 12px;
+  border: 1px solid rgba(117, 59, 189, 0.32);
+  background: linear-gradient(180deg, #f8f4fd 0%, #efe7fb 100%);
+  color: #6e3eb3;
+}
+
+.terms-load-more:hover,
+.terms-load-more:focus-visible,
+.home-modern-login-form input[type=submit]:hover,
+.home-modern-login-form button[type=submit]:hover,
+.home-modern-login-form .mepr-submit:hover,
+.questions-sidebar .search-form-custom input[type=submit]:hover,
+.questions-sidebar .search-form-custom input[type=submit]:focus-visible,
+.search .questions-sidebar .search-form-custom input[type=submit]:hover,
+.search .questions-sidebar .search-form-custom input[type=submit]:focus-visible {
+  border-color: rgba(117, 59, 189, 0.55);
+  background: linear-gradient(180deg, #f3ecfb 0%, #e9ddfa 100%);
+}
+
+@media only screen and (max-width: 768px) {
+  .home-modern .home-modern__container,
+  .single-post-page .single-post-page__container,
+  .news-archive-modern__container,
+  .questions-archive-page .content-container,
+  .questions-term-page .content-container,
+  .questions-category-page .content-container,
+  .questions-sidebar,
+  .search-results-page .content-container {
+    width: 95%;
+  }
+}

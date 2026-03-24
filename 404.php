@@ -4,7 +4,7 @@
  *
  * @link https://codex.wordpress.org/Creating_an_Error_404_Page
  *
- * @package kvizopija
+ * @package pkp
  */
 
 get_header();
@@ -14,11 +14,11 @@ get_header();
 
 		<section class="container">
 			<header class="content-container-fof">
-				<h1 class="page-title"><?php esc_html_e( 'Nešto se krivo skešalo ili stvarno ne postoji ono što ste tražili ili mislili da postoji.', 'kvizopija' ); ?></h1>
+				<h1 class="page-title"><?php esc_html_e( 'Nešto se krivo skešalo ili stvarno ne postoji ono što ste tražili ili mislili da postoji.', 'pkp' ); ?></h1>
 			</header><!-- .page-header -->
 
 			<div class="page-content">
-				<p class="fof"><?php esc_html_e( 'Upiši novi pojam ili odleti na krilima prepunim bratske ljubavi za čovjeka koji je zalutao, tako što ćeš odabrati jednu od kategorija pitanja.', 'kvizopija' ); ?></p>
+				<p class="fof"><?php esc_html_e( 'Upiši novi pojam ili odleti na krilima prepunim bratske ljubavi za čovjeka koji je zalutao, tako što ćeš odabrati jednu od kategorija pitanja.', 'pkp' ); ?></p>
 
 			</div><!-- .page-content -->
 		</section><!-- .error-404 -->

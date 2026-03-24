@@ -5,6 +5,7 @@
 @include meta.load-css("custom/00-core");
 @include meta.load-css("custom/01-custom-legacy");
 @include meta.load-css("custom/02-glossary-modern");
+@include meta.load-css("custom/02a-shared-ui");
 @include meta.load-css("custom/03-homepage-modern");
 @include meta.load-css("custom/04-single-post");
 @include meta.load-css("custom/05-category-archive");

@@ -10,7 +10,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package kvizopija
+ * @package pkp
  */
 
 get_header();

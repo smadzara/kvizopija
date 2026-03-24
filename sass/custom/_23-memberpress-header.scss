@@ -1,7 +1,7 @@
 ﻿/* MemberPress pricing/header: keep the standard solid menu color */
 .mepr-pro-template.mepr-app-layout #masthead.site-header,
 .mepr-pro-template.mepr-guest-layout #masthead.site-header {
-  background: #378ab1 !important;
+  background: rgb(106, 49, 175) !important;
 }
 
 .mepr-pro-template.mepr-app-layout #site-navigation.main-navigation,
@@ -13,7 +13,7 @@
 
 .mepr-pro-template.mepr-app-layout #primary-menu .sub-menu,
 .mepr-pro-template.mepr-guest-layout #primary-menu .sub-menu {
-  background: #5CB8E4;
+  background: rgb(106, 49, 175);
 }
 
 @media screen and (max-width: 900px) {

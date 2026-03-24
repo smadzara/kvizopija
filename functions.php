@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package kvizopija
+ * @package pkp
  */
 
 if ( ! defined( 'KVIZOPIJA_VERSION' ) ) {
@@ -331,6 +331,61 @@ if ( ! function_exists( 'kvizopija_get_question_of_the_day' ) ) {
 	}
 }
 
+if ( ! function_exists( 'kvizopija_get_question_category_latest_modified_dates' ) ) {
+	/**
+	 * Fetch latest modified dates for question categories in a single query.
+	 *
+	 * Uses a short transient to avoid repeated per-term queries on homepage loads.
+	 *
+	 * @return array<int,string> Map of term ID => formatted date.
+	 */
+	function kvizopija_get_question_category_latest_modified_dates() {
+		$cache_key = 'kvizopija_qcat_latest_modified_dates';
+		$cached    = get_transient( $cache_key );
+
+		if ( is_array( $cached ) ) {
+			return $cached;
+		}
+
+		global $wpdb;
+
+		$rows = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT tt.term_id, MAX(p.post_modified_gmt) AS latest_modified_gmt
+				FROM {$wpdb->posts} AS p
+				INNER JOIN {$wpdb->term_relationships} AS tr ON tr.object_id = p.ID
+				INNER JOIN {$wpdb->term_taxonomy} AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id
+				WHERE p.post_type = %s
+					AND p.post_status = %s
+					AND tt.taxonomy = %s
+				GROUP BY tt.term_id",
+				'questions',
+				'publish',
+				'questions_categories'
+			),
+			ARRAY_A
+		);
+
+		$latest_dates_by_term = array();
+		if ( is_array( $rows ) ) {
+			foreach ( $rows as $row ) {
+				$term_id = isset( $row['term_id'] ) ? absint( $row['term_id'] ) : 0;
+				$raw_gmt = isset( $row['latest_modified_gmt'] ) ? (string) $row['latest_modified_gmt'] : '';
+
+				if ( $term_id <= 0 || '' === $raw_gmt || '0000-00-00 00:00:00' === $raw_gmt ) {
+					continue;
+				}
+
+				$latest_dates_by_term[ $term_id ] = get_date_from_gmt( $raw_gmt, 'j. n. Y.' );
+			}
+		}
+
+		set_transient( $cache_key, $latest_dates_by_term, 15 * MINUTE_IN_SECONDS );
+
+		return $latest_dates_by_term;
+	}
+}
+
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
@@ -343,9 +398,9 @@ function kvizopija_setup() {
 		* Make theme available for translation.
 		* Translations can be filed in the /languages/ directory.
 		* If you're building a theme based on kvizopija, use a find and replace
-		* to change 'kvizopija' to the name of your theme in all the template files.
+		* to change 'pkp' to the name of your theme in all the template files.
 		*/
-	load_theme_textdomain( 'kvizopija', get_template_directory() . '/languages' );
+	load_theme_textdomain( 'pkp', get_template_directory() . '/languages' );
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
@@ -368,8 +423,8 @@ function kvizopija_setup() {
 	// This theme uses wp_nav_menu() in two locations.
 	register_nav_menus(
 		array(
-			'menu-1' => esc_html__( 'Primary', 'kvizopija' ),
-			'footer-menu' => esc_html__( 'Footer Menu', 'kvizopija' ),
+			'menu-1' => esc_html__( 'Primary', 'pkp' ),
+			'footer-menu' => esc_html__( 'Footer Menu', 'pkp' ),
 		)
 	);
 
@@ -442,9 +497,9 @@ add_action( 'after_setup_theme', 'kvizopija_content_width', 0 );
 function kvizopija_widgets_init() {
 	register_sidebar(
 		array(
-			'name'          => esc_html__( 'Sidebar', 'kvizopija' ),
+			'name'          => esc_html__( 'Sidebar', 'pkp' ),
 			'id'            => 'sidebar-1',
-			'description'   => esc_html__( 'Add widgets here.', 'kvizopija' ),
+			'description'   => esc_html__( 'Add widgets here.', 'pkp' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',
@@ -534,7 +589,7 @@ function kvizopija_add_primary_submenu_toggles( $item_output, $item, $depth, $ar
 
 	$label = sprintf(
 		/* translators: %s: menu item title. */
-		esc_attr__( 'Open submenu for %s', 'kvizopija' ),
+		esc_attr__( 'Open submenu for %s', 'pkp' ),
 		wp_strip_all_tags( $item->title )
 	);
 

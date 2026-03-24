@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package kvizopija
+ * @package pkp
  */
 
 ?>
@@ -51,7 +51,7 @@ $terms = get_the_terms( get_the_ID(), 'questions_terms' );
 			sprintf(
 				wp_kses(
 					/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'kvizopija' ),
+					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'pkp' ),
 					array(
 						'span' => array(
 							'class' => array(),

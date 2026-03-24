@@ -2,7 +2,6 @@
 .questions-term-page .content-container,
 .questions-archive-page .content-container,
 .questions-category-page .content-container {
-  width: min(1280px, 90%);
   margin-top: 40px;
   margin-bottom: 30px;
 }
@@ -151,21 +150,13 @@
   margin: 0;
   padding: 14px;
   min-height: 88px;
-  border-radius: 12px;
-  border: 1px solid rgba(117, 59, 189, 0.14);
-  background: #eef7f6;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .terms-page .term-card-link:hover .term-card,
 .terms-page .term-card-link:focus .term-card {
-  transform: translateY(-2px);
-  border-color: rgba(117, 59, 189, 0.36);
-  background: #f8f4fd;
-  box-shadow: 0 12px 20px rgba(48, 66, 82, 0.08);
 }
 
 .terms-page .term-title {
@@ -177,26 +168,14 @@
 }
 
 .terms-page .term-count-badge {
-  display: inline-flex;
   align-self: flex-start;
   margin-top: 10px;
   padding: 4px 9px;
-  border-radius: 999px;
-  border: 1px solid rgba(117, 59, 189, 0.18);
-  background: rgba(117, 59, 189, 0.08);
-  color: #6d3db2;
-  font-family: "Axiforma-Regular";
-  font-size: 1.2rem;
-  line-height: 1;
 }
 
 .terms-empty {
   margin-top: 12px;
   padding: 14px;
-  border-radius: 12px;
-  border: 1px dashed rgba(117, 59, 189, 0.32);
-  background: #f8f5fd;
-  color: #3f5666;
 }
 
 .pagination--terms {
@@ -210,16 +189,10 @@
   width: 100%;
   max-width: none;
   margin: 0;
-  margin-bottom: 0;
-  margin-top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 12px 18px;
-  border-radius: 12px;
-  border: 1px solid rgba(117, 59, 189, 0.32);
-  background: linear-gradient(180deg, #f8f4fd 0%, #efe7fb 100%);
-  color: #6e3eb3;
   font-family: "Gilroy-Bold";
   font-size: 1.65rem;
   line-height: 1.2;
@@ -228,11 +201,9 @@
 }
 
 .terms-load-more:hover,
-.terms-load-more:focus {
+.terms-load-more:focus-visible {
   transform: translateY(-2px);
   box-shadow: 0 14px 22px rgba(48, 66, 82, 0.12);
-  border-color: rgba(117, 59, 189, 0.55);
-  background: linear-gradient(180deg, #f3ecfb 0%, #e9ddfa 100%);
 }
 
 .terms-load-more:disabled {
@@ -243,58 +214,6 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .home-modern .home-modern__container {
-    width: 95%;
-  }
-  .home-modern__quick-buttons {
-    grid-template-columns: 1fr;
-  }
-  .home-modern__quick-button {
-    min-height: 76px;
-  }
-  .home-modern__quick-button-value {
-    font-size: 1.8rem;
-  }
-  .home-modern__grid {
-    grid-template-columns: 1fr;
-  }
-  .home-modern__panel-head {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .home-modern-news-grid,
-  .home-modern-categories {
-    grid-template-columns: 1fr;
-  }
-  .single-post-page .single-post-page__container {
-    width: 95%;
-  }
-  .single-post-modern__meta {
-    flex-direction: column;
-    gap: 4px;
-  }
-  .single-post-modern__title {
-    font-size: 2.6rem;
-  }
-  .single-post-modern__body p,
-  .single-post-modern__body li {
-    font-size: 1.65rem;
-  }
-  .single-post-modern__nav-link,
-  .single-post-modern__nav-link--next {
-    text-align: left;
-  }
-  .news-archive-modern__container {
-    width: 95%;
-  }
-  .news-archive-modern__list {
-    grid-template-columns: 1fr;
-  }
-  .questions-archive-page .content-container,
-  .questions-term-page .content-container,
-  .questions-category-page .content-container {
-    width: 95%;
-  }
   .terms-controls {
     position: static;
     top: auto;
@@ -372,34 +291,26 @@
   margin-bottom: 0px;
 }
 
-.answer {
-  padding-top: 0.1rem;
-  padding-bottom: 0.5rem;
-  font-weight: bolder;
-  font-size: 1.7rem;
-  font-family: "ProximaNova-Regular";
-}
-
+.answer,
 .answer-homepage {
   padding-top: 0.1rem;
   padding-bottom: 0.5rem;
-  font-weight: bolder;
-  font-size: 1.7rem;
-  font-family: "ProximaNova-Regular";
-  display: none;
 }
 
-.answer-homepage.show {
-  display: block;
-}
-
+.answer,
+.answer-homepage,
 .answer-category {
   font-weight: bolder;
   font-size: 1.7rem;
   font-family: "ProximaNova-Regular";
+}
+
+.answer-homepage,
+.answer-category {
   display: none;
 }
 
+.answer-homepage.show,
 .answer-category.show {
   display: block;
 }
@@ -454,7 +365,6 @@
 }
 
 .questions-sidebar {
-  width: min(1280px, 90%);
   margin: 0 auto 34px;
   display: flex;
   flex-direction: column;

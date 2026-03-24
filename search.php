@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
  *
- * @package kvizopija
+ * @package pkp
  */
 
 get_header();
@@ -20,12 +20,12 @@ $show_load_more = $max_pages > $current_page && $total_results > 50;
 
 		<?php if ( have_posts() ) : ?>
 
-			<h1><?= esc_html__( 'Rezultati pretraživanja', 'kvizopija' ); ?></h1>
+			<h1><?= esc_html__( 'Rezultati pretraživanja', 'pkp' ); ?></h1>
 			<p class="cat-taxonomy search-results-summary">
-				<?= esc_html__( 'Pojam:', 'kvizopija' ); ?>
+				<?= esc_html__( 'Pojam:', 'pkp' ); ?>
 				<span class="search-results-highlited"><?= esc_html( get_search_query() ); ?></span>
 				|
-				<?= esc_html__( 'Rezultata:', 'kvizopija' ); ?>
+				<?= esc_html__( 'Rezultata:', 'pkp' ); ?>
 				<?= esc_html( number_format_i18n( $total_results ) ); ?>
 			</p>
 

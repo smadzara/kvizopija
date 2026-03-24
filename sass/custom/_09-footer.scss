@@ -1,6 +1,6 @@
 ﻿/* FOOTER */
 .footer-main {
-  background: #5CB8E4;
+  background: rgb(106, 49, 175);
   text-align: center;
 }
 
@@ -12,11 +12,11 @@
 }
 
 .footer-row-menu {
-  background: #79c9eb;
+  background: rgb(106, 49, 175);
 }
 
 .footer-row-info {
-  background: #5CB8E4;
+  background: rgb(106, 49, 175);
   padding: 16px 12px 18px;
 }
 
@@ -185,8 +185,10 @@ p.term-title {
   width: 215.48px;
 }
 
-.homepage-button:hover {
-  background: rgb(194, 194, 194);
+@media (hover: hover) and (pointer: fine) {
+  .homepage-button:hover {
+    background: rgb(194, 194, 194);
+  }
 }
 
 

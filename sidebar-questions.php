@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package kvizopija
+ * @package pkp
  */
 
 $questions_taxonomy = 'questions_categories';

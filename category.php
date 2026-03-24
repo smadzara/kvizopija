@@ -4,7 +4,7 @@
  *
  * Reuses the modern category archive layout with load-more behavior.
  *
- * @package kvizopija
+ * @package pkp
  */
 
 locate_template( 'category-news.php', true, false );

@@ -2,7 +2,7 @@
 /**
  * kvizopija Theme Customizer
  *
- * @package kvizopija
+ * @package pkp
  */
 
 /**
